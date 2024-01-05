@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import Phaser from 'phaser';
+import Loding from './Scene/Loding';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  useEffect(() => {
+    const config = {
+      type: Phaser.AUTO,
+      width: 1920,
+      height: 1080,
+      physics: {
+        default: 'arcade',
+        debug: true
+      },
+      scene: [Loding],
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      }
+    };
+
+    const game = new Phaser.Game(config);
+
+    return () => {
+      game.destroy(true);
+    };
+  }, []);
+
+  return <div id="game-container" />;
 }
 
 export default App;
