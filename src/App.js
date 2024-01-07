@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import Phaser from 'phaser';
-import Loding from './Scene/Loding';
+import Loading from './Scene/Loading';
 
 function App() {
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
-      width: 1920,
-      height: 1080,
+      width:900,
       physics: {
         default: 'arcade',
         debug: true
       },
-      scene: [Loding],
+      scene: [Loading],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -22,11 +21,12 @@ function App() {
     const game = new Phaser.Game(config);
 
     return () => {
+
       game.destroy(true);
     };
   }, []);
-
-  return <div id="game-container" />;
+ 
+  return <div />;
 }
 
 export default App;
