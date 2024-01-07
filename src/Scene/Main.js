@@ -58,11 +58,16 @@ export default class Main extends Phaser.Scene {
       onComplete: () => {
         target.setTexture(thumbnails[index]);
         target.x = 0;
+        this.scaleImage(target);
       },
     });
   }
 
+  scaleImage(target){
+    target.displayWidth = this.game.config.width;
+    target.displayHeight = this.game.config.height;
+  }
   update() {
-    // 게임 업데이트 로직
+
   }
 }
