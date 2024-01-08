@@ -39,8 +39,8 @@ export default class Loading extends Phaser.Scene {
         repeat : -1
     });
 
-    this.input.once('pointerdown', ()=> {
-      this.scene.transition({target:'main', duration:"500"})
+    this.input.once('pointerdown', () => {
+      this.scene.start('main');
     });
 
   }

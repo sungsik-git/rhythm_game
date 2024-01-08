@@ -12,7 +12,10 @@ export default class Game2 extends Phaser.Scene {
     create(){
         this.add.text(100, 100 ,"Game2")
             .setFill('#3461eb')
-    
+        //Game UI scene load
+        this.scene.launch('gameUI');
+        //Home Button load
+        this.scene.launch('homeButton');
     }
 
     update(){

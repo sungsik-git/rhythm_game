@@ -19,6 +19,7 @@ export default class HomeButton extends Phaser.Scene {
         
         homeButton.setInteractive().on('pointerdown', ()=>{
             //실행되고 있는 scene이 모두 종료되어야함
+            this.scene.stop('gameUI')
             this.scene.start('main');
         });
     }
