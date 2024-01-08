@@ -29,6 +29,16 @@ export default class Loading extends Phaser.Scene {
     .setAlign('center')
     .setInteractive();
 
+    //글씨 깜박임 효과
+    this.tweens.add({
+        targets: this.clickToStart,
+        alpha : 0,
+        duration : 500,
+        ease : 'Powerl',
+        yoyo : true,
+        repeat : -1
+    });
+
     this.input.once('pointerdown', ()=> {
       this.scene.transition({target:'main', duration:"500"})
     });
