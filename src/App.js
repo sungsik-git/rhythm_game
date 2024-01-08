@@ -17,7 +17,7 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [Loading, Main, Game1, Game2, Game3, Game4, Game5],
+      scene: [/* Loading, */ Main, Game1, Game2, Game3, Game4, Game5],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
