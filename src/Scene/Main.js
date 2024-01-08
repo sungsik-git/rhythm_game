@@ -37,6 +37,7 @@ export default class Main extends Phaser.Scene {
     const nextButton = this.add.text(700, 500, 'Next', { fill: '#fff' }).setInteractive();
     const prevButton = this.add.text(100, 500, 'Prev', { fill: '#fff' }).setInteractive();
 
+    //곡 
     const nextThumbnail = () => {
       currentIndex = (currentIndex + 1) % thumbnails.length;
       this.slideThumbnail(currentThumbnail, thumbnails, currentIndex, -this.game.config.width);
