@@ -30,7 +30,6 @@ export default class Loading extends Phaser.Scene {
     .setInteractive();
 
     this.input.once('pointerdown', ()=> {
-      console.log("click Start")
       this.scene.transition({target:'main', duration:"500"})
     });
 

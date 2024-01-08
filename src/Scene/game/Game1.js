@@ -14,6 +14,8 @@ export default class Game1 extends Phaser.Scene {
             .setFill('#3461eb')
         //Game UI scene load
         this.scene.launch('gameUI');
+        //Home Button load
+        this.scene.launch('homeButton');
     }
 
     update(){

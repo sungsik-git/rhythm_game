@@ -4,7 +4,6 @@ import game2_thumbnail from "../img/game2_thumbnail.jpg";
 import game3_thumbnail from "../img/game3_thumbnail.jpg";
 import game4_thumbnail from "../img/game4_thumbnail.jpg";
 import game5_thumbnail from "../img/game5_thumbnail.jpg";
-import SceneLoader from "./SceneLoader";
 import Music from "./music_info/Music";
 
 export default class Main extends Phaser.Scene {
@@ -68,14 +67,11 @@ export default class Main extends Phaser.Scene {
     const prevThumbnail = () => {
       this.currentIndex = (this.currentIndex - 1 + this.musics.length) % this.musics.length;
       this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
-    };
-
-    // scene loader 객체 생성
-    const sceneLoader = this.scene.add('sceneLoader', SceneLoader, true);
+    }; 
 
     // thumbnail click시 해당되는 곡의 플레이 화면으로 이동
-    const onThumbnailClick = (e) => {
-      sceneLoader.loadScene(this.currentIndex);
+    const onThumbnailClick = () => {
+      this.loadScene(this.currentIndex);
     }
 
     // button event 설정
@@ -123,6 +119,32 @@ export default class Main extends Phaser.Scene {
   scaleImage(target) {
     target.displayWidth = 700;
     target.displayHeight = 500;
+  }
+
+  loadScene(currentIndex) {
+    // game을 선택하면 main scene은 종료됨
+    this.scene.stop('main');
+
+    // 매개변수로 받아온 index에 맞는 game scene을 출력
+    switch(currentIndex) {
+        case 0 :
+            this.scene.start('game1');
+            break;
+        case 1 :
+            this.scene.start('game2');
+            break;
+        case 2 :
+            this.scene.start('game3');
+            break;
+        case 3 : 
+            this.scene.start('game4');
+            break;
+        case 4 : 
+            this.scene.start('game5');
+            break;
+        default :
+            break;
+    }
   }
 
   update() {

@@ -8,6 +8,7 @@ import Game3 from './scene/game/Game3';
 import Game4 from './scene/game/Game4';
 import Game5 from './scene/game/Game5';
 import GameUI from './scene/GameUI';
+import HomeButton from './scene/HomeButton';
 
 function App() {
   useEffect(() => {
@@ -18,7 +19,7 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [/* Loading, */ Main, Game1, Game2, Game3, Game4, Game5, GameUI],
+      scene: [Loading, Main, Game1, Game2, Game3, Game4, Game5, GameUI, HomeButton],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
