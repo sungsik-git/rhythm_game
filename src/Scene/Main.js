@@ -10,7 +10,7 @@ import Music from "./music_info/Music";
 export default class Main extends Phaser.Scene {
   constructor() {
     super('main');
-    this.currentMusicTitle = null; // 새로운 멤버 변수 추가
+    this.currentMusicTitle = null;
     this.musics = [
       new Music('Game1', 'Artist1', 'game1_thumbnail', '-'),
       new Music('Game2', 'Artist2', 'game2_thumbnail', '-'),
@@ -49,7 +49,7 @@ export default class Main extends Phaser.Scene {
 
     const prevButton = this.add.text(
       this.game.config.width / 7,
-     this.game.config.height / 2,
+      this.game.config.height / 2,
       'Prev',
         {
           fill: '#7751e0',
