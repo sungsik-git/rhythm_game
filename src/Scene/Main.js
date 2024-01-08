@@ -4,6 +4,7 @@ import game2_thumbnail from "../img/game2_thumbnail.jpg";
 import game3_thumbnail from "../img/game3_thumbnail.jpg";
 import game4_thumbnail from "../img/game4_thumbnail.jpg";
 import game5_thumbnail from "../img/game5_thumbnail.jpg";
+import SceneLoader from "./SceneLoader";
 
 export default class Main extends Phaser.Scene {
   constructor() {
@@ -46,8 +47,21 @@ export default class Main extends Phaser.Scene {
       this.slideThumbnail(currentThumbnail, thumbnails, currentIndex, this.game.config.width);
     };
 
+
+    const sceneLoader = this.scene.add('sceneLoader', SceneLoader, true);
+
+    const onThumbnailClick = (e) => {
+      console.log(e)
+      // const id = e.pointer.id
+      // console.log(id)
+      console.log("Scene Click")
+      sceneLoader.loadScene(currentIndex);
+    }
+  
+
     nextButton.on('pointerdown', nextThumbnail);
     prevButton.on('pointerdown', prevThumbnail);
+    currentThumbnail.setInteractive().on('pointerdown', onThumbnailClick)
   }
 
   slideThumbnail(target, thumbnails, index, targetX) {
