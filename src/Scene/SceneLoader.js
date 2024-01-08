@@ -1,11 +1,14 @@
 import Phaser from "phaser";
 
+
 export default class SceneLoader extends Phaser.Scene {
     constructor(){
         super('sceneLoader');
     }
 
     loadScene(currentIndex) {
+        this.scene.stop('main');
+
         switch(currentIndex) {
             case 0 :
                 this.scene.start('game1');

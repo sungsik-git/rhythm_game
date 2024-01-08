@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class Game2 extends Phaser.Scene(){
+export default class Game2 extends Phaser.Scene {
     constructor(){
         super('game2');
     }
@@ -10,10 +10,12 @@ export default class Game2 extends Phaser.Scene(){
     }
 
     create(){
-
+        this.add.text(100, 100 ,"Game2")
+            .setFill('#3461eb')
+    
     }
 
     update(){
-        
+
     }
 }
