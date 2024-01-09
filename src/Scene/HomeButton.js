@@ -13,7 +13,7 @@ export default class HomeButton extends Phaser.Scene {
         //home 이동 버튼
         const homeButton = this.add.text(
             this.game.config.width - 100,
-            100,
+            50,
             'Home!!',
             { fill:'#000000'});
         
@@ -21,6 +21,7 @@ export default class HomeButton extends Phaser.Scene {
             //실행되고 있는 scene이 모두 종료되어야함
             this.scene.stop('game')
             this.scene.stop('gameUI');
+            this.scene.stop('gameInfoUI');
             this.scene.start('main');
         });
     }

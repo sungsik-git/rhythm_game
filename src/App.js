@@ -3,8 +3,10 @@ import Phaser from 'phaser';
 import Loading from './scene/Loading';
 import Main from './scene/Main'
 import Game from './scene/game/Game';
-import GameUI from './scene/GameUI';
 import HomeButton from './scene/HomeButton';
+import GameUI from './scene/interface/GameUI';
+import GameInfoUI from './scene/interface/GameInfoUI';
+import GameScore from './scene/game/GameScore';
 
 function App() {
   useEffect(() => {
@@ -15,7 +17,7 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [/* Loading,*/ Main, Game, GameUI, HomeButton],
+      scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, GameScore],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
