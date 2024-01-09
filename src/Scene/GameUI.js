@@ -28,7 +28,18 @@ export default class GameUI extends Phaser.Scene {
         const nodeRouteLine6 = this.add.rectangle(this.game.config.width / 9 + this.calcRouteLine(5, 5), this.game.config.height / 2, 2, 600, 0x000000);
         const nodeRouteLine7 = this.add.rectangle(this.game.config.width / 9 + this.calcRouteLine(6, 6), this.game.config.height / 2, 2, 600, 0x000000);
         const nodeRouteLine8 = this.add.rectangle(this.game.config.width / 9 + this.calcRouteLine(7, 7), this.game.config.height / 2, 2, 600, 0x000000);
+
+        //judgement Line
+        const judgementLine = this.add.graphics();
+        judgementLine.lineStyle(2, 0x000000);
+        judgementLine.beginPath();
+        judgementLine.moveTo(this.game.config.width / 9 ,this.game.config.height * 4 / 5);
+        judgementLine.lineTo(this.game.config.width * 9 / 10 - 2 , this.game.config.height * 4 / 5);
+        judgementLine.strokePath();
+
+
     }
+    
     
     //route의 경계선의 x좌표를 연산하는 함수 => 생성한 object의 cneter를 기준으로 위치를 잡기 때문에 cneter인 width의 절반을 더해줘야한다.
     calcRouteLine(lineCnt, routeCnt){
@@ -40,7 +51,7 @@ export default class GameUI extends Phaser.Scene {
     //route의 x좌표를 연산하믄 함수 => n번째 line의 x좌표를 기준, center인 width의 절반을 더해줘야 함
     calcRoute(lineCnt, routeCnt){
         const routeCenter  =  50;
-        return this.calcRouteLine(lineCnt, routeCnt) + 50;
+        return this.calcRouteLine(lineCnt, routeCnt) + routeCenter;
     }
 
     lineStyle(target) {
