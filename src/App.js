@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import Phaser from 'phaser';
-import Loading from './scene/Loading';
-import Main from './scene/Main'
-import Game from './scene/game/Game';
-import HomeButton from './scene/button/HomeButton';
-import GameUI from './scene/interface/GameUI';
-import GameInfoUI from './scene/interface/GameInfoUI';
-import GameScore from './scene/game/GameScore';
-import PauseButton from './scene/button/PauseButton';
+import Loading from './scenes/Loading';
+import Game from './scenes/game/Game';
+import HomeButton from './scenes/button/HomeButton';
+import GameUI from './scenes/interface/GameUI';
+import GameInfoUI from './scenes/interface/GameInfoUI';
+import GameScore from './scenes/game/GameScore';
+import PauseButton from './scenes/button/PauseButton';
+import Main from './scenes/Main';
 
 function App() {
   useEffect(() => {
@@ -18,7 +18,8 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
+      // scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
+      scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
