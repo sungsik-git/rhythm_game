@@ -22,6 +22,7 @@ export default class HomeButton extends Phaser.Scene {
             this.scene.stop('game')
             this.scene.stop('gameUI');
             this.scene.stop('gameInfoUI');
+            this.scene.stop('pauseButton')
             this.scene.start('main');
         });
     }

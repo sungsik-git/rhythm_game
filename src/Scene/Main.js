@@ -126,7 +126,7 @@ export default class Main extends Phaser.Scene {
     this.scene.stop('main');
 
     // 매개변수로 받아온 index에 맞는 game scene을 출력
-    this.scene.start('game', {musicInfo : this.musics[currentIndex]})
+    this.scene.start('game', {musicInfo : this.musics[currentIndex]});
   }
 
   update() {
