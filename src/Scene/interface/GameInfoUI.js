@@ -23,6 +23,7 @@ export default class GameInfoUI extends Phaser.Scene {
         this.add.text(ratioWidth / 9  + 400, ratioHeight * 12 / 13, this.musicInfo.artist, { fill: '#000000'})
             .setOrigin(0)
             .setFontSize(32);
+        
     }
 
     update(){
