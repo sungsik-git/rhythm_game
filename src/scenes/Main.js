@@ -4,6 +4,8 @@ import game2_thumbnail from "../img/game2_thumbnail.jpg";
 import game3_thumbnail from "../img/game3_thumbnail.jpg";
 import game4_thumbnail from "../img/game4_thumbnail.jpg";
 import game5_thumbnail from "../img/game5_thumbnail.jpg";
+import game1_music from '../music/Dome_before30mins_231206.wav';
+
 import Music from "./music_info/Music";
 
 export default class Main extends Phaser.Scene {
@@ -11,7 +13,7 @@ export default class Main extends Phaser.Scene {
     super('main');
     this.currentMusicTitle = null;
     this.musics = [
-      new Music('Game1', 'Artist1', 'game1_thumbnail', '-'),
+      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music),
       new Music('Game2', 'Artist2', 'game2_thumbnail', '-'),
       new Music('Game3', 'Artist3', 'game3_thumbnail', '-'),
       new Music('Game4', 'Artist4', 'game4_thumbnail', '-'),
@@ -61,7 +63,6 @@ export default class Main extends Phaser.Scene {
     const nextThumbnail = () => {
       this.currentIndex = (this.currentIndex + 1) % this.musics.length;
       this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width / 2);
-      console.log(this.musics[this.currentIndex].title);
     }
 
     const prevThumbnail = () => {

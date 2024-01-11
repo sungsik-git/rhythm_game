@@ -7,7 +7,7 @@ export default class GameInfoUI extends Phaser.Scene {
 
     init(data){
         this.musicInfo = data.musicInfo;
-    }1
+    };
 
     preload(){
 
