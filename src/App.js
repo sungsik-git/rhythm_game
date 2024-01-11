@@ -8,6 +8,8 @@ import GameInfoUI from './scenes/interface/GameInfoUI';
 import GameScore from './scenes/game/GameScore';
 import PauseButton from './scenes/button/PauseButton';
 import Main from './scenes/Main';
+import SoundBar from './scenes/button/SoundBar';
+
 
 function App() {
   useEffect(() => {
@@ -18,8 +20,8 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      // scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
-      scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
+      scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar],
+      // scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
