@@ -4,7 +4,9 @@ export default class HomeButton extends Phaser.Scene {
     constructor(){
         super('homeButton');
     }
-
+    init(data){
+        this.bgm = data.bgm;
+    }
     preload(){
 
     }
@@ -19,6 +21,7 @@ export default class HomeButton extends Phaser.Scene {
         
         homeButton.setInteractive().on('pointerdown', ()=>{
             //실행되고 있는 scene이 모두 종료되어야함
+            this.bgm.stop();
             this.scene.stop('game')
             this.scene.stop('gameUI');
             this.scene.stop('gameInfoUI');

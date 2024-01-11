@@ -42,13 +42,14 @@ export default class Game extends Phaser.Scene {
         // Game UI scene load
         this.scene.launch('gameUI');
         // Home Button load
-        this.scene.launch('homeButton');
+        this.scene.launch('homeButton', {bgm : bgm});
         this.scene.launch('pauseButton');
         // Game info -> title, artist
         this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
         // Game Score
         this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
             .setFontSize(20);
+
     }
 
     update() {
