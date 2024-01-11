@@ -49,30 +49,57 @@ export default class Game extends Phaser.Scene {
         // Game Score
         this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
             .setFontSize(20);
-
     }
 
     update() {
+        //node route property
+        const nodeRoute = this.registry.get('nodeRoute');
+
+
+        //Key Down
         if (this.keyS?.isDown) {
-            console.log('SSS!!');
+            nodeRoute.nodeRouteS.fillColor = 0xff0000;
         }
         if (this.keyD?.isDown) {
-            console.log('DDD!!');
+            nodeRoute.nodeRouteD.fillColor = 0xff0000;
         }
         if (this.keyF?.isDown) {
-            console.log('FFF!!');
+            nodeRoute.nodeRouteF.fillColor = 0xff0000;
         }
         if (this.keySpace?.isDown) {
-            console.log('space!!');
+            nodeRoute.nodeRouteSpace.fillColor = 0xff0000;
         }
         if (this.keyJ?.isDown) {
-            console.log('JJJ!!');
+            nodeRoute.nodeRouteJ.fillColor = 0xff0000;
         }
         if (this.keyK?.isDown) {
-            console.log('KKK!!');
+            nodeRoute.nodeRouteK.fillColor = 0xff0000;
         }
         if (this.keyL?.isDown) {
-            console.log('LLL!!');
+            nodeRoute.nodeRouteL.fillColor = 0xff0000;
+        }
+
+        //Key Up
+        if (this.keyS?.isUp) {
+            nodeRoute.nodeRouteS.fillColor = 0x8662f0;
+        }
+        if (this.keyD?.isUp) {
+            nodeRoute.nodeRouteD.fillColor = 0x8662f0;
+        }
+        if (this.keyF?.isUp) {
+            nodeRoute.nodeRouteF.fillColor = 0x8662f0;
+        }
+        if (this.keySpace?.isUp) {
+            nodeRoute.nodeRouteSpace.fillColor = 0x8662f0;
+        }
+        if (this.keyJ?.isUp) {
+            nodeRoute.nodeRouteJ.fillColor = 0x8662f0;
+        }
+        if (this.keyK?.isUp) {
+            nodeRoute.nodeRouteK.fillColor = 0x8662f0;
+        }
+        if (this.keyL?.isUp) {
+            nodeRoute.nodeRouteL.fillColor = 0x8662f0;
         }
     }
 }

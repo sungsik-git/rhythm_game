@@ -53,6 +53,17 @@ export default class GameUI extends Phaser.Scene {
         const keyJ = this.add.text(ratioWidth * 2 / 12 - 5 + 405, ratioHeight * 5 / 6, 'J');
         const keyK = this.add.text(ratioWidth * 2 / 12 - 5 + 505, ratioHeight * 5 / 6, 'K');
         const keyL = this.add.text(ratioWidth * 2 / 12 - 5 + 605, ratioHeight * 5 / 6, 'L');
+
+        //route를 다른 씬에서 사용할 수 있도록 registry에 저장
+        this.registry.set('nodeRoute', {
+            nodeRouteS,
+            nodeRouteD,
+            nodeRouteF,
+            nodeRouteSpace,
+            nodeRouteJ,
+            nodeRouteK,
+            nodeRouteL
+        });
     }
     
     
