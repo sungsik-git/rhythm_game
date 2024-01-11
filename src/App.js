@@ -9,6 +9,7 @@ import GameScore from './scenes/game/GameScore';
 import PauseButton from './scenes/button/PauseButton';
 import Main from './scenes/Main';
 import SoundBar from './scenes/button/SoundBar';
+import RestartButton from './scenes/button/RestartButton';
 
 
 function App() {
@@ -20,14 +21,14 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar],
-      // scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore],
+      scene: [/* Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
+      // scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
       },
       backgroundColor: '#f4f0ff'
-    };
+  };
 
     const game = new Phaser.Game(config);
 
