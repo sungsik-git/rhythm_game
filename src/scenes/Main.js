@@ -1,10 +1,17 @@
 import Phaser from "phaser";
+
+//썸네일 이미지 추가
 import game1_thumbnail from "../asset/img/game1_thumbnail.jpg";
 import game2_thumbnail from "../asset/img/game2_thumbnail.jpg";
 import game3_thumbnail from "../asset/img/game3_thumbnail.jpg";
 import game4_thumbnail from "../asset/img/game4_thumbnail.jpg";
 import game5_thumbnail from "../asset/img/game5_thumbnail.jpg";
+
+//음악 파일 추가
 import game1_music from '../asset/music/Dome_before30mins_231206.wav';
+
+//노트 파일 추가
+import game1_node from '../asset/textNode/SampleNode1.txt';
 
 import Music from "./music_info/Music";
 
@@ -13,7 +20,8 @@ export default class Main extends Phaser.Scene {
     super('main');
     this.currentMusicTitle = null;
     this.musics = [
-      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music),
+      //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
+      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
       new Music('Game2', 'Artist2', 'game2_thumbnail', '-'),
       new Music('Game3', 'Artist3', 'game3_thumbnail', '-'),
       new Music('Game4', 'Artist4', 'game4_thumbnail', '-'),

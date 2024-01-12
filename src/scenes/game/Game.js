@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 import GameScore from "./GameScore";
+import NodeManager from "../node/NodeManager";
+import Game1_node from "../../asset/textNode/SampleNode1.txt";
 
 export default class Game extends Phaser.Scene {
     constructor() {
@@ -21,6 +23,9 @@ export default class Game extends Phaser.Scene {
     preload() {
         // Load the background music (BGM)
         this.load.audio('bgm', this.musicInfo.musicPath);
+
+        // Load the node file
+        this.load.text('nodeFile', this.musicInfo.nodeFilePath);
 
         // Listen for when the audio is loaded
         this.load.on('complete', () => {
@@ -50,8 +55,15 @@ export default class Game extends Phaser.Scene {
         // Game Score
         this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
             .setFontSize(20);
+        // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
+
+        // Get nodes in node file
+        const gameNodes = this.cache.text.get('nodeFile');
         
+        const nodeManager = new NodeManager(gameNodes);
+        nodeManager.makeNodes();
+
     }
     
 

@@ -8,3 +8,5 @@ class Node{
         this.pressTime = pressTime;
     }
 }
+
+export default Node

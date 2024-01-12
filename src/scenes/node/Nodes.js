@@ -1,3 +1,5 @@
+import Node from './Node'
+
 class Nodes{
     constructor(){
         this.nodes = [];
@@ -6,8 +8,6 @@ class Nodes{
     createNode(startTime, key, pressTime){
         this.nodes.push(new Node(startTime, key, pressTime)); 
     }
-
-    // playNodes(){
-    //     return [...this.nodes];
-    // }
 }
+
+export default Nodes
