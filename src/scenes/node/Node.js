@@ -6,5 +6,5 @@ class Node{
         this.startTime = startTime;
         this.key = key;
         this.pressTime = pressTime;
-    }   
+    }
 }

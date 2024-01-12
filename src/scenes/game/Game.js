@@ -51,6 +51,7 @@ export default class Game extends Phaser.Scene {
         this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
             .setFontSize(20);
         this.scene.launch('soundBar', { bgm: bgm });
+        
     }
     
 

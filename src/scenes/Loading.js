@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import bg from "../img/loadingBackground.jpg";
+import bg from "../asset/img/loadingBackground.jpg";
 
 export default class Loading extends Phaser.Scene {
   constructor() {

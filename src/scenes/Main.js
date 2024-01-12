@@ -1,10 +1,10 @@
 import Phaser from "phaser";
-import game1_thumbnail from "../img/game1_thumbnail.jpg";
-import game2_thumbnail from "../img/game2_thumbnail.jpg";
-import game3_thumbnail from "../img/game3_thumbnail.jpg";
-import game4_thumbnail from "../img/game4_thumbnail.jpg";
-import game5_thumbnail from "../img/game5_thumbnail.jpg";
-import game1_music from '../music/Dome_before30mins_231206.wav';
+import game1_thumbnail from "../asset/img/game1_thumbnail.jpg";
+import game2_thumbnail from "../asset/img/game2_thumbnail.jpg";
+import game3_thumbnail from "../asset/img/game3_thumbnail.jpg";
+import game4_thumbnail from "../asset/img/game4_thumbnail.jpg";
+import game5_thumbnail from "../asset/img/game5_thumbnail.jpg";
+import game1_music from '../asset/music/Dome_before30mins_231206.wav';
 
 import Music from "./music_info/Music";
 
