@@ -1,11 +1,10 @@
 import Phaser from "phaser";
-import GameScore from "./GameScore";
-import NodeManager from "../node/NodeManager";
+import Nodes from "./node/Nodes";
+import Node from "./node/Node";
 
-export default class Game extends Phaser.Scene {
+export default class Test extends Phaser.Scene {
     constructor() {
-        super('game');
-        this.gameScore = new GameScore(0);
+        super('test');
         this.keyS = null;
         this.keyD = null;
         this.keyF = null;
@@ -13,20 +12,10 @@ export default class Game extends Phaser.Scene {
         this.keyJ = null;
         this.keyK = null;
         this.keyL = null;
-    }
-
-    init(data) {
-        this.musicInfo = data.musicInfo;
+        this.nodes = null;
     }
 
     preload() {
-        // Load the background music (BGM)
-        this.load.audio('bgm', this.musicInfo.musicPath);
-
-        // Load the node file
-        this.load.text('nodeFile', this.musicInfo.nodeFilePath);
-
-        // Listen for when the audio is loaded
         this.load.on('complete', () => {
             // Create key properties
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -40,24 +29,33 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-
-        // Play the background music (BGM)
-        const bgm = this.sound.add('bgm', { loop: false });
-        bgm.play();
         // Game UI scene load
         this.scene.launch('gameUI');
-        // load to Button 
-        this.scene.launch('homeButton', { bgm: bgm });
-        this.scene.launch('pauseButton');
-        this.scene.launch('restartButton', {bgm : bgm})
-        // Game info -> title, artist
-        this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
-        // Game Score
-        this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
-            .setFontSize(20);
-        // add sound bar
-        this.scene.launch('soundBar', { bgm: bgm });
-    
+        
+        // Nodes 인스턴스 생성
+        this.nodes = new Nodes();
+        
+        // 노드 추가
+        this.nodes.createNode(1000, 's', 0);
+        this.nodes.createNode(2000, 'd', 0);
+        this.nodes.createNode(3000, 'f', 0);
+        this.nodes.createNode(4000, 'space', 0);
+    }
+
+    calcNodeX(key) {
+        switch (key) {
+            case 's':
+                return 123;
+            case 'd':
+                return 234;
+            case 'f':
+                return 345;
+            case 'space':
+                return 456;
+            default:
+                console.log("default");
+                return 0;
+        }
     }
 
     update() {
@@ -108,25 +106,19 @@ export default class Game extends Phaser.Scene {
         }
         if (this.keyL?.isUp) {
             nodeRoute.nodeRouteL.fillColor = 0x8662f0;
-        }   
+        }
 
-        // Get nodes in node file
-        const nodeFile = this.cache.text.get('nodeFile');
-        const routeXPosition = this.registry.get('routeXPosition')
-        const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        const gameNodes = nodeManager.makeNodes();
-
-        
-        gameNodes.nodes.forEach(node => {
-            const nodeProperty = this.add.rectangle(
-                nodeManager.calcNodeXPosit(node.key),
-                20,
-                100,
-                20,
-                0x33FF66);
-                nodeProperty.setOrigin(0,0);
-                this.add.existing(nodeProperty);
-                console.log(node.key)
+        // 노드 출력
+        this.nodes.forEach(node => {
+            setTimeout(() => {
+                this.add.rectangle(
+                    this.calcNodeX(node.key),
+                    0,
+                    100,
+                    20,
+                    0x3366CC
+                );
+            }, node.startTime);
         });
-    }    
+    }
 }

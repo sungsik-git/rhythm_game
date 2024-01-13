@@ -23,19 +23,19 @@ class NodeManager {
     calcNodeXPosit(key) {
         switch(key){
             case 's' : 
-                return this.routeXPosition.keyS_X_Posit;
+                return this.routeXPosition.keyS_X_Posit -50;
             case 'd' :
-                return this.routeXPosition.keyD_X_Posit;
+                return this.routeXPosition.keyD_X_Posit-50
             case 'f' :
-                return this.routeXPosition.keyF_X_Posit;
+                return this.routeXPosition.keyF_X_Posit-50;
             case 'space' :
-                return this.routeXPosition.keySpace_X_Posit;
+                return this.routeXPosition.keySpace_X_Posit-50;
             case 'j' :
-                return this.routeXPosition.keyJ_X_Posit;
+                return this.routeXPosition.keyJ_X_Posit-50;
             case 'k' :
-                return this.routeXPosition.keyK_X_Posit;
+                return this.routeXPosition.keyK_X_Posit-50;
             case 'l' :
-                return this.routeXPosition.keyL_X_Posit;
+                return this.routeXPosition.keyL_X_Posit-50;
             default:
                 console.error(`Unexpected key: ${key}`);
                 return 0; 
