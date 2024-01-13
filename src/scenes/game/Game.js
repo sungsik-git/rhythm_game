@@ -1,7 +1,6 @@
 import Phaser from "phaser";
 import GameScore from "./GameScore";
 import NodeManager from "../node/NodeManager";
-import Game1_node from "../../asset/textNode/SampleNode1.txt";
 
 export default class Game extends Phaser.Scene {
     constructor() {
@@ -41,6 +40,7 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
+
         // Play the background music (BGM)
         const bgm = this.sound.add('bgm', { loop: false });
         bgm.play();
@@ -57,20 +57,11 @@ export default class Game extends Phaser.Scene {
             .setFontSize(20);
         // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
-
-        // Get nodes in node file
-        const gameNodes = this.cache.text.get('nodeFile');
-        
-        const nodeManager = new NodeManager(gameNodes);
-        nodeManager.makeNodes();
-
     }
-    
 
     update() {
         //node route property
         const nodeRoute = this.registry.get('nodeRoute');
-
 
         //Key Down
         if (this.keyS?.isDown) {
@@ -116,6 +107,24 @@ export default class Game extends Phaser.Scene {
         }
         if (this.keyL?.isUp) {
             nodeRoute.nodeRouteL.fillColor = 0x8662f0;
-        }
-    }
+        }   
+
+        // Get nodes in node file
+        const nodeFile = this.cache.text.get('nodeFile');
+        const routeXPosition = this.registry.get('routeXPosition')
+        const nodeManager = new NodeManager(nodeFile, routeXPosition);
+        const gameNodes = nodeManager.makeNodes();
+        
+        gameNodes.nodes.forEach(node => {
+            const nodeProperty = this.add.rectangle(
+                nodeManager.calcNodeXPosit(node.key),
+                0,
+                100,
+                20,
+                0x33FF66);
+                nodeProperty.setOrigin(0,0);
+                this.add.existing(nodeProperty);
+                console.log(node.key)
+        });
+    }    
 }

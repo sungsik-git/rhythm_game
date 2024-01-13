@@ -11,7 +11,6 @@ import Main from './scenes/Main';
 import SoundBar from './scenes/button/SoundBar';
 import RestartButton from './scenes/button/RestartButton';
 
-
 function App() {
   useEffect(() => {
     const config = {
