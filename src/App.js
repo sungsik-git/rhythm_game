@@ -10,6 +10,7 @@ import PauseButton from './scenes/button/PauseButton';
 import Main from './scenes/Main';
 import SoundBar from './scenes/button/SoundBar';
 import RestartButton from './scenes/button/RestartButton';
+import Test from './scenes/node/Test';
 
 function App() {
   useEffect(() => {
@@ -20,8 +21,9 @@ function App() {
         default: 'arcade',
         debug: true
       },
-      scene: [ /*Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
+      // scene: [ /*Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
       // scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
+      scene: [Test],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH

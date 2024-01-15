@@ -13,19 +13,22 @@ export default class Game extends Phaser.Scene {
         this.keyJ = null;
         this.keyK = null;
         this.keyL = null;
+        this.speed = 5;
+        this.gameNodes = [];
     }
 
     init(data) {
         this.musicInfo = data.musicInfo;
+        this.registry.set('routeXPosition', data.routeXPosition);
     }
 
     preload() {
         // Load the background music (BGM)
         this.load.audio('bgm', this.musicInfo.musicPath);
-
+    
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
-
+    
         // Listen for when the audio is loaded
         this.load.on('complete', () => {
             // Create key properties
@@ -40,12 +43,11 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-
         // Play the background music (BGM)
         const bgm = this.sound.add('bgm', { loop: false });
         bgm.play();
         // Game UI scene load
-        this.scene.launch('gameUI');
+        this.scene.launch('gameUI')
         // load to Button 
         this.scene.launch('homeButton', { bgm: bgm });
         this.scene.launch('pauseButton');
@@ -57,18 +59,42 @@ export default class Game extends Phaser.Scene {
             .setFontSize(20);
         // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
-    
+
         // Get nodes in node file
         const nodeFile = this.cache.text.get('nodeFile');
         const routeXPosition = this.registry.get('routeXPosition')
         const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        const gameNodes = nodeManager.makeNodes();
+        this.gameNodes = nodeManager.makeNodes();
 
-        gameNodes.forEach(node => {
-            //node 객체 생성 기능 구현
-        })
-        
+        this.gameNodes.forEach(node => {
+            this.add.rectangle(
+                this.changeXPosi(node.key),
+                100,
+                100,
+                40,
+                0x000000
+            ).setOrigin(0)
+        });
+    }
+    
+    changeXPosi(key){
+        switch(key){
+            case 's' :
+            return 123;
+            case 'd' :
+            return 234;
+            case 'f' :
+            return 345;
+            case 'space' :
+            return 456;
+            case 'j' :
+            return 567;
+            case 'k' :
+            return 678;
+            case 'l' :
+            return 789;
 
+        }
     }
 
     update() {
@@ -121,6 +147,21 @@ export default class Game extends Phaser.Scene {
             nodeRoute.nodeRouteL.fillColor = 0x8662f0;
         }   
 
+        
+        this.gameNodes.forEach(node => {
+            console.log(node)
+            this.nodeDown(node);
+        });
+    }   
 
-    }    
+    nodeDown(node){
+        this.tweens.add({
+            targets: node,
+            y: node.y + this.speed, 
+            duration: 100,            
+            repeat: 0,                
+            onComplete: () => {
+            }
+        });
+    }
 }
