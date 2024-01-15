@@ -58,6 +58,17 @@ export default class Game extends Phaser.Scene {
         // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
     
+        // Get nodes in node file
+        const nodeFile = this.cache.text.get('nodeFile');
+        const routeXPosition = this.registry.get('routeXPosition')
+        const nodeManager = new NodeManager(nodeFile, routeXPosition);
+        const gameNodes = nodeManager.makeNodes();
+
+        gameNodes.forEach(node => {
+            //node 객체 생성 기능 구현
+        })
+        
+
     }
 
     update() {
@@ -110,23 +121,6 @@ export default class Game extends Phaser.Scene {
             nodeRoute.nodeRouteL.fillColor = 0x8662f0;
         }   
 
-        // Get nodes in node file
-        const nodeFile = this.cache.text.get('nodeFile');
-        const routeXPosition = this.registry.get('routeXPosition')
-        const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        const gameNodes = nodeManager.makeNodes();
 
-        
-        gameNodes.nodes.forEach(node => {
-            const nodeProperty = this.add.rectangle(
-                nodeManager.calcNodeXPosit(node.key),
-                20,
-                100,
-                20,
-                0x33FF66);
-                nodeProperty.setOrigin(0,0);
-                this.add.existing(nodeProperty);
-                console.log(node.key)
-        });
     }    
 }
