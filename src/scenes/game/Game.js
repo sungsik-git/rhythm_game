@@ -11,12 +11,11 @@ export default class Game extends Phaser.Scene {
         this.keyJ = null;
         this.keyK = null;
         this.speed = 5;
-        this.gameNodes = [];
+        this.nodes = [];
     }
 
     init(data) {
         this.musicInfo = data.musicInfo;
-        this.registry.set('routeXPosition', data.routeXPosition);
     }
 
     preload() {
@@ -26,6 +25,9 @@ export default class Game extends Phaser.Scene {
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
     
+        // Listen for preload complete event
+        this.load.once('complete', this.create, this);
+
         // Listen for when the audio is loaded
         this.load.on('complete', () => {
             // Create key properties
@@ -58,36 +60,50 @@ export default class Game extends Phaser.Scene {
         const nodeFile = this.cache.text.get('nodeFile');
         const routeXPosition = this.registry.get('routeXPosition')
         const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        this.gameNodes = nodeManager.makeNodes();
+        this.nodes = nodeManager.makeNodes(); 
 
-        this.gameNodes.forEach(node => {
-            this.add.rectangle(
-                this.changeXPosi(node.key),
-                100,
+        this.nodes.forEach(node => {
+        // 각 노드를 setTimeout을 이용하여 지연 생성
+        setTimeout(() => {
+            const rect = this.add.rectangle(
+                this.keyChangeX(node.key),
+                0,
                 100,
                 40,
                 0x000000
-            ).setOrigin(0)
+            );
+
+            // 노드에 Tween을 설정
+            this.tweens.add({
+                targets: rect,
+                y: 600, // 최종적으로 이동하고자 하는 y 좌표
+                duration: 1000, // Tween에 걸리는 시간 (밀리초)
+                ease: 'Linear', // 이징 함수 (선택적)
+                onComplete: () => {
+                    // Tween이 완료되면 호출되는 콜백
+                    rect.destroy(); // Tween이 완료되면 객체 파괴
+                }
+            });
+        }, node.startTime);
         });
     }
     
-    changeXPosi(key){
-        switch(key){
-            case 's' :
-            return 123;
-            case 'd' :
-            return 234;
-            case 'f' :
-            return 345;
-            case 'space' :
-            return 456;
-            case 'j' :
-            return 567;
-            case 'k' :
-            return 678;
-            case 'l' :
-            return 789;
-
+    keyChangeX(key) {
+        switch (key) {
+            case 's':
+                return 123;
+            case 'd':
+                return 234;
+            case 'f':
+                return 345;
+            case 'space':
+                return 456;
+            case 'j':
+                return 567;
+            case 'k':
+                return 678;
+            case 'l':
+                return 789;
         }
     }
 
@@ -122,22 +138,5 @@ export default class Game extends Phaser.Scene {
         if (this.keyK?.isUp) {
             nodeRoute.nodeRouteK.fillColor = 0x8662f0;
         } 
-
-        
-        this.gameNodes.forEach(node => {
-            console.log(node)
-            this.nodeDown(node);
-        });
-    }   
-
-    nodeDown(node){
-        this.tweens.add({
-            targets: node,
-            y: node.y + this.speed, 
-            duration: 100,            
-            repeat: 0,                
-            onComplete: () => {
-            }
-        });
     }
 }

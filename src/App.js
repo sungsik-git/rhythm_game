@@ -24,13 +24,13 @@ function App() {
       },
       scene: [ 
         //Page
-        // /*Loading,*/ Main, Game, 
+        /*Loading,*/ Main, Game, 
         //Interface
-        // GameUI, GameInfoUI, Coordinate
+        GameUI, GameInfoUI, Coordinate,
         //Component
-        // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
+        HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         //Test
-        Test, Coordinate
+        // Test, Coordinate
       ],
       
       scale: {
