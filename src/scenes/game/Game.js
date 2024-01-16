@@ -59,7 +59,17 @@ export default class Game extends Phaser.Scene {
         // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
 
-   
+        bgm.on('complete', () => {
+            this.scene.stop('resultButton');
+            this.scene.stop('pauseButton');
+            this.scene.stop('gameInfoUI');
+            this.scene.stop('soundBar');
+            this.scene.stop('gameUI');
+        
+            // Transition to the result scene
+            this.scene.start('result');
+        });
+        
     }
 
     

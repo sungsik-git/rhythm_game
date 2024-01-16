@@ -12,6 +12,7 @@ import SoundBar from './scenes/button/SoundBar';
 import RestartButton from './scenes/button/RestartButton';
 import Test from './scenes/node/Test';
 import Coordinate from './scenes/theme/Coordinate';
+import Result from './scenes/game/Result';
 
 function App() {
   useEffect(() => {
@@ -24,7 +25,7 @@ function App() {
       },
       scene: [ 
         //Page
-        /*Loading,*/ Main, Game, 
+        /*Loading,*/ Main, Game, Result,
         //Interface
         GameUI, GameInfoUI, Coordinate,
         //Component
