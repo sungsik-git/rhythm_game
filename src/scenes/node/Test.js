@@ -69,6 +69,7 @@ export default class Test extends Phaser.Scene {
                 return 678;
             case 'l':
                 return 789;
+                default : return 0
         }
     }
 

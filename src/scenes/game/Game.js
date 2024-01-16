@@ -25,9 +25,7 @@ export default class Game extends Phaser.Scene {
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
     
-        // Listen for preload complete event
-        this.load.once('complete', this.create, this);
-
+    
         // Listen for when the audio is loaded
         this.load.on('complete', () => {
             // Create key properties
@@ -44,10 +42,15 @@ export default class Game extends Phaser.Scene {
         bgm.play();
         // Game UI scene load
         this.scene.launch('gameUI')
+        // Get nodes in node file
+        const nodeFile = this.cache.text.get('nodeFile');
+        const nodeManager = new NodeManager(this, nodeFile);
+        this.nodes = nodeManager.makeNodes();
+        nodeManager.nodeSlider();
         // load to Button 
         this.scene.launch('homeButton', { bgm: bgm });
         this.scene.launch('pauseButton');
-        this.scene.launch('restartButton', {bgm : bgm})
+        this.scene.launch('restartButton', {bgm : bgm, nodeManager : nodeManager })
         // Game info -> title, artist
         this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
         // Game Score
@@ -56,57 +59,11 @@ export default class Game extends Phaser.Scene {
         // add sound bar
         this.scene.launch('soundBar', { bgm: bgm });
 
-        // Get nodes in node file
-        const nodeFile = this.cache.text.get('nodeFile');
-        const routeXPosition = this.registry.get('routeXPosition')
-        const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        this.nodes = nodeManager.makeNodes(); 
-
-        this.nodes.forEach(node => {
-        // 각 노드를 setTimeout을 이용하여 지연 생성
-        setTimeout(() => {
-            const rect = this.add.rectangle(
-                this.keyChangeX(node.key),
-                0,
-                100,
-                40,
-                0x000000
-            );
-
-            // 노드에 Tween을 설정
-            this.tweens.add({
-                targets: rect,
-                y: 600, // 최종적으로 이동하고자 하는 y 좌표
-                duration: 1000, // Tween에 걸리는 시간 (밀리초)
-                ease: 'Linear', // 이징 함수 (선택적)
-                onComplete: () => {
-                    // Tween이 완료되면 호출되는 콜백
-                    rect.destroy(); // Tween이 완료되면 객체 파괴
-                }
-            });
-        }, node.startTime);
-        });
+   
     }
+
     
-    keyChangeX(key) {
-        switch (key) {
-            case 's':
-                return 123;
-            case 'd':
-                return 234;
-            case 'f':
-                return 345;
-            case 'space':
-                return 456;
-            case 'j':
-                return 567;
-            case 'k':
-                return 678;
-            case 'l':
-                return 789;
-        }
-    }
-
+    
     update() {
         //node route property
         const nodeRoute = this.registry.get('nodeRoute');

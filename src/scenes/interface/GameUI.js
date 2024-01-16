@@ -22,12 +22,6 @@ export default class GameUI extends Phaser.Scene {
         const keyJ_X_Posit = ratioWidth / 9 + this.calcRoute(4, 3);
         const keyK_X_Posit = ratioWidth / 9 + this.calcRoute(5, 4);
 
-        this.registry.set('routeXPosition', {
-            keyD_X_Posit,
-            keyF_X_Posit,
-            keyJ_X_Posit,
-            keyK_X_Posit,
-        });
 
         //node가 떨어질 route
         const nodeRouteD = this.add.rectangle(keyD_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
