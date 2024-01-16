@@ -23,7 +23,7 @@ function App() {
       },
       // scene: [ /*Loading,*/ Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
       // scene: [Loading, Main, Game, GameUI, GameInfoUI, HomeButton, PauseButton, GameScore, SoundBar, RestartButton],
-      scene: [Test],
+      scene: [Test, GameUI],
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH

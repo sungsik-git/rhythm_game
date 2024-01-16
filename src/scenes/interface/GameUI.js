@@ -17,42 +17,31 @@ export default class GameUI extends Phaser.Scene {
         const ratioHeight = this.game.config.height;
 
         //Route X Position
-        const keyS_X_Posit = ratioWidth / 9 + this.calcRoute(1, 0);
         const keyD_X_Posit = ratioWidth / 9 + this.calcRoute(2, 1);
         const keyF_X_Posit = ratioWidth / 9 + this.calcRoute(3, 2);
-        const keySpace_X_Posit = ratioWidth / 9 + this.calcRoute(4, 3);
-        const keyJ_X_Posit = ratioWidth / 9 + this.calcRoute(5, 4);
-        const keyK_X_Posit = ratioWidth / 9 + this.calcRoute(6, 5);
-        const keyL_X_Posit = ratioWidth / 9 + this.calcRoute(7, 6);
+        const keyJ_X_Posit = ratioWidth / 9 + this.calcRoute(4, 3);
+        const keyK_X_Posit = ratioWidth / 9 + this.calcRoute(5, 4);
 
         this.registry.set('routeXPosition', {
-            keyS_X_Posit,
             keyD_X_Posit,
             keyF_X_Posit,
-            keySpace_X_Posit,
             keyJ_X_Posit,
             keyK_X_Posit,
-            keyL_X_Posit
         });
 
         //node가 떨어질 route
-        const nodeRouteS = this.add.rectangle(keyS_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
         const nodeRouteD = this.add.rectangle(keyD_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
         const nodeRouteF = this.add.rectangle(keyF_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
-        const nodeRouteSpace = this.add.rectangle(keySpace_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
         const nodeRouteJ = this.add.rectangle(keyJ_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
         const nodeRouteK = this.add.rectangle(keyK_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
-        const nodeRouteL = this.add.rectangle(keyL_X_Posit, ratioHeight / 2, 100, 600, 0x8662f0);
 
         //route 경계선
-        this.add.rectangle(ratioWidth / 9 - 0.5, ratioHeight / 2, 2, 600, 0x000000);
+
         this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(1, 1), ratioHeight / 2, 2, 600, 0x000000);
         this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(2, 2), ratioHeight / 2, 2, 600, 0x000000);
         this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(3, 3), ratioHeight / 2, 2, 600, 0x000000);
         this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(4, 4), ratioHeight / 2, 2, 600, 0x000000);
         this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(5, 5), ratioHeight / 2, 2, 600, 0x000000);
-        this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(6, 6), ratioHeight / 2, 2, 600, 0x000000);
-        this.add.rectangle(ratioWidth / 9 + this.calcRouteLine(7, 7), ratioHeight / 2, 2, 600, 0x000000);
 
         //judgement Line
         const judgementLine = this.add.graphics();
@@ -63,23 +52,17 @@ export default class GameUI extends Phaser.Scene {
         judgementLine.strokePath();
 
         //Key Info
-        this.add.text(ratioWidth * 2 / 12 - 5, ratioHeight * 5 / 6, 'S');
         this.add.text(ratioWidth * 2 / 12 - 5 + 100, ratioHeight * 5 / 6, 'D');
         this.add.text(ratioWidth * 2 / 12 - 5 + 200, ratioHeight * 5 / 6, 'F');
-        this.add.text(ratioWidth * 2 / 12 - 5 + 285, ratioHeight * 5 / 6, 'Space');
-        this.add.text(ratioWidth * 2 / 12 - 5 + 405, ratioHeight * 5 / 6, 'J');
-        this.add.text(ratioWidth * 2 / 12 - 5 + 505, ratioHeight * 5 / 6, 'K');
-        this.add.text(ratioWidth * 2 / 12 - 5 + 605, ratioHeight * 5 / 6, 'L');
+        this.add.text(ratioWidth * 2 / 12 - 5 + 305, ratioHeight * 5 / 6, 'J');
+        this.add.text(ratioWidth * 2 / 12 - 5 + 405, ratioHeight * 5 / 6, 'K');
 
         //route를 다른 씬에서 사용할 수 있도록 registry에 저장
         this.registry.set('nodeRoute', {
-            nodeRouteS,
             nodeRouteD,
             nodeRouteF,
-            nodeRouteSpace,
             nodeRouteJ,
             nodeRouteK,
-            nodeRouteL
         });
 
         

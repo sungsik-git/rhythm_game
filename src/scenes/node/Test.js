@@ -14,6 +14,7 @@ export default class Test extends Phaser.Scene {
     }
 
     create() {
+        this.scene.launch('gameUI')
         const nodeFile = this.cache.text.get('nodeFile');
         const routeXPosition = this.registry.get('routeXPosition')
         const nodeManager = new NodeManager(nodeFile, routeXPosition);
@@ -34,7 +35,7 @@ export default class Test extends Phaser.Scene {
                 this.tweens.add({
                     targets: rect,
                     y: 600, // 최종적으로 이동하고자 하는 y 좌표
-                    duration: 5000, // Tween에 걸리는 시간 (밀리초)
+                    duration: 1000, // Tween에 걸리는 시간 (밀리초)
                     ease: 'Linear', // 이징 함수 (선택적)
                     onComplete: () => {
                         // Tween이 완료되면 호출되는 콜백
@@ -65,6 +66,6 @@ export default class Test extends Phaser.Scene {
     }
 
     update() {
-        // update 함수에서 아무것도 처리하지 않아도 됨
+
     }
 }

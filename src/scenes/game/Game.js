@@ -6,13 +6,10 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
         this.gameScore = new GameScore(0);
-        this.keyS = null;
         this.keyD = null;
         this.keyF = null;
-        this.keySpace = null;
         this.keyJ = null;
         this.keyK = null;
-        this.keyL = null;
         this.speed = 5;
         this.gameNodes = [];
     }
@@ -32,13 +29,10 @@ export default class Game extends Phaser.Scene {
         // Listen for when the audio is loaded
         this.load.on('complete', () => {
             // Create key properties
-            this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
             this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-            this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
             this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
             this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-            this.keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         });
     }
 
@@ -102,17 +96,11 @@ export default class Game extends Phaser.Scene {
         const nodeRoute = this.registry.get('nodeRoute');
 
         //Key Down
-        if (this.keyS?.isDown) {
-            nodeRoute.nodeRouteS.fillColor = 0xff0000;
-        }
         if (this.keyD?.isDown) {
             nodeRoute.nodeRouteD.fillColor = 0xff0000;
         }
         if (this.keyF?.isDown) {
             nodeRoute.nodeRouteF.fillColor = 0xff0000;
-        }
-        if (this.keySpace?.isDown) {
-            nodeRoute.nodeRouteSpace.fillColor = 0xff0000;
         }
         if (this.keyJ?.isDown) {
             nodeRoute.nodeRouteJ.fillColor = 0xff0000;
@@ -120,32 +108,20 @@ export default class Game extends Phaser.Scene {
         if (this.keyK?.isDown) {
             nodeRoute.nodeRouteK.fillColor = 0xff0000;
         }
-        if (this.keyL?.isDown) {
-            nodeRoute.nodeRouteL.fillColor = 0xff0000;
-        }
 
         //Key Up
-        if (this.keyS?.isUp) {
-            nodeRoute.nodeRouteS.fillColor = 0x8662f0;
-        }
         if (this.keyD?.isUp) {
             nodeRoute.nodeRouteD.fillColor = 0x8662f0;
         }
         if (this.keyF?.isUp) {
             nodeRoute.nodeRouteF.fillColor = 0x8662f0;
         }
-        if (this.keySpace?.isUp) {
-            nodeRoute.nodeRouteSpace.fillColor = 0x8662f0;
-        }
         if (this.keyJ?.isUp) {
             nodeRoute.nodeRouteJ.fillColor = 0x8662f0;
         }
         if (this.keyK?.isUp) {
             nodeRoute.nodeRouteK.fillColor = 0x8662f0;
-        }
-        if (this.keyL?.isUp) {
-            nodeRoute.nodeRouteL.fillColor = 0x8662f0;
-        }   
+        } 
 
         
         this.gameNodes.forEach(node => {
