@@ -20,6 +20,24 @@ class NodeManager {
         return this.nodes;
     }
 
+    pauseNodes() {
+        this.nodes.forEach(node => {
+            const rect = this.scene.children.getByName(node.key);
+            if (rect) {
+                this.scene.tweens.pauseTweensOf(rect);
+            }
+        });
+    }
+    
+    resumeNodes() {
+        this.nodes.forEach(node => {
+            const rect = this.scene.children.getByName(node.key);
+            if (rect) {
+                this.scene.tweens.resumeTweensOf(rect);
+            }
+        });
+    }
+
     clearNodes() {
         // 기존 노드들을 화면에서 제거
         this.nodes.forEach(node => {

@@ -49,7 +49,7 @@ export default class Game extends Phaser.Scene {
         nodeManager.nodeSlider();
         // load to Button 
         this.scene.launch('homeButton', { bgm: bgm });
-        this.scene.launch('pauseButton');
+        this.scene.launch('pauseButton', { bgm : bgm, nodeManager : nodeManager});
         this.scene.launch('restartButton', {bgm : bgm, nodeManager : nodeManager })
         // Game info -> title, artist
         this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
