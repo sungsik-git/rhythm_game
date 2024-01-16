@@ -11,10 +11,17 @@ export default class Test extends Phaser.Scene {
     preload() {
         // Load the node file
         this.load.text('nodeFile', textNodeFile);
+
+        // Listen for preload complete event
+        this.load.once('complete', this.create, this);
     }
 
     create() {
-        this.scene.launch('gameUI')
+        this.scene.launch('coordinate');
+        const coordinateManager = this.scene.get('coordinate');
+        const keyDXPos = coordinateManager.xPosit.keyD;
+        console.log(keyDXPos)
+
         const nodeFile = this.cache.text.get('nodeFile');
         const routeXPosition = this.registry.get('routeXPosition')
         const nodeManager = new NodeManager(nodeFile, routeXPosition);
