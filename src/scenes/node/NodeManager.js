@@ -75,7 +75,7 @@ class NodeManager {
     }
 
     nodeSlider() {
-        this.nodes.forEach(node => {
+        this.nodes.forEach( node => {
             // 각 노드를 setTimeout을 이용하여 지연 생성
             setTimeout(() => {
                 const rect = this.scene.add.rectangle(
@@ -85,6 +85,9 @@ class NodeManager {
                     40,
                     0x000000
                 );
+
+                const nodeName = `node_${node.nodeNumber}`;
+                rect.setName(nodeName);
 
                 // 노드에 Tween을 설정
                 this.scene.tweens.add({

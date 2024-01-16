@@ -9,7 +9,12 @@ import game5_thumbnail from "../../asset/img/game5_thumbnail.jpg";
 
 //음악 파일 추가
 import game1_music from '../../asset/music/Dome_before30mins_231206.wav';
-import game2_music from '../../asset/music/sample-3s.mp3';
+import game2_music from '../../asset/music/attention.mp3';
+import game3_music from '../../asset/music/dangerously.mp3';
+import game4_music from '../../asset/music/loser.mp3';
+import game5_music from '../../asset/music/that’s_not_how_this-works.mp3';
+import game6_music from '../../asset/music/thats_hilarious.mp3';
+import game7_music from '../../asset/music/see_you_again.mp3';
 
 //노트 파일 추가
 import game1_node from '../../asset/textNode/SampleNode1.txt';
@@ -23,10 +28,12 @@ export default class Main extends Phaser.Scene {
     this.musics = [
       //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
       new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
-      new Music('Game2', 'Artist2', 'game2_thumbnail', game2_music, game1_node),
-      new Music('Game3', 'Artist3', 'game3_thumbnail', '-'),
-      new Music('Game4', 'Artist4', 'game4_thumbnail', '-'),
-      new Music('Game5', 'Artist5', 'game5_thumbnail', '-'),
+      new Music('Attention', 'Charlie Puth', 'game2_thumbnail', game2_music, game1_node),
+      new Music('Dangerously', 'Charlie Puth', 'game3_thumbnail', game3_music, game1_node),
+      new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game1_node),
+      new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game1_node),
+      new Music('Thats hilarious', 'Charlie Puth', 'game5_thumbnail', game6_music, game1_node),
+      new Music('See you again', 'Charlie Puth', 'game5_thumbnail', game7_music, game1_node),
     ];
     this.currentIndex = 0;
   }

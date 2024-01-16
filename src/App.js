@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import Phaser from 'phaser';
 import Loading from './scenes/game/Loading';
 import Game from './scenes/game/Game';
-import HomeButton from './scenes/button/HomeButton';
+import HomeButton from './scenes/component/HomeButton';
 import GameUI from './scenes/interface/GameUI';
 import GameInfoUI from './scenes/interface/GameInfoUI';
 import GameScore from './scenes/game/GameScore';
-import PauseButton from './scenes/button/PauseButton';
+import PauseButton from './scenes/component/PauseButton';
 import Main from './scenes/game/Main';
-import SoundBar from './scenes/button/SoundBar';
-import RestartButton from './scenes/button/RestartButton';
+import SoundBar from './scenes/component/SoundBar';
+import RestartButton from './scenes/component/RestartButton';
 import Test from './scenes/node/Test';
 import Coordinate from './scenes/theme/Coordinate';
 import Result from './scenes/game/Result';
@@ -25,7 +25,7 @@ function App() {
       },
       scene: [ 
         //Page
-        /*Loading,*/ Main, Game, Result,
+        Loading, Main, Game, Result,
         //Interface
         GameUI, GameInfoUI, Coordinate,
         //Component

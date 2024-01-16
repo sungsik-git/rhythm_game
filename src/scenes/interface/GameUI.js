@@ -39,11 +39,14 @@ export default class GameUI extends Phaser.Scene {
 
         //judgement Line
         const judgementLine = this.add.graphics();
+        const judgementLineY = ratioHeight * 4 / 5;
         judgementLine.lineStyle(2, 0x000000);
         judgementLine.beginPath();
         judgementLine.moveTo(ratioWidth / 9 ,ratioHeight * 4 / 5);
-        judgementLine.lineTo(ratioWidth * 9 / 10 - 2 , ratioHeight * 4 / 5);
+        judgementLine.lineTo(ratioWidth * 9 / 10 - 2 , judgementLineY);
         judgementLine.strokePath();
+        
+        this.registry.set('judgementLineY', judgementLineY)
 
         //Key Info
         this.add.text(ratioWidth * 2 / 12 - 5 + 100, ratioHeight * 5 / 6, 'D');

@@ -34,6 +34,7 @@ export default class Game extends Phaser.Scene {
             this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
             this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
         });
+
     }
 
     create() {
@@ -69,18 +70,47 @@ export default class Game extends Phaser.Scene {
             // Transition to the result scene
             this.scene.start('result');
         });
+
         
     }
 
+    judgementNode(nodes) {
+        
+        const judgementLineY = this.scene.registry.get('judgementLineY');
+        nodes.forEach(node => {
+            
     
+            if (node) {
+                const difference = Math.abs(node.y - judgementLineY);
+    
+                // 판정 로직
+                if (difference < 10) {
+                    console.log('Perfect');
+                } else if (difference < 20) {
+                    console.log('Great');
+                } else if (difference < 30) {
+                    console.log('Good');
+                } else if (difference < 40) {
+                    console.log('Bad');
+                } else {
+                    console.log('Miss');
+                }
+    
+                // 판정이 완료된 노드는 화면에서 제거
+                node.destroy();
+            }
+        });
+    }
     
     update() {
         //node route property
-        const nodeRoute = this.registry.get('nodeRoute');
+        const nodeRoute = this.scene.registry.get('nodeRoute');
 
         //Key Down
         if (this.keyD?.isDown) {
             nodeRoute.nodeRouteD.fillColor = 0xff0000;
+            
+            // this.judgementNode(this.nodes);
         }
         if (this.keyF?.isDown) {
             nodeRoute.nodeRouteF.fillColor = 0xff0000;
