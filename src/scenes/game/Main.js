@@ -51,8 +51,16 @@ export default class Main extends Phaser.Scene {
   }
 
   create() {   
-    // 초기 이미지 로드
-    const currentThumbnail = this.add.image(this.game.config.width / 2, this.game.config.height / 5, this.musics[this.currentIndex].thumbnailPath).setOrigin(0.5, 0);
+    // init background image
+    const currentBackground = this.add.image(0, 0, this.musics[this.currentIndex].thumbnailPath)
+    .setOrigin(0, 0)
+    .setAlpha(0.3)
+    currentBackground.displayWidth = this.game.config.width
+    currentBackground.displayHeight = this.game.config.height
+    
+    // init thumbnail image
+    const currentThumbnail = this.add.image(this.game.config.width / 2, this.game.config.height / 5, this.musics[this.currentIndex].thumbnailPath)
+    .setOrigin(0.5, 0);
     this.scaleImage(currentThumbnail);
     
     // 버튼 위치 로드
@@ -83,11 +91,13 @@ export default class Main extends Phaser.Scene {
     const nextThumbnail = () => {
       this.currentIndex = (this.currentIndex + 1) % this.musics.length;
       this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width / 2);
+      this.slideBackground(currentBackground, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width);
     }
 
     const prevThumbnail = () => {
       this.currentIndex = (this.currentIndex - 1 + this.musics.length) % this.musics.length;
-      this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
+      this.slideThumbnail([currentThumbnail], this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
+      this.slideBackground(currentBackground, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width);
     }; 
 
     // thumbnail click시 해당되는 곡의 플레이 화면으로 이동
@@ -135,6 +145,20 @@ export default class Main extends Phaser.Scene {
       },
     });
   }
+  slideBackground(target, thumbnailPath, targetX) {
+    this.tweens.add({
+      targets: target,
+      x: targetX,
+      duration: 500,
+      onComplete: () => {
+        target.setTexture(thumbnailPath).setOrigin(0, 0);
+        target.x = 0; 
+        target.displayHeight = this.game.config.height;
+        target.displayWidth = this.game.config.width;
+      },
+    });
+  }
+  
 
   // 이미지 위치 고정을 위한 함수
   scaleImage(target) {

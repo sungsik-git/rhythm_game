@@ -12,6 +12,8 @@ import SoundBar from './scenes/component/SoundBar';
 import RestartButton from './scenes/component/RestartButton';
 import Test from './scenes/node/Test';
 import Result from './scenes/game/Result';
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+
 
 function App() {
   useEffect(() => {
@@ -32,11 +34,21 @@ function App() {
         //Test
         // Test, Coordinate
       ],
-      
+      plugins: {
+        scene: [
+          {
+            key: 'rexUI',
+            plugin: RexUIPlugin,
+            mapping: 'rexUI'
+          }
+          // Add other plugins as needed
+        ]
+      },
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
       },
+      
       backgroundColor: '#ffffff'
   };
 
