@@ -2,10 +2,12 @@ import Phaser from "phaser";
 
 //썸네일 이미지 추가
 import game1_thumbnail from "../../asset/img/game1_thumbnail.jpg";
-import game2_thumbnail from "../../asset/img/game2_thumbnail.jpg";
-import game3_thumbnail from "../../asset/img/game3_thumbnail.jpg";
-import game4_thumbnail from "../../asset/img/game4_thumbnail.jpg";
-import game5_thumbnail from "../../asset/img/game5_thumbnail.jpg";
+import game2_thumbnail from "../../asset/img/game2_thumbnail.jpeg";
+import game3_thumbnail from "../../asset/img/game3_thumbnail.jpeg";
+import game4_thumbnail from "../../asset/img/game4_thumbnail.jpeg";
+import game5_thumbnail from "../../asset/img/game5_thumbnail.png";
+import game6_thumbnail from "../../asset/img/game6_thumbnail.jpeg";
+import game7_thumbnail from "../../asset/img/game7_thumbnail.jpeg";
 
 //음악 파일 추가
 import game1_music from '../../asset/music/Dome_before30mins_231206.wav';
@@ -27,13 +29,13 @@ export default class Main extends Phaser.Scene {
     this.currentMusicTitle = null;
     this.musics = [
       //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
-      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
       new Music('Attention', 'Charlie Puth', 'game2_thumbnail', game2_music, game1_node),
       new Music('Dangerously', 'Charlie Puth', 'game3_thumbnail', game3_music, game1_node),
       new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game1_node),
       new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game1_node),
-      new Music('Thats hilarious', 'Charlie Puth', 'game5_thumbnail', game6_music, game1_node),
-      new Music('See you again', 'Charlie Puth', 'game5_thumbnail', game7_music, game1_node),
+      new Music('Thats hilarious', 'Charlie Puth', 'game6_thumbnail', game6_music, game1_node),
+      new Music('See you again', 'Charlie Puth', 'game7_thumbnail', game7_music, game1_node),
+      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
     ];
     this.currentIndex = 0;
   }
@@ -44,6 +46,8 @@ export default class Main extends Phaser.Scene {
     this.load.image('game3_thumbnail', game3_thumbnail);
     this.load.image('game4_thumbnail', game4_thumbnail);
     this.load.image('game5_thumbnail', game5_thumbnail);
+    this.load.image('game6_thumbnail', game6_thumbnail);
+    this.load.image('game7_thumbnail', game7_thumbnail);
   }
 
   create() {   
