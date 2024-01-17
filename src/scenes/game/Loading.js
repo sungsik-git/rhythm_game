@@ -1,5 +1,6 @@
 import Phaser from "phaser";
-import bg from "../../asset/img/loadingBackground.jpg";
+import bg from "../../asset/img/loadingBackground2.jpg";
+import Coordinate from "../theme/Coordinate";
 
 export default class Loading extends Phaser.Scene {
   constructor() {
@@ -12,14 +13,16 @@ export default class Loading extends Phaser.Scene {
   }
 
   create() {
-    const bgImg = this.add.image(0, 0, 'bg').setOrigin(0);
-    bgImg.displayWidth = this.game.config.width;
-    bgImg.displayHeight = this.game.config.height;
+    const coordinate = new Coordinate()
 
-    //start button 
+    const bgImg = this.add.image(0, 0, 'bg').setOrigin(0);
+    bgImg.displayWidth = coordinate.xPosit.width;
+    bgImg.displayHeight = coordinate.yPosit.height;
+
+    //Start Button
     this.clickToStart = this.add.text(
-      this.game.config.width / 2,
-      this.game.config.height * 3 / 4,
+      coordinate.xPosit.center,
+      coordinate.yPosit.centerBottomMore,
       'Click to Start'
     )
     .setFill("#fff")
@@ -29,17 +32,17 @@ export default class Loading extends Phaser.Scene {
     .setAlign('center')
     .setInteractive();
 
-    //글씨 깜박임 효과
+    //Font animation
     this.tweens.add({
         targets: this.clickToStart,
         alpha : 0,
-        duration : 500,
+        duration : 1000,
         ease : 'Powerl',
         yoyo : true,
         repeat : -1
     });
 
-    this.input.once('pointerdown', () => {
+    this.clickToStart.once('pointerdown', () => {
       this.scene.start('main');
     });
 

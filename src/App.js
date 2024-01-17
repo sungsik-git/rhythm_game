@@ -11,14 +11,13 @@ import Main from './scenes/game/Main';
 import SoundBar from './scenes/component/SoundBar';
 import RestartButton from './scenes/component/RestartButton';
 import Test from './scenes/node/Test';
-import Coordinate from './scenes/theme/Coordinate';
 import Result from './scenes/game/Result';
 
 function App() {
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
-      width:900,
+      width:1200,
       physics: {
         default: 'arcade',
         debug: true
@@ -27,7 +26,7 @@ function App() {
         //Page
         Loading, Main, Game, Result,
         //Interface
-        GameUI, GameInfoUI, Coordinate,
+        GameUI, GameInfoUI,
         //Component
         HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         //Test
@@ -38,7 +37,7 @@ function App() {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
       },
-      backgroundColor: '#f4f0ff'
+      backgroundColor: '#ffffff'
   };
 
     const game = new Phaser.Game(config);
