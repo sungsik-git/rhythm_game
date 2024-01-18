@@ -26,13 +26,13 @@ function App() {
       },
       scene: [ 
         //Page
-        Loading, Main, Game, Result,
+        // Loading, Main, Game, Result,
         //Interface
-        GameUI, GameInfoUI,
+        // GameUI, GameInfoUI,
         //Component
-        HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
+        // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         //Test
-        // Test, Coordinate
+        Test
       ],
       plugins: {
         scene: [

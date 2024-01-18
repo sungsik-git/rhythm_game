@@ -1,79 +1,48 @@
 import Phaser from "phaser";
-import NodeManager from "./NodeManager";
-import textNodeFile from "../../asset/textNode/SampleNode1.txt"
 
 export default class Test extends Phaser.Scene {
     constructor() {
         super('test');
-        this.nodes = [];
-    }
-
-    preload() {
-        // Load the node file
-        this.load.text('nodeFile', textNodeFile);
-
-        // Listen for preload complete event
-        this.load.once('complete', this.create, this);
+        this.recs = []; 
     }
 
     create() {
-        this.scene.launch('coordinate');
-        const coordinateManager = this.scene.get('coordinate');
-        const keyDXPos = coordinateManager.xPosit.keyD;
-        console.log(keyDXPos)
-
-        const nodeFile = this.cache.text.get('nodeFile');
-        const routeXPosition = this.registry.get('routeXPosition')
-        const nodeManager = new NodeManager(nodeFile, routeXPosition);
-        this.nodes = nodeManager.makeNodes(); // node 객체
-
-        this.nodes.forEach(node => {
-            // 각 노드를 setTimeout을 이용하여 지연 생성
-            setTimeout(() => {
-                const rect = this.add.rectangle(
-                    this.keyChangeX(node.key),
-                    0,
-                    100,
-                    40,
-                    0x000000
-                );
-
-                // 노드에 Tween을 설정
-                this.tweens.add({
-                    targets: rect,
-                    y: 600, // 최종적으로 이동하고자 하는 y 좌표
-                    duration: 1000, // Tween에 걸리는 시간 (밀리초)
-                    ease: 'Linear', // 이징 함수 (선택적)
-                    onComplete: () => {
-                        // Tween이 완료되면 호출되는 콜백
-                        rect.destroy(); // Tween이 완료되면 객체 파괴
-                    }
-                });
-            }, node.startTime);
+        // 일정 시간이 지난 후에 코드 실행
+        this.time.addEvent({
+            delay: 1000,
+            callback: this.createRectangle,
+            callbackScope: this
         });
     }
 
-    keyChangeX(key) {
-        switch (key) {
-            case 's':
-                return 123;
-            case 'd':
-                return 234;
-            case 'f':
-                return 345;
-            case 'space':
-                return 456;
-            case 'j':
-                return 567;
-            case 'k':
-                return 678;
-            case 'l':
-                return 789;
-                default : return 0
-        }
+    createRectangle() {
+        const rec1 = this.add.rectangle(100, 100, 100, 40, 0x000000);
+        const rec2 = this.add.rectangle(200, 100, 100, 40, 0x000000);
+        const rec3 = this.add.rectangle(300, 100, 100, 40, 0x000000);
+        const rec4 = this.add.rectangle(400, 100, 100, 40, 0x000000);
+        console.log("Object created");
+        this.recs.push(rec1)
+        this.recs.push(rec2)
+        this.recs.push(rec3)
+        this.recs.push(rec4)
+
+        this.recs.forEach(rec => {
+            this.tweens.add({
+                targets: rec,
+                y: 600,
+                duration: 1000,
+                ease: 'Linear',
+                onComplete: () => {
+                    rec.destroy();
+                }
+            });
+        })
+        
     }
 
     update() {
-
+        if (this.recs.length > 0 && this.recs[0].y < 600) {
+            console.log(this.recs[0].y);
+        }
     }
 }

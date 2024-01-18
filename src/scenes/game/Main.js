@@ -27,6 +27,8 @@ export default class Main extends Phaser.Scene {
   constructor() {
     super('main');
     this.currentMusicTitle = null;
+    this.currentIndex = 0;
+
     this.musics = [
       //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
       new Music('Attention', 'Charlie Puth', 'game2_thumbnail', game2_music, game1_node),
@@ -37,7 +39,6 @@ export default class Main extends Phaser.Scene {
       new Music('See you again', 'Charlie Puth', 'game7_thumbnail', game7_music, game1_node),
       new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
     ];
-    this.currentIndex = 0;
   }
 
   preload() {
@@ -48,6 +49,7 @@ export default class Main extends Phaser.Scene {
     this.load.image('game5_thumbnail', game5_thumbnail);
     this.load.image('game6_thumbnail', game6_thumbnail);
     this.load.image('game7_thumbnail', game7_thumbnail);
+
   }
 
   create() {   
@@ -96,7 +98,7 @@ export default class Main extends Phaser.Scene {
 
     const prevThumbnail = () => {
       this.currentIndex = (this.currentIndex - 1 + this.musics.length) % this.musics.length;
-      this.slideThumbnail([currentThumbnail], this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
+      this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
       this.slideBackground(currentBackground, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width);
     }; 
 
@@ -149,7 +151,7 @@ export default class Main extends Phaser.Scene {
     this.tweens.add({
       targets: target,
       x: targetX,
-      duration: 500,
+      duration: 400,
       onComplete: () => {
         target.setTexture(thumbnailPath).setOrigin(0, 0);
         target.x = 0; 
