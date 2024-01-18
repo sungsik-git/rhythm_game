@@ -19,7 +19,9 @@ function App() {
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
-      width:1200,
+      // width:1200,
+      width: 1920,
+      height: 1090,
       physics: {
         default: 'arcade',
         debug: true
