@@ -11,6 +11,7 @@ import Main from './scenes/game/Main';
 import SoundBar from './scenes/component/SoundBar';
 import RestartButton from './scenes/component/RestartButton';
 import Test from './scenes/node/Test';
+import Test2 from './scenes/node/Test2';
 import Result from './scenes/game/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 
@@ -33,7 +34,7 @@ function App() {
         //Component
         // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         //Test
-        Test
+        Test2
       ],
       plugins: {
         scene: [
