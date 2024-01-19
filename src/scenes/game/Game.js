@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
         this.keyK = null;
         this.speed = 5;
         this.nodes = [];
+        this.timeToFall = 900;
     }
 
     init(data) {
@@ -71,69 +72,13 @@ export default class Game extends Phaser.Scene {
             this.scene.start('result');
         });
 
-        
     }
 
-    judgementNode(nodes) {
-        
-        const judgementLineY = this.scene.registry.get('judgementLineY');
-        nodes.forEach(node => {
-            
-    
-            if (node) {
-                const difference = Math.abs(node.y - judgementLineY);
-    
-                // 판정 로직
-                if (difference < 10) {
-                    console.log('Perfect');
-                } else if (difference < 20) {
-                    console.log('Great');
-                } else if (difference < 30) {
-                    console.log('Good');
-                } else if (difference < 40) {
-                    console.log('Bad');
-                } else {
-                    console.log('Miss');
-                }
-    
-                // 판정이 완료된 노드는 화면에서 제거
-                node.destroy();
-            }
-        });
-    }
-    
     update() {
-        // //node route property
-        // const nodeRoute = this.scene.registry.get('nodeRoute');
-
-        // //Key Down
-        // if (this.keyD?.isDown) {
-        //     nodeRoute.nodeRouteD.fillColor = 0xff0000;
-            
-        //     // this.judgementNode(this.nodes);
-        // }
-        // if (this.keyF?.isDown) {
-        //     nodeRoute.nodeRouteF.fillColor = 0xff0000;
-        // }
-        // if (this.keyJ?.isDown) {
-        //     nodeRoute.nodeRouteJ.fillColor = 0xff0000;
-        // }
-        // if (this.keyK?.isDown) {
-        //     nodeRoute.nodeRouteK.fillColor = 0xff0000;
-        // }
-
-        // //Key Up
-        // if (this.keyD?.isUp) {
-        //     nodeRoute.nodeRouteD.fillColor = 0x8662f0;
-        // }
-        // if (this.keyF?.isUp) {
-        //     nodeRoute.nodeRouteF.fillColor = 0x8662f0;
-        // } 
-        // if (this.keyJ?.isUp) {
-        //     nodeRoute.nodeRouteJ.fillColor = 0x8662f0;
-        // }
-        // if (this.keyK?.isUp) {
-        //     nodeRoute.nodeRouteK.fillColor = 0x8662f0;
-        // } 
+        
+        
     }
+
+    
+
 }

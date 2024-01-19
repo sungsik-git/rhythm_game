@@ -19,16 +19,15 @@ function App() {
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
-      // width:1200,
-      width: 1920,
-      height: 1090,
+      width:1200,
+      // width: 1920,
       physics: {
         default: 'arcade',
         debug: true
       },
       scene: [ 
         //Page
-        // Loading, Main, Game, Result,
+        // /* Loading, */ Main, Game, Result,
         //Interface
         // GameUI, GameInfoUI,
         //Component
@@ -51,7 +50,7 @@ function App() {
         autoCenter: Phaser.Scale.CENTER_BOTH
       },
       
-      backgroundColor: '#ffffff'
+      backgroundColor: '#000000'
   };
 
     const game = new Phaser.Game(config);
