@@ -1,3 +1,11 @@
+/*
+- [ ]  노드 생성
+- [ ]  노드 움직임
+- [ ]  노드 소멸
+- [ ]  판정선
+- [ ]  노드 판정
+- [ ]  점수 반영 */
+
 import Phaser from "phaser";
 
 export default class Test2 extends Phaser.Scene {
@@ -11,19 +19,39 @@ export default class Test2 extends Phaser.Scene {
     }
 
     create() {
-        const newNote = this.classToRect(new Note(100, 'd', 0));
-        this.notes.push(newNote);
+        this.notes.push(this.classToRect(new Note(100, 'd', 0)));
+        this.notes.push(this.classToRect(new Note(300, 'f', 0)));
+        this.notes.push(this.classToRect(new Note(500, 'd', 0)));
+        this.notes.push(this.classToRect(new Note(700, 'j', 0)));
+        this.notes.push(this.classToRect(new Note(900, 'k', 0)));
+        this.notes.push(this.classToRect(new Note(1100, 'd', 0)));
+
+        this.judgementLine = this.add.rectangle(100, 600, 1000, 10, 0xffffff)
+        this.judgementLine.setOrigin(0, 0);
+
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     }
 
     update() {
+
         this.noteSlide(this.notes);
+
+        for(const note of this.notes){
+            if(this.keyD.isDown){
+                this.judgementNote(note)
+            }
+        }
     }
 
     noteSlide(notes) {
         for (const note of notes) {
-            if (note.rect.y < 600) {
-                note.rect.y += 5;
-            }
+            setTimeout(() => {
+                if (note.rect.y < 600) {
+                    note.rect.y += 5;
+                }
+            }, note.note.startTime);
+
+
             if ( note.rect.y == 600){
                 note.rect.destroy();
             }
@@ -31,7 +59,6 @@ export default class Test2 extends Phaser.Scene {
     }
 
     classToRect(note) {
-        // 노트를 생성하고 노트의 정보를 보유한 객체를 반환합니다.
         const rect = this.add.rectangle(this.xPositionToKey(note.key), 0, 100, 40, 0xaaa000);
         return { note, rect };
     }
@@ -39,18 +66,25 @@ export default class Test2 extends Phaser.Scene {
     xPositionToKey(keyName) {
         switch (keyName) {
             case 'd':
-                return 123;
+                return 223;
             case 'f':
-                return 234;
+                return 334;
             case 'j':
-                return 456;
+                return 556;
             case 'k':
-                return 567;
+                return 667;
+        }
+    }
+
+    judgementNote(note){
+        if(note.rect.y >= 600){
+
         }
     }
 }
 
 class Note {
+    static index = 0;
     constructor(startTime, key, pressTime) {
         this.index = Note.index++;
         this.startTime = startTime;
@@ -59,5 +93,4 @@ class Note {
     }
 }
 
-// Note 클래스의 정적 속성으로 index를 추가
-Note.index = 0;
+
