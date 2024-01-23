@@ -36,6 +36,7 @@ export default class Test4 extends Phaser.Scene {
 
                     if (this.rects[i].y === 0) {
                         this.rects[i].destroy();
+                        this.rects.splice(i, 1)
                     }
                 },
                 loop: false,

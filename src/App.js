@@ -36,8 +36,8 @@ function App() {
         //Component
         // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         // Test
-        // Test2
-        Test4
+        Test2
+        // Test4
       ],
       plugins: {
         scene: [
