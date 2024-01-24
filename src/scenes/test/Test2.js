@@ -75,12 +75,12 @@ export default class Test2 extends Phaser.Scene {
     }
 
     //Get max y-position node
-    getMaxYNode(){
+    getMaxYNode() {
         let maxNode = null;
-        for(let i=0; i<this.nodes.length; i++){
-            if(this.nodes[i].y !== 600){
-                const currentRect = this.nodes[i];
-                if(!maxNode || currentRect.y > maxNode.y){
+        for (let i = 0; i < this.nodes.length; i++) {
+            const currentRect = this.nodes[i];
+            if (currentRect.y !== 600) {
+                if (!maxNode || currentRect.y > maxNode.y) {
                     maxNode = currentRect;
                 }
             }
@@ -88,40 +88,43 @@ export default class Test2 extends Phaser.Scene {
         return maxNode;
     }
     
+    
     //Once key down event
-    handleKeyDown = () => {
-        this.judgementNode()
-        console.log(this.maxYNode.y)
+    handleKeyDown = (key) => {
+        this.judgementNode(key)
+        // console.log(this.maxYNode.y)
     }
 
     //judgement Node to Line
-    judgementNode() {
-        let maxYNode = this.getMaxYNode();
-    
-        if (!maxYNode) {
-            console.log("Miss");
-            return;
-        }
-    
-        const dist = Math.abs(this.yOfJudgementLine - this.maxYNode.y)
+    judgementNode(key) {
+        const maxYNode = this.getMaxYNode();
+        console.log("key = " + key)
+        console.log("maxYNode key = " + maxYNode.getData('key'))
+        if(key === maxYNode.key){
+            if (!maxYNode) {
+                console.log("Miss");
+                return;
+            }
         
-        if (dist === 0) {
-            console.log("Miss");
-        } else if (dist <= 20) {
-            console.log("Perfect");
-        } else if (dist <= 40) {
-            console.log("Great");
-        } else if (dist <= 60) {
-            console.log("Good");
-        } else if (dist <= 80) {
-            console.log("Early");
+            const dist = Math.abs(this.yOfJudgementLine - this.maxYNode.y)
+            
+            if (dist === 0) {
+                console.log("Miss");
+            } else if (dist <= 20) {
+                console.log("Perfect");
+            } else if (dist <= 40) {
+                console.log("Great");
+            } else if (dist <= 60) {
+                console.log("Good");
+            } else {
+                console.log("Early");
+            }
+        
+            maxYNode.destroy();
+            this.nodes.splice(maxYNode.getData('index'),1)
+
         }
-    
-        maxYNode.destroy();
-        this.rects.splice(i, 1)
-        this.nodes = this.nodes.filter(node => node !== maxYNode);
     }
-    
 }
 
 class Node {
@@ -164,6 +167,7 @@ class NodeManager{
             node.setData('startTime', classOfNode.startTime);
             node.setData('pressTime', classOfNode.pressTime);
             node.setData('key', classOfNode.key);
+            node.setData('index', classOfNode.index);
 
             nodes.push(node);
         });

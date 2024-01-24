@@ -10,12 +10,13 @@ import PauseButton from './scenes/component/PauseButton';
 import Main from './scenes/game/Main';
 import SoundBar from './scenes/component/SoundBar';
 import RestartButton from './scenes/component/RestartButton';
-import Test from './scenes/node/Test';
-import Test2 from './scenes/node/Test2';
+import Test from './scenes/test/Test';
+import Test2 from './scenes/test/Test2';
 import Result from './scenes/game/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import Test3 from './scenes/node/Test3';
-import Test4 from './scenes/node/Test4';
+import Test3 from './scenes/test/Test3';
+import Test4 from './scenes/test/Test4';
+import Test5 from './scenes/test/Test5';
 
 
 function App() {
@@ -30,14 +31,15 @@ function App() {
       },
       scene: [ 
         //Page
-        // Loading, Main, Game, Result,
+        // Loading, 
+        Main, Game, Result,
         //Interface
-        // GameUI, GameInfoUI,
+        GameUI, GameInfoUI,
         //Component
-        // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
+        HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         // Test
-        Test2
-        // Test4
+        // Test2
+        // Test5
       ],
       plugins: {
         scene: [
