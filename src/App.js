@@ -32,14 +32,14 @@ function App() {
       scene: [ 
         //Page
         // Loading, 
-        Main, Game, Result,
+        // Main, Game, Result,
         //Interface
-        GameUI, GameInfoUI,
+        // GameUI, GameInfoUI,
         //Component
-        HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
+        // HomeButton, PauseButton, GameScore, SoundBar, RestartButton,
         // Test
         // Test2
-        // Test5
+        Test5
       ],
       plugins: {
         scene: [

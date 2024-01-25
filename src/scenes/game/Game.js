@@ -12,12 +12,6 @@ export default class Game extends Phaser.Scene {
         this.combo = 0;
         this.yOfJudgementLine = 600; // revise 
         this.maxYNode = null;
-
-        // Load keyboard
-        this.keyD = null;
-        this.keyF = null;
-        this.keyJ = null;
-        this.keyK = null;
     }
 
     init(data) {
@@ -31,7 +25,11 @@ export default class Game extends Phaser.Scene {
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
     
-        
+        // Load keyboard
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
     }
 
@@ -76,36 +74,12 @@ export default class Game extends Phaser.Scene {
         const classOfNodes = nodeManager.makeClassFromText(nodeFile);
         this.nodes = nodeManager.makeRectFromClass(classOfNodes);
 
-        // D 키에 대한 이벤트
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyD.on('down', () => {
-            // D 키를 눌렀을 때 실행되는 코드
-            this.handleKeyDown('d');
-        });
-
-        // F 키에 대한 이벤트
-        this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        this.keyF.on('down', () => {
-            // F 키를 눌렀을 때 실행되는 코드
-            this.handleKeyDown('f');
-        });
-
-        // J 키에 대한 이벤트
-        this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-        this.keyJ.on('down', () => {
-            // J 키를 눌렀을 때 실행되는 코드
-            this.handleKeyDown('j');
-        });
-
-        // K 키에 대한 이벤트
-        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-        this.keyK.on('down', () => {
-            // K 키를 눌렀을 때 실행되는 코드
-            this.handleKeyDown('k');
-        });
+        this.keyD.on('down', () => this.handleKeyDown('d'));
+        this.keyF.on('down', () => this.handleKeyDown('f'));
+        this.keyJ.on('down', () => this.handleKeyDown('j'));
+        this.keyK.on('down', () => this.handleKeyDown('k'));
         
         this.add.rectangle(100,600,1200,5,0xffffff)
-        this.add.text(500,600,this.judgementText,{color:'0xffffff'})
     }
 
     update() {
@@ -151,22 +125,16 @@ export default class Game extends Phaser.Scene {
         
             maxYNode.destroy();
             this.nodes.splice(maxYNode.getData('index'),1)
-
-        }else{
-            this.judgementText = "Miss"
-            this.combo = 0;
+            console.log(this.nodes.length)
         }
     }
 
     //Get max y-position node
     getMaxYNode() {
-        let maxNode = null;
+        var maxNode = null;
         for (let i = 0; i < this.nodes.length; i++) {
-            const currentRect = this.nodes[i];
-            if (currentRect.y !== 600) {
-                if (!maxNode || currentRect.y > maxNode.y) {
-                    maxNode = currentRect;
-                }
+            if(!maxNode || maxNode.y < this.nodes[i].y){
+                maxNode = this.nodes[i];
             }
         }
         return maxNode;

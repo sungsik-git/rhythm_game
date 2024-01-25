@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class Test5 extends Phaser.Scene {
+export default class Test6 extends Phaser.Scene {
     constructor() {
         super('test5');
         this.ndoesClass = [];
@@ -70,7 +70,10 @@ export default class Test5 extends Phaser.Scene {
     handleKeyDown(key) {
         this.effectOfKeyPress(key);
 
-
+        const matchingNote = this.nodes.find(node => node.getData('key') === key);
+        if (matchingNote) {
+            this.judgement(matchingNote);
+        }
     }
 
     handleKeyUp(key) {
