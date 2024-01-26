@@ -11,7 +11,6 @@ export default class Game extends Phaser.Scene {
         this.combo = 0;
         this.yOfJudgementLine = 600; // revise 
         this.maxYNode = null;
-        this.gameKey = ['D', 'F', 'J', 'K']
     }
 
     init(data) {
