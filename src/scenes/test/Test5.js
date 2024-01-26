@@ -43,7 +43,6 @@ export default class Test5 extends Phaser.Scene {
         this.keyK.on('up', () => this.handleKeyUp('k'));
 
         this.judgementLine = this.add.rectangle(400,this.judgementLineY,415,5,0xFF0066).setOrigin(0);
-        this.physics.add.existing(this.judgementLine);
 
         /* make node class, parameter is startTime, key, pressTime */
         this.makeNodeToClass(500,'d',0);
@@ -68,9 +67,16 @@ export default class Test5 extends Phaser.Scene {
     /* additional function */
 
     handleKeyDown(key) {
+        var judgmentNodes = this.checkNodeOfJudgement();
         this.effectOfKeyPress(key);
-
-
+    
+        if (judgmentNodes.length > 0) {
+            console.log("isnode true");
+            judgmentNodes.forEach(node => {
+                this.judgeNode(node);
+            });
+            this.removeNode(judgmentNodes);
+        }
     }
 
     handleKeyUp(key) {
@@ -195,11 +201,13 @@ export default class Test5 extends Phaser.Scene {
         const index = this.nodes.indexOf(node);
         if (index !== -1) {
             this.nodes.splice(index, 1);
+            node.destroy();
         }
-        node.destroy();
+        
     }
     
     judgeNode(node) {
+        console.log(node.y)
         const distance = Math.abs(node.y + node.height / 2 - this.judgementLine.y);
     
         if (distance <= 10) {
@@ -215,9 +223,16 @@ export default class Test5 extends Phaser.Scene {
             console.log("Early");
 
         } else {
-            console.log("Miss");
+            this.missJudgement();
 
         }
+    }
+
+    checkNodeOfJudgement(){
+        return this.nodes.filter(node => node.y >= 570);
+    }
+    missJudgement(){
+        console.log("Miss")
     }
 }
 
