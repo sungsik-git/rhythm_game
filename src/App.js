@@ -5,7 +5,6 @@ import Game from './scenes/game/Game';
 import HomeButton from './scenes/component/HomeButton';
 import GameUI from './scenes/interface/GameUI';
 import GameInfoUI from './scenes/interface/GameInfoUI';
-import GameScore from './scenes/game/GameScore';
 import PauseButton from './scenes/component/PauseButton';
 import Main from './scenes/game/Main';
 import SoundBar from './scenes/component/SoundBar';

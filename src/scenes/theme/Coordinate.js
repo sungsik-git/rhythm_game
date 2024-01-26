@@ -3,10 +3,10 @@ export default class Coordinate {
         this.xPosit = {
             width : window.game.config.width,
             center: window.game.config.width / 2,
-            keyD: window.game.config.width / 5,
-            keyF: window.game.config.width * 1 / 5,
-            keyJ: window.game.config.width * 2 / 5,
-            keyK: window.game.config.width * 3 / 5,
+            keyD: 400,
+            keyF: 505,
+            keyJ: 610,
+            keyK: 715,
             centerLeft: window.game.config.width / 2 - 100,
         };
 

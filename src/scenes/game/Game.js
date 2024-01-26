@@ -1,11 +1,10 @@
 import Phaser from "phaser";
-import GameScore from "./GameScore";
 import NodeManager from "../node/NodeManager";
+import Coordinate from "../theme/Coordinate";
 
 export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
-        this.gameScore = new GameScore(0);
         this.speed = 5;
         this.nodes = [];
         this.judgementText = null;
@@ -30,6 +29,7 @@ export default class Game extends Phaser.Scene {
         this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
         this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+
 
     }
 
@@ -68,6 +68,15 @@ export default class Game extends Phaser.Scene {
         //     this.scene.start('result');
         // });
         */
+        /* load theme */
+        const coordinate = new Coordinate();
+
+        /* make nodeRoute */
+        this.routeOfKeyD = this.add.rectangle(coordinate.xPosit.keyD, 100, 100, 600, 0xffffff).setOrigin(0);
+        this.routeOfKeyF = this.add.rectangle(coordinate.xPosit.keyF, 100, 100, 600, 0xffffff).setOrigin(0);
+        this.routeOfKeyJ = this.add.rectangle(coordinate.xPosit.keyJ, 100, 100, 600, 0xffffff).setOrigin(0);
+        this.routeOfKeyK = this.add.rectangle(coordinate.xPosit.keyK, 100, 100, 600, 0xffffff).setOrigin(0);
+
 
         const nodeFile = this.cache.text.get('nodeFile');
         const nodeManager = new NodeManager(this);
@@ -78,6 +87,11 @@ export default class Game extends Phaser.Scene {
         this.keyF.on('down', () => this.handleKeyDown('f'));
         this.keyJ.on('down', () => this.handleKeyDown('j'));
         this.keyK.on('down', () => this.handleKeyDown('k'));
+
+        this.keyD.on('up', () => this.handleKeyUp('d'));
+        this.keyF.on('up', () => this.handleKeyUp('f'));
+        this.keyJ.on('up', () => this.handleKeyUp('j'));
+        this.keyK.on('up', () => this.handleKeyUp('k'));
         
         this.add.rectangle(100,600,1200,5,0xffffff)
     }

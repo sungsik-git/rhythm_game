@@ -1,11 +1,9 @@
 import Phaser from "phaser";
-import GameScore from '../game/GameScore';
 
 export default class GameUI extends Phaser.Scene {
     
     constructor() {
         super('gameUI');
-        this.score = new GameScore(0);
     }
 
     preload() {

@@ -5,10 +5,6 @@ export default class Test5 extends Phaser.Scene {
         super('test5');
         this.ndoesClass = [];
         this.nodes = [];
-        this.keyD = null;
-        this.keyF = null;
-        this.keyJ = null;
-        this.keyK = null;
         this.routeOfKeyD = null;
         this.routeOfKeyF = null;
         this.routeOfKeyJ = null;
@@ -46,7 +42,10 @@ export default class Test5 extends Phaser.Scene {
 
         /* make node class, parameter is startTime, key, pressTime */
         this.makeNodeToClass(500,'d',0);
-        this.makeNodeToClass(1000,'f',0)
+        this.makeNodeToClass(1005,'f',0)
+        this.makeNodeToClass(1010,'f',0)
+        this.makeNodeToClass(1015,'f',0)
+        this.makeNodeToClass(1020,'f',0)
         this.makeNodeToClass(1500,'j',0)
         this.makeNodeToClass(1500,'k',0)
         this.makeNodeToClass(2000,'d',0)
