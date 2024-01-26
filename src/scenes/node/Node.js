@@ -1,4 +1,4 @@
-class Node{
+export default class Node{
     static nodeNumber = 1;
 
     constructor(startTime, key, pressTime){
@@ -8,5 +8,3 @@ class Node{
         this.pressTime = pressTime;
     }   
 }
-
-export default Node

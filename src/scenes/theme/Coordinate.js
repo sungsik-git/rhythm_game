@@ -10,7 +10,7 @@ export default class Coordinate {
             keyF: 505,
             keyJ: 610,
             keyK: 715,
-            
+
         };
 
         this.yPosit = {
@@ -18,7 +18,8 @@ export default class Coordinate {
             center: window.game.config.height / 2,
             centerBottom: window.game.config.height * 3 / 4,
             centerBottomMore: window.game.config.height * 5 / 6,
-            nodeRouteOrigin : 100,
+            nodeRouteOrigin: 100,
+            judgementLine: 600,
         }
 
         this.width = {
@@ -31,6 +32,7 @@ export default class Coordinate {
 
         this.color = {
             nodeRoute: 0xffffff,
+            pressednodeRoute: 0x00CCFF,
         }
     }
 }

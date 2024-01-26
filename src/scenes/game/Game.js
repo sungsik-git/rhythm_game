@@ -1,16 +1,23 @@
 import Phaser from "phaser";
 import NodeManager from "../node/NodeManager";
 import Coordinate from "../theme/Coordinate";
+import KeyboardEvent from "../input/KeyboardEvent";
 
 export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
         this.speed = 5;
+        this.nodesClass = [];
         this.nodes = [];
         this.judgementText = null;
-        this.combo = 0;
         this.yOfJudgementLine = 600; // revise 
         this.maxYNode = null;
+        this.combo = 0;
+        this.score = 0;
+        //theme
+        this.coordinate = new Coordinate();
+
+        this.gameKeys = ['D', 'F', 'J', 'K'];
     }
 
     init(data) {
@@ -23,14 +30,7 @@ export default class Game extends Phaser.Scene {
     
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
-    
-        // Load keyboard
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-
-
+         
     }
 
     create() {
@@ -68,59 +68,58 @@ export default class Game extends Phaser.Scene {
         //     this.scene.start('result');
         // });
         */
-        /* load theme */
-        const coordinate = new Coordinate();
 
-        /* make nodeRoute */
+        // load keyboard event
+        this.keyboardEvent = new KeyboardEvent(this);
+        this.keyboardEvent.loadGameKey();
+        this.keyboardEvent.loadKeydownEvent();
+        this.keyboardEvent.loadKeyUpEvent();
+    
+        // make nodeRoute 
         this.routeOfKeyD = this.add.rectangle(
-            coordinate.xPosit.keyD,
-            coordinate.yPosit.nodeRouteOrigin,
-            coordinate.width.node,
-            coordinate.height.node,
-            coordinate.color.nodeRoute
+            this.coordinate.xPosit.keyD,
+            this.coordinate.yPosit.nodeRouteOrigin,
+            this.coordinate.width.node,
+            this.coordinate.height.node,
+            this.coordinate.color.nodeRoute
         ).setOrigin(0);
         this.routeOfKeyF = this.add.rectangle(
-            coordinate.xPosit.keyF,
-            coordinate.yPosit.nodeRouteOrigin,
-            coordinate.width.node,
-            coordinate.height.node,
-            coordinate.color.nodeRoute
+            this.coordinate.xPosit.keyF,
+            this.coordinate.yPosit.nodeRouteOrigin,
+            this.coordinate.width.node,
+            this.coordinate.height.node,
+            this.coordinate.color.nodeRoute
         ).setOrigin(0);
         this.routeOfKeyJ = this.add.rectangle(
-            coordinate.xPosit.keyJ,
-            coordinate.yPosit.nodeRouteOrigin,
-            coordinate.width.node,
-            coordinate.height.node,
-            coordinate.color.nodeRoute
+            this.coordinate.xPosit.keyJ,
+            this.coordinate.yPosit.nodeRouteOrigin,
+            this.coordinate.width.node,
+            this.coordinate.height.node,
+            this.coordinate.color.nodeRoute
         ).setOrigin(0);
         this.routeOfKeyK = this.add.rectangle(
-            coordinate.xPosit.keyK,
-            coordinate.yPosit.nodeRouteOrigin,
-            coordinate.width.node,
-            coordinate.height.node,
-            coordinate.color.nodeRoute
+            this.coordinate.xPosit.keyK,
+            this.coordinate.yPosit.nodeRouteOrigin,
+            this.coordinate.width.node,
+            this.coordinate.height.node,
+            this.coordinate.color.nodeRoute
         ).setOrigin(0);
 
-
+        //load the nodes
         const nodeFile = this.cache.text.get('nodeFile');
         const nodeManager = new NodeManager(this);
-        const classOfNodes = nodeManager.makeClassFromText(nodeFile);
-        this.nodes = nodeManager.makeRectFromClass(classOfNodes);
+        this.nodesClass = nodeManager.makeClassFromText(nodeFile);
+        this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
 
-        this.keyD.on('down', () => this.handleKeyDown('d'));
-        this.keyF.on('down', () => this.handleKeyDown('f'));
-        this.keyJ.on('down', () => this.handleKeyDown('j'));
-        this.keyK.on('down', () => this.handleKeyDown('k'));
+        //load Keyboard event
+        this.keyboardEvent.loadKeydownEvent();
+        this.keyboardEvent.loadKeyUpEvent();
 
-        this.keyD.on('up', () => this.handleKeyUp('d'));
-        this.keyF.on('up', () => this.handleKeyUp('f'));
-        this.keyJ.on('up', () => this.handleKeyUp('j'));
-        this.keyK.on('up', () => this.handleKeyUp('k'));
         
-        this.add.rectangle(100,600,1200,5,0xffffff)
     }
 
     update() {
+        //drop the nodes
         this.nodeSlider();
         
     }
@@ -139,9 +138,7 @@ export default class Game extends Phaser.Scene {
         );
     }
 
-    handleKeyDown(key){
-        this.judgementNode(key)
-    }
+
 
     judgementNode(key){
         const maxYNode = this.getMaxYNode();

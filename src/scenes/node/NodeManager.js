@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-class NodeManager {
+export default class NodeManager {
     constructor(scene) {
         this.scene = scene;
     }
@@ -19,20 +19,28 @@ class NodeManager {
 
     makeRectFromClass(classOfNodes){
         const nodes = [];
-        classOfNodes.forEach(classOfNode => {
-            const node = this.scene.add.rectangle(
-                this.xPositionToKey(classOfNode.key),
-                0,
-                100,
-                40,
-                0x00ff00
-            )
-            node.setData('startTime', classOfNode.startTime);
-            node.setData('pressTime', classOfNode.pressTime);
-            node.setData('key', classOfNode.key);
-            node.setData('index', classOfNode.index);
-
-            nodes.push(node);
+        classOfNodes.forEach(node => {
+            this.scene.time.addEvent({
+                delay: node.startTime, 
+                callback: () => {
+                    var nodeRect = this.scene.add.rectangle(
+                        this.xPositionToKey(node.key),
+                        50,
+                        100,
+                        40 + (node.pressTime * 40),
+                        0x00ffaa
+                    )
+                    nodeRect.setOrigin(0);
+    
+                    
+                    nodeRect.setData('startTime', node.startTime);
+                    nodeRect.setData('key', node.key);
+    
+                    nodes.push(nodeRect);
+                },
+                loop: false, 
+                callbackScope: this 
+            });
         });
 
         return nodes;
@@ -53,4 +61,3 @@ class NodeManager {
 
 }
 
-export default NodeManager;
