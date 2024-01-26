@@ -11,6 +11,7 @@ export default class Game extends Phaser.Scene {
         this.combo = 0;
         this.yOfJudgementLine = 600; // revise 
         this.maxYNode = null;
+        this.gameKey = ['D', 'F', 'J', 'K']
     }
 
     init(data) {
@@ -72,10 +73,34 @@ export default class Game extends Phaser.Scene {
         const coordinate = new Coordinate();
 
         /* make nodeRoute */
-        this.routeOfKeyD = this.add.rectangle(coordinate.xPosit.keyD, 100, 100, 600, 0xffffff).setOrigin(0);
-        this.routeOfKeyF = this.add.rectangle(coordinate.xPosit.keyF, 100, 100, 600, 0xffffff).setOrigin(0);
-        this.routeOfKeyJ = this.add.rectangle(coordinate.xPosit.keyJ, 100, 100, 600, 0xffffff).setOrigin(0);
-        this.routeOfKeyK = this.add.rectangle(coordinate.xPosit.keyK, 100, 100, 600, 0xffffff).setOrigin(0);
+        this.routeOfKeyD = this.add.rectangle(
+            coordinate.xPosit.keyD,
+            coordinate.yPosit.nodeRouteOrigin,
+            coordinate.width.node,
+            coordinate.height.node,
+            coordinate.color.nodeRoute
+        ).setOrigin(0);
+        this.routeOfKeyF = this.add.rectangle(
+            coordinate.xPosit.keyF,
+            coordinate.yPosit.nodeRouteOrigin,
+            coordinate.width.node,
+            coordinate.height.node,
+            coordinate.color.nodeRoute
+        ).setOrigin(0);
+        this.routeOfKeyJ = this.add.rectangle(
+            coordinate.xPosit.keyJ,
+            coordinate.yPosit.nodeRouteOrigin,
+            coordinate.width.node,
+            coordinate.height.node,
+            coordinate.color.nodeRoute
+        ).setOrigin(0);
+        this.routeOfKeyK = this.add.rectangle(
+            coordinate.xPosit.keyK,
+            coordinate.yPosit.nodeRouteOrigin,
+            coordinate.width.node,
+            coordinate.height.node,
+            coordinate.color.nodeRoute
+        ).setOrigin(0);
 
 
         const nodeFile = this.cache.text.get('nodeFile');
