@@ -1,6 +1,10 @@
 import Phaser from "phaser";
+import Coordinate from "../theme/Coordinate";
 
 export default class KeyboardEvent{
+
+    coordinate = new Coordinate();
+
     constructor(scene){
         this.scene = scene
         this.keyD = null;
@@ -50,13 +54,13 @@ export default class KeyboardEvent{
     getRouteByKey(key) {
         switch (key) {
             case 'd':
-                return this.routeOfKeyD;
+                return this.scene.routeOfKeyD;
             case 'f':
-                return this.routeOfKeyF;
+                return this.scene.routeOfKeyF;
             case 'j':
-                return this.routeOfKeyJ;
+                return this.scene.routeOfKeyJ;
             case 'k':
-                return this.routeOfKeyK;
+                return this.scene.routeOfKeyK;
             default:
                 return null;
         }
@@ -65,19 +69,19 @@ export default class KeyboardEvent{
     effectOfKeyPress(key) {
         const route = this.getRouteByKey(key);
         if (route) {
-            route.setFillStyle(0x00ff00);
+            route.setFillStyle(this.coordinate.color.pressednodeRoute);
         }
     }
 
     effectOfKeyRelease(key) {
         const route = this.getRouteByKey(key);
         if (route) {
-            route.setFillStyle(0xffffff); 
+            route.setFillStyle(this.coordinate.color.nodeRoute); 
         }
     }
     judgeNode(node) {
         console.log(node.y)
-        const distance = Math.abs(node.y + node.height / 2 - this.judgementLine.y);
+        const distance = Math.abs(node.y + node.height / 2 - this.coordinate.yPosit.judgementLine);
     
         if (distance <= 10) {
             console.log("Perfect");
@@ -107,15 +111,15 @@ export default class KeyboardEvent{
     }
 
     checkNodeOfJudgement(){
-        return this.nodes.filter(node => node.y >= 570);
+        return this.scene.nodes.filter(node => node.y >= 570);
     }
     missJudgement(){
         console.log("Miss")
     }
     removeNode(node){
-        const index = this.nodes.indexOf(node);
+        const index = this.scene.nodes.indexOf(node);
         if (index !== -1) {
-            this.nodes.splice(index, 1);
+            this.scene.nodes.splice(index, 1);
             node.destroy();
         }
         

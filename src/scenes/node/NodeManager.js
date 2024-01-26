@@ -1,6 +1,10 @@
+import Coordinate from "../theme/Coordinate";
 import Node from "./Node";
 
 export default class NodeManager {
+    
+    coordinate = new Coordinate();
+    
     constructor(scene) {
         this.scene = scene;
     }
@@ -25,9 +29,9 @@ export default class NodeManager {
                 callback: () => {
                     var nodeRect = this.scene.add.rectangle(
                         this.xPositionToKey(node.key),
-                        50,
-                        100,
-                        40 + (node.pressTime * 40),
+                        this.coordinate.yPosit.nodeRouteOrigin,
+                        this.coordinate.width.node,
+                        this.coordinate.height.node + (node.pressTime * 40),
                         0x00ffaa
                     )
                     nodeRect.setOrigin(0);
@@ -47,15 +51,16 @@ export default class NodeManager {
     }
 
     xPositionToKey(keyName) {
+        
         switch (keyName) {
             case 'd':
-                return 223;
+                return this.coordinate.xPosit.keyD;
             case 'f':
-                return 334;
+                return this.coordinate.xPosit.keyF;
             case 'j':
-                return 556;
+                return this.coordinate.xPosit.keyJ;
             case 'k':
-                return 667;
+                return this.coordinate.xPosit.keyK;
         }
     }
 

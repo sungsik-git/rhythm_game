@@ -28,11 +28,13 @@ export default class Coordinate {
 
         this.height = {
             node: 40,
+            nodeRoute: 600,
         }
 
         this.color = {
             nodeRoute: 0xffffff,
             pressednodeRoute: 0x00CCFF,
+            node: 0x00ffaa,
         }
     }
 }
