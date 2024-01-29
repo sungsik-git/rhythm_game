@@ -9,15 +9,15 @@ export default class Game extends Phaser.Scene {
         this.speed = 5;
         this.nodesClass = [];
         this.nodes = [];
-        this.judgementText = null;
         this.yOfJudgementLine = 600; // revise 
         this.maxYNode = null;
         this.combo = 0;
         this.score = 0;
+        this.judgementText = null;
+        
+        
         //theme
         this.coordinate = new Coordinate();
-
-        this.gameKeys = ['D', 'F', 'J', 'K'];
     }
 
     init(data) {
@@ -105,6 +105,15 @@ export default class Game extends Phaser.Scene {
             this.coordinate.color.nodeRoute
         ).setOrigin(0);
 
+        // make judgement line
+        this.add.rectangle(
+            this.coordinate.xPosit.keyD,
+            this.coordinate.yPosit.judgementLine,
+            this.coordinate.width.judgementLine,
+            this.coordinate.height.judgementLine,
+            this.coordinate.color.judgementLine
+        ).setOrigin(0);
+
         //load the nodes
         const nodeFile = this.cache.text.get('nodeFile');
         const nodeManager = new NodeManager(this);
@@ -115,63 +124,32 @@ export default class Game extends Phaser.Scene {
         this.keyboardEvent.loadKeydownEvent();
         this.keyboardEvent.loadKeyUpEvent();
 
-        
+        // show judgement text
+        this.add.text(100,100,this.judgementText,{ fill: '#ffff' }).setOrigin(0.5);
     }
 
     update() {
         //drop the nodes
         this.nodeSlider();
-        
     }
 
-    nodeSlider(){
-        this.nodes.forEach(node => 
-            setTimeout(() => {
-                
-                if(node.y < 600){
-                    node.y += 5;
-                }
-                if(node.y === 600){
-                    node.destroy();
-                }
-            }, node.getData('startTime'))
-        );
+    nodeSlider() {
+        this.nodes.forEach(node => {
+            this.time.addEvent({
+                delay: node.getData('startTime'),
+                callback: () => {
+                    if (node.y < 650) {
+                        node.y += 5;
+                    }
+                    if (node.y === 650) {
+                        this.keyboardEvent.missJudgement();
+                        this.keyboardEvent.removeNode(node);
+                    }
+                },
+                loop: false,
+                callbackScope: this
+            });
+        });
     }
-
-
-
-    judgementNode(key){
-        const maxYNode = this.getMaxYNode();
-
-        if(key === maxYNode.getData('key')){
-            const dist = Math.abs(this.yOfJudgementLine - maxYNode.y)
-            
-            if (dist === 0) {
-                console.log("Miss");
-            } else if (dist <= 20) {
-                console.log("Perfect");
-            } else if (dist <= 40) {
-                console.log("Great");
-            } else if (dist <= 60) {
-                console.log("Good");
-            } else {
-                console.log("Early");
-            }
-        
-            maxYNode.destroy();
-            this.nodes.splice(maxYNode.getData('index'),1)
-            console.log(this.nodes.length)
-        }
-    }
-
-    //Get max y-position node
-    getMaxYNode() {
-        var maxNode = null;
-        for (let i = 0; i < this.nodes.length; i++) {
-            if(!maxNode || maxNode.y < this.nodes[i].y){
-                maxNode = this.nodes[i];
-            }
-        }
-        return maxNode;
-    }
+    
 }

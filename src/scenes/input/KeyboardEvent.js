@@ -35,11 +35,10 @@ export default class KeyboardEvent{
     }
 
     handleKeyDown(key) {
-        var judgmentNodes = this.checkNodeOfJudgement();
+        var judgmentNodes = this.checkNodeOfJudgement(key);
         this.effectOfKeyPress(key);
     
         if (judgmentNodes.length > 0) {
-            console.log("isnode true");
             judgmentNodes.forEach(node => {
                 this.judgeNode(node);
             });
@@ -80,42 +79,37 @@ export default class KeyboardEvent{
         }
     }
     judgeNode(node) {
-        console.log(node.y)
-        const distance = Math.abs(node.y + node.height / 2 - this.coordinate.yPosit.judgementLine);
-    
+        const distance = Math.abs(this.coordinate.yPosit.judgementLine - node.y);
+        var judgementText = this.scene.judgementText;
+        console.log(distance)
         if (distance <= 10) {
-            console.log("Perfect");
-
+            this.changeJudgementText("Perfect")
+            this.addScore(200)
+            this.addCombo()
         } else if (distance <= 20) {
-            console.log("Great");
-
+            this.changeJudgementText("greate")
+            this.addScore(150)
+            this.addCombo()
         } else if (distance <= 30) {
-            console.log("Good");
-
+            this.changeJudgementText("good")
+            this.addScore(100)
+            this.addCombo()
         } else if (distance <= 40) {
-            console.log("Early");
-
-        } else {
-            this.missJudgement();
-
+            this.changeJudgementText("Early")
         }
+        this.removeNode(node);
+        console.log(this.scene.judgementText)
     }
-    getNodesAtMaxY() {
-        const maxY = this.getMaxY();
-        return this.nodes.filter(node => node.y === maxY);
+
+    checkNodeOfJudgement(key){
+        return this.scene.nodes.filter(node => node.y >= 550 && node.getData('key') === key);
+    }
+
+    missJudgement(){
+        this.changeJudgementText("Miss");
+        this.resetCombo()
     }
     
-
-    getMaxY(){
-        return Math.max(...this.nodes.map(node => node.y));
-    }
-
-    checkNodeOfJudgement(){
-        return this.scene.nodes.filter(node => node.y >= 570);
-    }
-    missJudgement(){
-        console.log("Miss")
-    }
     removeNode(node){
         const index = this.scene.nodes.indexOf(node);
         if (index !== -1) {
@@ -123,5 +117,21 @@ export default class KeyboardEvent{
             node.destroy();
         }
         
+    }
+
+    changeJudgementText(message){
+        this.scene.judgementText = message;
+    }
+
+    addScore(score){
+        this.scene.score += score;
+    }
+
+    addCombo(){
+        this.scene.combo++;
+    }
+
+    resetCombo(){
+        this.scene.combo = 0;
     }
 }

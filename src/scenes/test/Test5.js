@@ -60,7 +60,6 @@ export default class Test5 extends Phaser.Scene {
 
     update() {
         this.nodeSlider()
-        this.maxYNode = this.getMaxY();
     }
 
     /* additional function */

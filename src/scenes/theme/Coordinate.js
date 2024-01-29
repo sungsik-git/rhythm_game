@@ -24,17 +24,21 @@ export default class Coordinate {
 
         this.width = {
             node: 100,
+            judgementLine: 415,
         }
 
         this.height = {
             node: 40,
             nodeRoute: 600,
+            judgementLine: 4,
         }
 
         this.color = {
             nodeRoute: 0xffffff,
             pressednodeRoute: 0x00CCFF,
             node: 0x00ffaa,
+            judgementLine: 0xFF0066,
+            
         }
     }
 }
