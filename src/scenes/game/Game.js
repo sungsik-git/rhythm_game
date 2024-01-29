@@ -13,8 +13,7 @@ export default class Game extends Phaser.Scene {
         this.maxYNode = null;
         this.combo = 0;
         this.score = 0;
-        this.judgementText = null;
-        
+        this.judgementText = "test";
         
         //theme
         this.coordinate = new Coordinate();
@@ -125,31 +124,53 @@ export default class Game extends Phaser.Scene {
         this.keyboardEvent.loadKeyUpEvent();
 
         // show judgement text
-        this.add.text(100,100,this.judgementText,{ fill: '#ffff' }).setOrigin(0.5);
+        this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
+        this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
+        this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'}).setOrigin(0.5);
     }
 
     update() {
         //drop the nodes
         this.nodeSlider();
+
+        this.updateJudgementText();
+        this.updateCombo();
+        this.updateScore();
+
+        if(this.nodes.length === 0){
+
+        }
+    }
+
+    updateJudgementText(){
+        this.judgementTextObject.setText(this.judgementText);
+    }
+
+    updateCombo(){
+        this.comboObject.setText(this.combo);
+    }
+
+    updateScore(){
+        this.scoreObject.setText(this.score);
     }
 
     nodeSlider() {
         this.nodes.forEach(node => {
+
+
             this.time.addEvent({
                 delay: node.getData('startTime'),
                 callback: () => {
                     if (node.y < 650) {
                         node.y += 5;
-                    }
-                    if (node.y === 650) {
-                        this.keyboardEvent.missJudgement();
-                        this.keyboardEvent.removeNode(node);
-                    }
+                    } 
                 },
                 loop: false,
-                callbackScope: this
+                callbackScope: node
             });
         });
-    }
+    }   
+
+
     
 }

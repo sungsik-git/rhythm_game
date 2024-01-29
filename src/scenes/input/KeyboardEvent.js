@@ -80,8 +80,6 @@ export default class KeyboardEvent{
     }
     judgeNode(node) {
         const distance = Math.abs(this.coordinate.yPosit.judgementLine - node.y);
-        var judgementText = this.scene.judgementText;
-        console.log(distance)
         if (distance <= 10) {
             this.changeJudgementText("Perfect")
             this.addScore(200)
@@ -96,9 +94,9 @@ export default class KeyboardEvent{
             this.addCombo()
         } else if (distance <= 40) {
             this.changeJudgementText("Early")
+            this.resetCombo();
         }
         this.removeNode(node);
-        console.log(this.scene.judgementText)
     }
 
     checkNodeOfJudgement(key){
@@ -107,7 +105,7 @@ export default class KeyboardEvent{
 
     missJudgement(){
         this.changeJudgementText("Miss");
-        this.resetCombo()
+        this.resetCombo();
     }
     
     removeNode(node){
@@ -116,7 +114,7 @@ export default class KeyboardEvent{
             this.scene.nodes.splice(index, 1);
             node.destroy();
         }
-        
+        node = null;
     }
 
     changeJudgementText(message){
