@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import NodeManager from "../node/NodeManager";
 import Coordinate from "../theme/Coordinate";
 import KeyboardEvent from "../input/KeyboardEvent";
+import HomeButton from "../component/HomeButton";
 
 export default class Game extends Phaser.Scene {
     constructor() {
@@ -9,7 +10,7 @@ export default class Game extends Phaser.Scene {
         this.speed = 5;
         this.nodesClass = [];
         this.nodes = [];
-        this.yOfJudgementLine = 600; // revise 
+        this.yOfJudgementLine = 600;
         this.maxYNode = null;
         this.combo = 0;
         this.score = 0;
@@ -34,25 +35,18 @@ export default class Game extends Phaser.Scene {
 
     create() {
         /*
-        // Play the background music (BGM)
-        const bgm = this.sound.add('bgm', { loop: false });
-        bgm.play();
+      
+
         // Game UI scene load
         // this.scene.launch('gameUI')
-        // Get nodes in node file
-        const nodeFile = this.cache.text.get('nodeFile');
-        const nodeManager = new NodeManager(this, nodeFile);
-        this.nodes = nodeManager.makeNodes();
-        nodeManager.nodeSlider();
+       
         // load to Button 
-        this.scene.launch('homeButton', { bgm: bgm });
+        
         this.scene.launch('pauseButton', { bgm : bgm, nodeManager : nodeManager});
         this.scene.launch('restartButton', {bgm : bgm, nodeManager : nodeManager })
         // Game info -> title, artist
         this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
-        // Game Score
-        this.add.text(50, 50, this.gameScore.score, { fill: '#000000' })
-            .setFontSize(20);
+        
         // add sound bar
         // this.scene.launch('soundBar', { bgm: bgm });
 
@@ -67,6 +61,13 @@ export default class Game extends Phaser.Scene {
         //     this.scene.start('result');
         // });
         */
+
+        // Play the background music (BGM)
+        const bgm = this.sound.add('bgm', { loop: false });
+        bgm.play();
+
+        this.homeButton = new HomeButton(this, bgm);
+        this.homeButton.loadHomeButton();
 
         // load keyboard event
         this.keyboardEvent = new KeyboardEvent(this);

@@ -6,7 +6,7 @@ export default class KeyboardEvent{
     coordinate = new Coordinate();
 
     constructor(scene){
-        this.scene = scene
+        this.scene = scene;
         this.keyD = null;
         this.keyF = null;
         this.keyJ = null;
