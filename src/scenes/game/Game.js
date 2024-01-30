@@ -3,8 +3,13 @@ import NodeManager from "../node/NodeManager";
 import Coordinate from "../theme/Coordinate";
 import KeyboardEvent from "../input/KeyboardEvent";
 import HomeButton from "../component/HomeButton";
+import RestartButton from "../component/RestartButton";
 
 export default class Game extends Phaser.Scene {
+    init(data) {
+        this.musicInfo = data.musicInfo;
+    }
+
     constructor() {
         super('game');
         this.speed = 5;
@@ -14,14 +19,11 @@ export default class Game extends Phaser.Scene {
         this.maxYNode = null;
         this.combo = 0;
         this.score = 0;
-        this.judgementText = "test";
-        
+        this.judgementText = null;
+        this.bgm = null;
+
         //theme
         this.coordinate = new Coordinate();
-    }
-
-    init(data) {
-        this.musicInfo = data.musicInfo;
     }
 
     preload() {
@@ -30,18 +32,10 @@ export default class Game extends Phaser.Scene {
     
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
-         
     }
 
     create() {
-        /*
-      
-
-        // Game UI scene load
-        // this.scene.launch('gameUI')
-       
-        // load to Button 
-        
+        /*   
         this.scene.launch('pauseButton', { bgm : bgm, nodeManager : nodeManager});
         this.scene.launch('restartButton', {bgm : bgm, nodeManager : nodeManager })
         // Game info -> title, artist
@@ -63,19 +57,22 @@ export default class Game extends Phaser.Scene {
         */
 
         // Play the background music (BGM)
-        const bgm = this.sound.add('bgm', { loop: false });
-        bgm.play();
+        this.bgm = this.sound.add('bgm', { loop: false });
+        this.bgm.play();
 
-        this.homeButton = new HomeButton(this, bgm);
+        // Load to button
+        this.homeButton = new HomeButton(this, this.bgm);
         this.homeButton.loadHomeButton();
+        this.restartButton = new RestartButton(this, this.bgm);
+        this.restartButton.loadRestartButton();
 
-        // load keyboard event
+        // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
         this.keyboardEvent.loadGameKey();
         this.keyboardEvent.loadKeydownEvent();
         this.keyboardEvent.loadKeyUpEvent();
     
-        // make nodeRoute 
+        // make to nodeRoute 
         this.routeOfKeyD = this.add.rectangle(
             this.coordinate.xPosit.keyD,
             this.coordinate.yPosit.nodeRouteOrigin,

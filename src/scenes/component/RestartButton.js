@@ -1,32 +1,34 @@
-import Phaser from 'phaser';
+import NodeManager from "../node/NodeManager";
 
-export default class RestartButton extends Phaser.Scene {
-    constructor() {
-        super('restartButton');
-    }
+export default class RestartButton {
 
-    init(data) {
-        this.bgm = data.bgm;
-        this.nodeManager = data.nodeManager;
-    }
+    constructor(scene, bgm) {
+        this.scene = scene;
+        this.bgm = bgm;
+    }   
 
-    create() {
-        const nodeManager = this.nodeManager;
-        const restartButton = this.add.text(
-            this.game.config.width - 300,
-            50,
-            'Restart!!',
-            { fill: '#000000' }
-        );
+    loadRestartButton() {
+        if(this.scene){
+            const nodeManager = new NodeManager();
 
-        restartButton.setInteractive().on('pointerdown', () => {
-            this.bgm.stop();
-            this.bgm.play();
-            
-            // 기존 노드들을 제거하고 새로운 노드들 생성
-            nodeManager.clearNodes();
-            nodeManager.makeNodes();
-            nodeManager.nodeSlider();
-        });
+            const restartButton = this.scene.add.text(
+                this.scene.game.config.width - 300,
+                50,
+                'Restart!!',
+                { fill: '#ffffff' }
+            );
+
+            restartButton.setInteractive().on('pointerdown', () => {
+                this.bgm.stop();
+                this.bgm.play();
+                
+                // 기존 노드들을 제거하고 새로운 노드들 생성
+                nodeManager.clearNodes();
+                nodeManager.makeRectFromClass();
+                nodeManager.nodeSlider();
+            });
+        }else{
+            console.log("not scene")
+        }
     }
 }

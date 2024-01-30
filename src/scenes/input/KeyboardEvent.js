@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Coordinate from "../theme/Coordinate";
+import NodeManager from "../node/NodeManager";
 
 export default class KeyboardEvent{
 
@@ -11,6 +12,8 @@ export default class KeyboardEvent{
         this.keyF = null;
         this.keyJ = null;
         this.keyK = null;
+
+        this.nodeManager = new NodeManager(scene);
     }
 
     loadGameKey(){
@@ -42,7 +45,7 @@ export default class KeyboardEvent{
             judgmentNodes.forEach(node => {
                 this.judgeNode(node);
             });
-            this.removeNode(judgmentNodes);
+            this.nodeManager.removeNode(judgmentNodes);
         }
     }
 
@@ -96,7 +99,7 @@ export default class KeyboardEvent{
             this.changeJudgementText("Early")
             this.resetCombo();
         }
-        this.removeNode(node);
+        this.nodeManager.removeNode(node);
     }
 
     checkNodeOfJudgement(key){
@@ -108,15 +111,6 @@ export default class KeyboardEvent{
         this.resetCombo();
     }
     
-    removeNode(node){
-        const index = this.scene.nodes.indexOf(node);
-        if (index !== -1) {
-            this.scene.nodes.splice(index, 1);
-            node.destroy();
-        }
-        node = null;
-    }
-
     changeJudgementText(message){
         this.scene.judgementText = message;
     }

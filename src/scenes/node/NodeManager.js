@@ -61,8 +61,22 @@ export default class NodeManager {
                 return this.coordinate.xPosit.keyJ;
             case 'k':
                 return this.coordinate.xPosit.keyK;
+            default :
+                return null;
         }
     }
 
+    clearNodes(){
+        
+    }
+
+    removeNode(node){
+        const index = this.scene.nodes.indexOf(node);
+        if (index !== -1) {
+            this.scene.nodes.splice(index, 1);
+            node.destroy();
+        }
+        node = null;
+    }
 }
 
