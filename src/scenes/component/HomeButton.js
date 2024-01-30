@@ -24,7 +24,7 @@ export default class HomeButton {
                 this.scene.scene.start('main');
             });
         } else {
-            console.log("HomeButton error");
+            console.log("Home Button Error");
         }
     }
 }

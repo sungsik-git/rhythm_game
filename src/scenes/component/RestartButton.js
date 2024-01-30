@@ -5,12 +5,11 @@ export default class RestartButton {
     constructor(scene, bgm) {
         this.scene = scene;
         this.bgm = bgm;
+        this.nodeManager = new NodeManager(scene);
     }   
 
     loadRestartButton() {
         if(this.scene){
-            const nodeManager = new NodeManager();
-
             const restartButton = this.scene.add.text(
                 this.scene.game.config.width - 300,
                 50,
@@ -20,15 +19,17 @@ export default class RestartButton {
 
             restartButton.setInteractive().on('pointerdown', () => {
                 this.bgm.stop();
-                this.bgm.play();
-                
-                // 기존 노드들을 제거하고 새로운 노드들 생성
-                nodeManager.clearNodes();
-                nodeManager.makeRectFromClass();
-                nodeManager.nodeSlider();
+                this.bgm.destroy();
+
+                if (this.scene.cache && this.scene.cache.audio) {
+                    this.scene.cache.audio.remove('bgm');
+                }
+
+                this.nodeManager.clearNodes();
+                this.scene.scene.restart();
             });
         }else{
-            console.log("not scene")
+            console.log("Restart Button Error")
         }
     }
 }

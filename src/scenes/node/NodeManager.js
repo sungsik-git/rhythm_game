@@ -7,23 +7,21 @@ export default class NodeManager {
     
     constructor(scene) {
         this.scene = scene;
+        this.classOfNodes = [];
     }
 
     makeClassFromText(nodeFile){
         const lines = nodeFile.split('\n');
-        const classOfNodes = [];
 
         lines.forEach(line => {
             const [startTime, key, pressTime] = line.replace(/[{}]/g, '').split(',').map(item => item.trim());
-            classOfNodes.push(new Node(parseInt(startTime), key, parseInt(pressTime)));
+            this.classOfNodes.push(new Node(parseInt(startTime), key, parseInt(pressTime)));
         });
-
-        return classOfNodes;
     }
 
-    makeRectFromClass(classOfNodes){
+    makeRectFromClass(){
         const nodes = [];
-        classOfNodes.forEach(node => {
+        this.classOfNodes.forEach(node => {
             this.scene.time.addEvent({
                 delay: node.startTime, 
                 callback: () => {
@@ -67,7 +65,12 @@ export default class NodeManager {
     }
 
     clearNodes(){
-        
+        if(this.scene.nodes){
+            this.scene.nodes.forEach(node => {
+                this.removeNode(node)
+            });
+            this.scene.nodes = [];
+        }
     }
 
     removeNode(node){

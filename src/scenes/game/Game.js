@@ -63,7 +63,7 @@ export default class Game extends Phaser.Scene {
         // Load to button
         this.homeButton = new HomeButton(this, this.bgm);
         this.homeButton.loadHomeButton();
-        this.restartButton = new RestartButton(this, this.bgm);
+        this.restartButton = new RestartButton(this, this.bgm,);
         this.restartButton.loadRestartButton();
 
         // load to keyboard event
@@ -113,7 +113,7 @@ export default class Game extends Phaser.Scene {
 
         //load the nodes
         const nodeFile = this.cache.text.get('nodeFile');
-        const nodeManager = new NodeManager(this);
+        const nodeManager = new NodeManager(this, this.nodes);
         this.nodesClass = nodeManager.makeClassFromText(nodeFile);
         this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
 
