@@ -130,12 +130,15 @@ export default class Game extends Phaser.Scene {
         this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
         this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'}).setOrigin(0.5);
 
-        // this.bgm.on('complete', () => {
-        //     this.scene.start('result', { score: this.score, musicInfo: this.musicInfo })
-        // });
-        setTimeout(()=>{
-            this.scene.start('result');
-        },1000)
+        this.bgm.on('complete', () => {
+            this.time.addEvent({
+                delay: 3000,
+                callback: () => {
+                    this.scene.start('result', { score: this.score, musicInfo: this.musicInfo })
+                },
+                callbackScope: this
+            });
+        });
     }
 
     update() {
