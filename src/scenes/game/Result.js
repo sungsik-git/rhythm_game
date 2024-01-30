@@ -6,4 +6,8 @@ export default class Result extends Phaser.Scene{
         super('result');
         
     }
+
+    create(){
+        this.add.text(100,100,"result",{fill:'#ffffff'})
+    }
 }

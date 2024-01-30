@@ -1,50 +1,48 @@
-import Phaser from "phaser";
+import NodeManager from "../node/NodeManager";
 
-export default class PauseButton extends Phaser.Scene {
-    constructor(){
-        super('pauseButton');
-        this.isPaused = false;
+export default class PauseButton {
+    constructor(scene, bgm, isPaused) {
+        this.scene = scene;
+        this.bgm = bgm;
+        this.isPaused = isPaused;
+        this.nodeManager = new NodeManager(scene);
     }
 
-   init(data){
-    this.bgm = data.bgm;
-    this.nodeManager = data.nodeManager;
-    this.isPaused = false;
-
-   }
-
-   create() {
-        const pauseButton = this.add.text(
-            this.game.config.width - 150,
+    loadPauseButton() {
+        const pauseButton = this.scene.add.text(
+            this.scene.game.config.width - 180,
             50,
             'Pause',
-            { fill: '#000000' }
+            { fill: '#ffffff' }
         );
 
         pauseButton.setInteractive().on('pointerdown', () => {
-            this.togglePause();
+            this.pauseGame();
         });
     }
 
-    togglePause() {
-        if (this.isPaused) {
-            this.resumeGame();
-        } else {
-            this.pauseGame();
-        }
+    loadResumeButton(){
+        const resumeButton = this.scene.add.text(
+            this.scene.game.config.width - 180,
+            100,
+            'Resume',
+            { fill: '#ffffff' }
+        );
 
-        this.isPaused = !this.isPaused;
+        resumeButton.setInteractive().on('pointerdown', () => {
+            this.resumeGame();
+        });
     }
 
+
     pauseGame() {
-        // 일시 중지: 배경 음악 일시 중지, 노드 애니메이션 일시 중지
         this.bgm.pause();
-        this.nodeManager.pauseNodes();
+        this.scene.scene.pause();
     }
 
     resumeGame() {
-        // 재개: 배경 음악 재개, 노드 애니메이션 재개
+        console.log("resume")
         this.bgm.resume();
-        this.nodeManager.resumeNodes();
+        this.scene.scene.get('game').resume();
     }
 }

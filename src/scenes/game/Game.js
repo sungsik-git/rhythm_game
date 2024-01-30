@@ -4,6 +4,7 @@ import Coordinate from "../theme/Coordinate";
 import KeyboardEvent from "../input/KeyboardEvent";
 import HomeButton from "../component/HomeButton";
 import RestartButton from "../component/RestartButton";
+import PauseButton from "../component/PauseButton";
 
 export default class Game extends Phaser.Scene {
     init(data) {
@@ -65,6 +66,9 @@ export default class Game extends Phaser.Scene {
         this.homeButton.loadHomeButton();
         this.restartButton = new RestartButton(this, this.bgm,);
         this.restartButton.loadRestartButton();
+        this.pauseButton = new PauseButton(this, this.bgm, this.isPause);
+        this.pauseButton.loadPauseButton();
+        this.pauseButton.loadResumeButton();
 
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
@@ -112,10 +116,10 @@ export default class Game extends Phaser.Scene {
         ).setOrigin(0);
 
         //load the nodes
-        const nodeFile = this.cache.text.get('nodeFile');
-        const nodeManager = new NodeManager(this, this.nodes);
-        this.nodesClass = nodeManager.makeClassFromText(nodeFile);
-        this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
+            const nodeFile = this.cache.text.get('nodeFile');
+            const nodeManager = new NodeManager(this, this.nodes);
+            this.nodesClass = nodeManager.makeClassFromText(nodeFile);
+            this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
 
         //load Keyboard event
         this.keyboardEvent.loadKeydownEvent();
@@ -125,6 +129,13 @@ export default class Game extends Phaser.Scene {
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
         this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
         this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'}).setOrigin(0.5);
+
+        // this.bgm.on('complete', () => {
+        //     this.scene.start('result', { score: this.score, musicInfo: this.musicInfo })
+        // });
+        setTimeout(()=>{
+            this.scene.start('result');
+        },1000)
     }
 
     update() {
@@ -134,10 +145,6 @@ export default class Game extends Phaser.Scene {
         this.updateJudgementText();
         this.updateCombo();
         this.updateScore();
-
-        if(this.nodes.length === 0){
-
-        }
     }
 
     updateJudgementText(){
