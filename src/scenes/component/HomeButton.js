@@ -1,6 +1,7 @@
 export default class HomeButton {
-    constructor(scene, bgm) {
+    constructor(scene, bgm, score) {
         this.scene = scene;
+        this.score = score;
         this.bgm = bgm;
     }
 
@@ -14,12 +15,21 @@ export default class HomeButton {
             );
 
             homeButton.setInteractive().on('pointerdown', () => {
-                this.bgm.stop();
-                this.bgm.destroy();
-                
-                if (this.scene.cache && this.scene.cache.audio) {
-                    this.scene.cache.audio.remove('bgm');
+                if(this.bgm){
+                    this.bgm.stop();
+                    this.bgm.destroy();
+
+                    if (this.scene.cache && this.scene.cache.audio) {
+                        this.scene.cache.audio.remove('bgm');
+                    }
                 }
+
+                //점수, 콤보, 판정 초기화
+                if (this.scene.resetGameState) {
+                    this.scene.resetGameState();
+                }else(
+                    console.log("not method")
+                )
 
                 this.scene.scene.start('main');
             });

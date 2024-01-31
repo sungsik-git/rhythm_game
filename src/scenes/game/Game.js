@@ -36,33 +36,12 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-        /*   
-        this.scene.launch('pauseButton', { bgm : bgm, nodeManager : nodeManager});
-        this.scene.launch('restartButton', {bgm : bgm, nodeManager : nodeManager })
-        // Game info -> title, artist
-        this.scene.launch('gameInfoUI', { musicInfo: this.musicInfo });
-        
-        // add sound bar
-        // this.scene.launch('soundBar', { bgm: bgm });
-
-        // bgm.on('complete', () => {
-        //     this.scene.stop('resultButton');
-        //     this.scene.stop('pauseButton');
-        //     this.scene.stop('gameInfoUI');
-        //     this.scene.stop('soundBar');
-        //     this.scene.stop('gameUI');
-        
-        //     // Transition to the result scene
-        //     this.scene.start('result');
-        // });
-        */
-
         // Play the background music (BGM)
         this.bgm = this.sound.add('bgm', { loop: false });
         this.bgm.play();
 
         // Load to button
-        this.homeButton = new HomeButton(this, this.bgm);
+        this.homeButton = new HomeButton(this, this.bgm, this.score);
         this.homeButton.loadHomeButton();
         this.restartButton = new RestartButton(this, this.bgm,);
         this.restartButton.loadRestartButton();
@@ -177,8 +156,11 @@ export default class Game extends Phaser.Scene {
                 callbackScope: node
             });
         });
-    }   
+    }
 
-
-    
+    resetGameState() {
+        this.score = 0;
+        this.combo = 0;
+        this.judgementText = null;
+    }
 }
