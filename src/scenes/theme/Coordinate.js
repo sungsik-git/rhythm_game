@@ -6,10 +6,10 @@ export default class Coordinate {
             centerLeft: window.game.config.width / 2 - 100,
 
             // Position of node and node route
-            keyD: 400,
-            keyF: 505,
-            keyJ: 610,
-            keyK: 715,
+            keyD: 0,
+            keyF: 125,
+            keyJ: 250,
+            keyK: 375,
 
         };
 
@@ -18,18 +18,18 @@ export default class Coordinate {
             center: window.game.config.height / 2,
             centerBottom: window.game.config.height * 3 / 4,
             centerBottomMore: window.game.config.height * 5 / 6,
-            nodeRouteOrigin: 100,
+            nodeRouteOrigin: 0,
             judgementLine: 600,
         }
 
         this.width = {
-            node: 100,
-            judgementLine: 415,
+            node: 120,
+            judgementLine: 495,
         }
 
         this.height = {
             node: 40,
-            nodeRoute: 600,
+            nodeRoute: 700,
             judgementLine: 4,
         }
 

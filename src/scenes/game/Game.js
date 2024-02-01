@@ -86,7 +86,7 @@ export default class Game extends Phaser.Scene {
         ).setOrigin(0);
 
         // make judgement line
-        this.add.rectangle(
+        this.judgementLine = this.add.rectangle(
             this.coordinate.xPosit.keyD,
             this.coordinate.yPosit.judgementLine,
             this.coordinate.width.judgementLine,
@@ -94,11 +94,19 @@ export default class Game extends Phaser.Scene {
             this.coordinate.color.judgementLine
         ).setOrigin(0);
 
+        this.gameInfoBar = this.add.rectangle(
+            0,
+            this.game.config.height - 100,
+            this.game.config.width,
+            100,
+            0x00ffaa
+        ).setOrigin(0);
+
         //load the nodes
-            const nodeFile = this.cache.text.get('nodeFile');
-            const nodeManager = new NodeManager(this, this.nodes);
-            this.nodesClass = nodeManager.makeClassFromText(nodeFile);
-            this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
+        const nodeFile = this.cache.text.get('nodeFile');
+        const nodeManager = new NodeManager(this, this.nodes);
+        this.nodesClass = nodeManager.makeClassFromText(nodeFile);
+        this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
 
         //load Keyboard event
         this.keyboardEvent.loadKeydownEvent();
@@ -107,7 +115,9 @@ export default class Game extends Phaser.Scene {
         // show judgement text
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
         this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
-        this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'}).setOrigin(0.5);
+        this.scoreObject = this.add.text(100, this.gameInfoBar.y+50, this.score, {fill: '#000000'})
+        .setOrigin(0.5)
+        .setFontSize(40);
 
         this.bgm.on('complete', () => {
             this.time.addEvent({
