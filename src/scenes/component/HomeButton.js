@@ -27,9 +27,7 @@ export default class HomeButton {
                 //점수, 콤보, 판정 초기화
                 if (this.scene.resetGameState) {
                     this.scene.resetGameState();
-                }else(
-                    console.log("not method")
-                )
+                }
 
                 this.scene.scene.start('main');
             });

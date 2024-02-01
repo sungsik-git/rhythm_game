@@ -115,7 +115,7 @@ export default class Game extends Phaser.Scene {
         // show judgement text
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
         this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
-        this.scoreObject = this.add.text(100, this.gameInfoBar.y+50, this.score, {fill: '#000000'})
+        this.scoreObject = this.add.text(100, 750, this.score, {fill: '#000000'})
         .setOrigin(0.5)
         .setFontSize(40);
 
