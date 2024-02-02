@@ -147,14 +147,12 @@ export default class Game extends Phaser.Scene {
 
     nodeSlider() {
         this.nodes.forEach(node => {
-
-
             this.time.addEvent({
                 delay: node.getData('startTime'),
                 callback: () => {
                     if (node.y < 650) {
                         node.y += 5;
-                    } 
+                    }
                 },
                 loop: false,
                 callbackScope: node

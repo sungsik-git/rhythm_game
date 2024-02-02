@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
+    new Music('Attention', 'Charlie Puth', 'game2_thumbnail', shortSample, game1_node),
+    new Music('Dangerously', 'Charlie Puth', 'game3_thumbnail', game3_music, game2_node),
+    new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game1_node),
+    new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game1_node),
+    new Music('Thats hilarious', 'Charlie Puth', 'game6_thumbnail', game6_music, game1_node),
+    new Music('See you again', 'Charlie Puth', 'game7_thumbnail', game7_music, game1_node),
+    new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node), -->
+    <div id="musicInfo_container">
+        <p id="musicTitle"></p>
+        <div id='musicChangeButton'>
+            <input type="button" id="leftSlideButton" class="musicSlideButton" value="L">
+            <input type="button" id="rightSlideButton" class="musicSlideButton" value="R">
+        </div>
+    </div>
+    <div>
+        <audio id="currentAudio" src="./that’s_not_how_this-works.mp3"></audio>
+        <input id="playButton" type="button" value="Play" >
+    </div>
+    <div id="timer_container">
+        <p id="timer">00:00:00</p>
+    </div>
+    <div>
+        <textarea id="textOfNodes" cols="50" rows="100" readonly="true"></textarea>
+    </div>
+</body>
+
+<script>
+    //music info
+    const Musics = [
+        {index: 0, src:'./attention.mp3', title: 'Attention'},
+        {index: 1, src:'./dangerously.mp3', title: 'Dangerously'},
+        {index: 2, src:'./loser.mp3', title: 'Loser'},
+        {index: 3, src:'./see_you_again.mp3', title: 'See you again'},
+        {index: 4, src:'./that’s_not_how_this-works.mp3', title: "That's not how this work"},
+        {index: 5, src:'./thats_hilarious.mp3', title: 'Thats hilarious'},
+        {index: 6, src:'./Dome_before30mins_231206.wav', title: 'Dome_before'},
+    ]
+    let currentMusicIndex = 0
+    let currentMusicSrc = Musics[currentMusicIndex].src;
+    let currentMusicTitle = Musics[currentMusicIndex].title;
+
+    let musicTitleElement = document.getElementById('musicTitle');
+    let currentAudioElement = document.getElementById('currentAudio');
+    let outputTextArea = document.getElementById('outputTextArea');
+
+    musicTitleElement.textContent = currentMusicTitle;
+    currentAudioElement.src = currentMusicSrc;
+
+    // music change button
+    let leftSlideButton = document.getElementById('leftSlideButton');
+    let rightSlideButton = document.getElementById('rightSlideButton');
+
+    leftSlideButton.addEventListener('click', () => {
+        currentMusicIndex = (currentMusicIndex - 1 + Musics.length ) % Musics.length 
+        musicTitleElement.textContent = Musics[currentMusicIndex].title;
+        currentAudioElement.src = Musics[currentMusicIndex].src;
+    });
+
+    rightSlideButton.addEventListener('click', () => {
+        currentMusicIndex = (currentMusicIndex + 1) % Musics.length
+        musicTitleElement.textContent = Musics[currentMusicIndex].title;
+        currentAudioElement.src = Musics[currentMusicIndex].src;
+    })
+
+    // music 
+    const currnetAudio = document.getElementById('currentAudio');
+    const playButton = document.getElementById('playButton');
+    let isPlayMusic = false;
+
+    function toggleMusicPlay(){
+        if(isPlayMusic){
+            currnetAudio.pause();
+            isPlayMusic = false ;
+            playButton.value = 'Play';
+
+            stopTimer();
+        }else{
+            currnetAudio.play();
+            isPlayMusic = true;
+            playButton.value = 'Pause';
+
+            startTimer();
+        }
+    }
+
+    playButton.addEventListener('click', toggleMusicPlay);
+
+    // make timer to start with music
+    let timer; 
+    let milliseconds = 0;
+    let seconds = 0;
+    let minutes = 0;
+
+    let startTimeOfNode = 0;
+
+    function updateTimer(){
+        startTimeOfNode++;
+
+        milliseconds++;
+        if(milliseconds === 1000){
+            milliseconds = 0;
+            seconds++;
+        }
+        if(seconds === 60){
+            seconds = 0;
+            minutes++;
+        }
+
+        const formattedTime = padNumber(minutes) + ":" + padNumber(seconds) + ":" + padNumber(milliseconds);
+        document.getElementById('timer').innerText = formattedTime;
+    }
+
+    function startTimer(){
+        timer = setInterval(updateTimer, 1);
+    }
+
+    function stopTimer(){
+        clearInterval(timer)
+    }
+
+    function padNumber(number){
+        return number < 10 ? '0' + number : number;
+    }
+
+    // 키보드를 눌렀을 때 시간과 키값을 textarea에 추가하기
+    const textOfNodes = document.getElementById('textOfNodes');
+
+    document.addEventListener('keydown', function(event){
+        if(event.key === 'd' || event.key === 'f' || event.key === 'j' || event.key === 'k'){
+            textOfNodes.value += `{ ${startTimeOfNode}, ${event.key} }\n`
+        }
+    });
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

@@ -38,7 +38,7 @@ export default class KeyboardEvent{
         var judgmentNodes = this.checkNodeOfJudgement(key);
         this.effectOfKeyPress(key);
     
-        if (judgmentNodes.length > 0) {
+        if (judgmentNodes.length > 0) { 
             judgmentNodes.forEach(node => {
                 this.judgeNode(node);
             });
