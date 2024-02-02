@@ -21,20 +21,17 @@ export default class KeyboardEvent{
         this.keyF = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         this.keyJ = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
         this.keyK = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-    }
 
-    loadKeydownEvent(){
         this.keyD.on('down', () => this.handleKeyDown('d'));
         this.keyF.on('down', () => this.handleKeyDown('f'));
         this.keyJ.on('down', () => this.handleKeyDown('j'));
         this.keyK.on('down', () => this.handleKeyDown('k'));
-    }
 
-    loadKeyUpEvent(){
         this.keyD.on('up', () => this.handleKeyUp('d'));
         this.keyF.on('up', () => this.handleKeyUp('f'));
         this.keyJ.on('up', () => this.handleKeyUp('j'));
         this.keyK.on('up', () => this.handleKeyUp('k'));
+
     }
 
     handleKeyDown(key) {

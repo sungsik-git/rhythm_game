@@ -52,8 +52,6 @@ export default class Game extends Phaser.Scene {
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
         this.keyboardEvent.loadGameKey();
-        this.keyboardEvent.loadKeydownEvent();
-        this.keyboardEvent.loadKeyUpEvent();
     
         // make to nodeRoute 
         this.routeOfKeyD = this.add.rectangle(
@@ -99,7 +97,7 @@ export default class Game extends Phaser.Scene {
             this.game.config.height - 100,
             this.game.config.width,
             100,
-            0x00ffaa
+            0xff00aa
         ).setOrigin(0);
 
         //load the nodes
@@ -108,14 +106,10 @@ export default class Game extends Phaser.Scene {
         this.nodesClass = nodeManager.makeClassFromText(nodeFile);
         this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
 
-        //load Keyboard event
-        this.keyboardEvent.loadKeydownEvent();
-        this.keyboardEvent.loadKeyUpEvent();
-
         // show judgement text
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
         this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
-        this.scoreObject = this.add.text(100, 750, this.score, {fill: '#000000'})
+        this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'})
         .setOrigin(0.5)
         .setFontSize(40);
 
