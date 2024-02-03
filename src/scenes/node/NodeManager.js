@@ -29,7 +29,7 @@ export default class NodeManager {
                         this.xPositionToKey(node.key),
                         this.coordinate.yPosit.nodeRouteOrigin,
                         this.coordinate.width.node,
-                        this.coordinate.height.node + (node.pressTime * 40),
+                        this.coordinate.height.node + (node.pressTime/1000 * 40),
                         0x00ffaa
                     )
                     nodeRect.setOrigin(0);

@@ -63,12 +63,18 @@
         currentMusicIndex = (currentMusicIndex - 1 + Musics.length ) % Musics.length 
         musicTitleElement.textContent = Musics[currentMusicIndex].title;
         currentAudioElement.src = Musics[currentMusicIndex].src;
+        
+        resetTimer();
+        stopTimer();
     });
 
     rightSlideButton.addEventListener('click', () => {
         currentMusicIndex = (currentMusicIndex + 1) % Musics.length
         musicTitleElement.textContent = Musics[currentMusicIndex].title;
         currentAudioElement.src = Musics[currentMusicIndex].src;
+        
+        resetTimer();
+        stopTimer();
     })
 
     // music 
@@ -100,10 +106,10 @@
     let seconds = 0;
     let minutes = 0;
 
-    let startTimeOfNode = 0;
+    let onlyMilli = 0;
 
     function updateTimer(){
-        startTimeOfNode++;
+        onlyMilli++;
 
         milliseconds++;
         if(milliseconds === 1000){
@@ -127,20 +133,42 @@
         clearInterval(timer)
     }
 
+    function resetTimer(){
+        startTimeOfNode = 0;
+        milliseconds = 0;
+        seconds = 0;
+        minutes = 0;
+        document.getElementById('timer').innerText = '00:00:00';
+        textOfNodes.value = "";
+    }
+
     function padNumber(number){
         return number < 10 ? '0' + number : number;
     }
 
-    // 키보드를 눌렀을 때 시간과 키값을 textarea에 추가하기
+    // Output of node info in text area
     const textOfNodes = document.getElementById('textOfNodes');
 
-    document.addEventListener('keydown', function(event){
-        if(event.key === 'd' || event.key === 'f' || event.key === 'j' || event.key === 'k'){
-            textOfNodes.value += `{ ${startTimeOfNode}, ${event.key} }\n`
+    const keyInfo = {
+        'd': { startTime: 0, pressedTime: 0 },
+        'f': { startTime: 0, pressedTime: 0 },
+        'j': { startTime: 0, pressedTime: 0 },
+        'k': { startTime: 0, pressedTime: 0 }
+    };
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'd' || event.key === 'f' || event.key === 'j' || event.key === 'k') {
+            keyInfo[event.key].startTime = onlyMilli;
         }
     });
 
-    
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'd' || event.key === 'f' || event.key === 'j' || event.key === 'k') {
+            keyInfo[event.key].pressedTime = onlyMilli - keyInfo[event.key].startTime;
+            textOfNodes.value += `{${keyInfo[event.key].startTime}, ${event.key}, ${keyInfo[event.key].pressedTime}}\n`;
+        }
+    });
+
 
 
 
