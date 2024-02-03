@@ -102,14 +102,14 @@ export default class Game extends Phaser.Scene {
 
         //load the nodes
         const nodeFile = this.cache.text.get('nodeFile');
-        const nodeManager = new NodeManager(this, this.nodes);
-        this.nodesClass = nodeManager.makeClassFromText(nodeFile);
-        this.nodes = nodeManager.makeRectFromClass(this.nodesClass);
+        this.nodeManager = new NodeManager(this, this.nodes);
+        this.nodesClass = this.nodeManager.makeClassFromText(nodeFile);
+        this.nodes = this.nodeManager.makeRectFromClass(this.nodesClass);
 
         // show judgement text
-        this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#ffffaa' }).setOrigin(0.5);
-        this.comboObject = this.add.text(100, 200, this.combo, {fill: '#ffffaa'}).setOrigin(0.5);
-        this.scoreObject = this.add.text(100, 300, this.score, {fill: '#ffffaa'})
+        this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#000000' }).setOrigin(0.5);
+        this.comboObject = this.add.text(100, 200, this.combo, {fill: '#000000'}).setOrigin(0.5);
+        this.scoreObject = this.add.text(100, 300, this.score, {fill: '#000000'})
         .setOrigin(0.5)
         .setFontSize(40);
 
@@ -147,17 +147,18 @@ export default class Game extends Phaser.Scene {
 
     nodeSlider() {
         this.nodes.forEach(node => {
-            this.time.addEvent({
-                delay: node.getData('startTime'),
-                callback: () => {
-                    if (node.y < 650) {
-                        node.y += 5;
-                    }
-                },
-                loop: false,
-                callbackScope: node
-            });
-        });
+            setTimeout(() => {
+                if (node.y < 650) {
+                    node.y += this.speed;
+                }
+            }, node.getData('startTime'));
+                if (node.y === 650){
+                    this.keyboardEvent.missJudgement();
+                    this.nodeManager.removeNode(node);
+                }
+            }
+        );
+
     }
 
     resetGameState() {

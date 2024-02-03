@@ -103,7 +103,7 @@ export default class KeyboardEvent{
         return this.scene.nodes.filter(node => node.y >= 550 && node.getData('key') === key);
     }
 
-    missJudgement(){
+    missJudgement(node){
         this.changeJudgementText("Miss");
         this.resetCombo();
     }
