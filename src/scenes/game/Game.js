@@ -25,6 +25,8 @@ export default class Game extends Phaser.Scene {
 
         //theme
         this.coordinate = new Coordinate();        
+
+        this.isPause = false;
     }
 
     preload() {
@@ -40,16 +42,26 @@ export default class Game extends Phaser.Scene {
     create() {
         // Play the background music (BGM)
         this.bgm = this.sound.add('bgm', { loop: false });
-        this.bgm.play();
+        if(!this.isPause){
+            this.bgm.play();
+        }else{
+            this.bgm.pause();
+        }
 
         // Load to button
         this.homeButton = new HomeButton(this, this.bgm, this.score);
         this.homeButton.loadHomeButton();
         this.restartButton = new RestartButton(this, this.bgm,);
         this.restartButton.loadRestartButton();
-        this.pauseButton = new PauseButton(this, this.bgm, this.isPause);
-        this.pauseButton.loadPauseButton();
-        this.pauseButton.loadResumeButton();
+       
+        this.pauseButton = this.add.text( this.game.config.width - 180,50,'Pause','0xffffff')
+        .setInteractive();
+
+        this.pauseButton.on('pointerdown', () => {
+            if(this.isPause) this.isPause = false;
+            else this.isPause = true;
+        });
+
 
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
@@ -130,11 +142,14 @@ export default class Game extends Phaser.Scene {
 
     update() {
         //drop the nodes
-        this.nodeSlider();
 
-        this.updateJudgementText();
-        this.updateCombo();
-        this.updateScore();
+        if(!this.isPause){
+            this.nodeSlider();
+        
+            this.updateJudgementText();
+            this.updateCombo();
+            this.updateScore();
+        }   
     }
 
     updateJudgementText(){
@@ -151,11 +166,9 @@ export default class Game extends Phaser.Scene {
 
     nodeSlider() {
         this.nodes.forEach(node => {
-            setTimeout(() => {
-                if (node.y < 650) {
-                    node.y += this.speed;
-                }
-            }, node.getData('startTime'));
+            if (node.y < 650) {
+                node.y += this.speed;
+            }
 
             if (node.y === 650){
                 this.keyboardEvent.missJudgement();
@@ -168,7 +181,5 @@ export default class Game extends Phaser.Scene {
         this.score = 0;
         this.combo = 0;
         this.judgementText = null;
-        this.nodesClass = [];
-        this.nodes = [];
     }
 }
