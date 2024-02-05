@@ -24,11 +24,6 @@ export default class HomeButton {
                     }
                 }
 
-                //점수, 콤보, 판정 초기화
-                if (this.scene.resetGameState) {
-                    this.scene.resetGameState();
-                }
-
                 this.scene.scene.start('main');
             });
         } else {

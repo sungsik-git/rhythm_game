@@ -24,10 +24,12 @@ export default class Game extends Phaser.Scene {
         this.bgm = null;
 
         //theme
-        this.coordinate = new Coordinate();
+        this.coordinate = new Coordinate();        
     }
 
     preload() {
+        this.resetGameState();
+        
         // Load the background music (BGM)
         this.load.audio('bgm', this.musicInfo.musicPath);
     
@@ -117,11 +119,13 @@ export default class Game extends Phaser.Scene {
             this.time.addEvent({
                 delay: 3000,
                 callback: () => {
-                    this.scene.start('result', { score: this.score, musicInfo: this.musicInfo })
+                    this.scene.start('result', { score: this.score, musicInfo: this.musicInfo, combo: this.combo, judgementText: this.judgementText });
                 },
                 callbackScope: this
             });
         });
+
+        
     }
 
     update() {
@@ -152,18 +156,19 @@ export default class Game extends Phaser.Scene {
                     node.y += this.speed;
                 }
             }, node.getData('startTime'));
-                if (node.y === 650){
-                    this.keyboardEvent.missJudgement();
-                    this.nodeManager.removeNode(node);
-                }
-            }
-        );
 
+            if (node.y === 650){
+                this.keyboardEvent.missJudgement();
+                this.nodeManager.removeNode(node);
+            }
+        });
     }
 
     resetGameState() {
         this.score = 0;
         this.combo = 0;
         this.judgementText = null;
+        this.nodesClass = [];
+        this.nodes = [];
     }
 }
