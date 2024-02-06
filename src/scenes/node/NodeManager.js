@@ -5,9 +5,10 @@ export default class NodeManager {
     
     coordinate = new Coordinate();
 
-    constructor(scene, nodeFile) {
+    constructor(scene, nodeFile, isPause) {
         this.scene = scene;
         this.nodeFile = nodeFile;
+        this.isPause = isPause;
 
         this.classOfNodes = [];
         this.nodes = [];
@@ -46,7 +47,7 @@ export default class NodeManager {
                 callbackScope: this 
             });
         });
-
+    
         return this.nodes;
     }
 

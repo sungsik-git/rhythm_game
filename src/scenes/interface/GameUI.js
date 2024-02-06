@@ -6,7 +6,7 @@ export default class GameUI {
         this.scene = scene;
         this.coordinate = new Coordinate()
     }
-
+    
     loadGameUI(){
         // make to nodeRoute 
         this.routeOfKeyD = this.scene.add.rectangle(
