@@ -1,7 +1,7 @@
 export default class HomeButton {
-    constructor(scene, bgm, score) {
+    constructor(scene, bgm, nodes) {
         this.scene = scene;
-        this.score = score;
+        this.nodes = nodes;
         this.bgm = bgm;
     }
 
@@ -22,6 +22,8 @@ export default class HomeButton {
                     if (this.scene.cache && this.scene.cache.audio) {
                         this.scene.cache.audio.remove('bgm');
                     }
+
+                    
                 }
 
                 this.scene.scene.start('main');

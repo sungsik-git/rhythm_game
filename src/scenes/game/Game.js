@@ -9,6 +9,7 @@ import PauseButton from "../component/PauseButton";
 export default class Game extends Phaser.Scene {
     init(data) {
         this.musicInfo = data.musicInfo;
+        this.currentIndex = data.currentIndex;
     }
 
     constructor() {
@@ -22,6 +23,7 @@ export default class Game extends Phaser.Scene {
         this.score = 0;
         this.judgementText = null;
         this.bgm = null;
+
 
         //theme
         this.coordinate = new Coordinate();        
@@ -40,6 +42,18 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
+        //load the nodes
+        let nodeFileKey = 'nodeFile';
+
+        if (this.cache.text.has(nodeFileKey)) {
+            this.nodeFile = this.cache.text.get(nodeFileKey);
+            this.cache.text.remove(nodeFileKey);
+        }
+
+        this.nodeManager = new NodeManager(this, this.nodeFile);
+        this.nodesClass = this.nodeManager.makeClassFromText();
+        this.nodes = this.nodeManager.makeRectFromClass(this.nodesClass);
+
         // Play the background music (BGM)
         this.bgm = this.sound.add('bgm', { loop: false });
         if(!this.isPause){
@@ -51,7 +65,7 @@ export default class Game extends Phaser.Scene {
         // Load to button
         this.homeButton = new HomeButton(this, this.bgm, this.score);
         this.homeButton.loadHomeButton();
-        this.restartButton = new RestartButton(this, this.bgm,);
+        this.restartButton = new RestartButton(this, this.bgm, this.nodes);
         this.restartButton.loadRestartButton();
        
         this.pauseButton = this.add.text( this.game.config.width - 180,50,'Pause','0xffffff')
@@ -111,14 +125,10 @@ export default class Game extends Phaser.Scene {
             this.game.config.height - 100,
             this.game.config.width,
             100,
-            0xff00aa
+            0x8c8c8c
         ).setOrigin(0);
 
-        //load the nodes
-        const nodeFile = this.cache.text.get('nodeFile');
-        this.nodeManager = new NodeManager(this, this.nodes);
-        this.nodesClass = this.nodeManager.makeClassFromText(nodeFile);
-        this.nodes = this.nodeManager.makeRectFromClass(this.nodesClass);
+        
 
         // show judgement text
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#000000' }).setOrigin(0.5);
@@ -137,7 +147,7 @@ export default class Game extends Phaser.Scene {
             });
         });
 
-        
+
     }
 
     update() {
@@ -181,5 +191,9 @@ export default class Game extends Phaser.Scene {
         this.score = 0;
         this.combo = 0;
         this.judgementText = null;
+        this.nodesClass = null;
+        this.nodes = null;
+        
+
     }
 }

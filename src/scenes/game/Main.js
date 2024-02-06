@@ -51,7 +51,6 @@ export default class Main extends Phaser.Scene {
     this.load.image('game5_thumbnail', game5_thumbnail);
     this.load.image('game6_thumbnail', game6_thumbnail);
     this.load.image('game7_thumbnail', game7_thumbnail);
-
   }
 
   create() {   
@@ -108,6 +107,8 @@ export default class Main extends Phaser.Scene {
     const onThumbnailClick = () => {
       this.loadScene(this.currentIndex);
     }
+
+    
 
     // button event 설정
     nextButton.on('pointerdown', nextThumbnail);
@@ -175,7 +176,7 @@ export default class Main extends Phaser.Scene {
     this.scene.stop('main');
 
     // 매개변수로 받아온 index에 맞는 game scene을 출력
-    this.scene.start('game', {musicInfo : this.musics[currentIndex]});
+    this.scene.start('game', {musicInfo : this.musics[currentIndex], currentIndex: this.currentIndex});
   }
 
   update() {

@@ -4,23 +4,28 @@ import Node from "./Node";
 export default class NodeManager {
     
     coordinate = new Coordinate();
-    
-    constructor(scene) {
+
+    constructor(scene, nodeFile) {
         this.scene = scene;
+        this.nodeFile = nodeFile;
+
         this.classOfNodes = [];
+        this.nodes = [];
     }
 
-    makeClassFromText(nodeFile){
-        const lines = nodeFile.split('\n');
-
+    makeClassFromText(){
+        console.log(this.nodeFile)
+        let lines = this.nodeFile.split('\n');
         lines.forEach(line => {
             const [startTime, key, pressTime] = line.replace(/[{}]/g, '').split(',').map(item => item.trim());
             this.classOfNodes.push(new Node(parseInt(startTime), key, parseInt(pressTime)));
         });
+    
+        return this.classOfNodes;
     }
+    
 
     makeRectFromClass(){
-        const nodes = [];
         this.classOfNodes.forEach(node => {
             this.scene.time.addEvent({
                 delay: node.startTime, 
@@ -33,19 +38,17 @@ export default class NodeManager {
                         0x00ffaa
                     )
                     nodeRect.setOrigin(0);
-    
-                    
                     nodeRect.setData('startTime', node.startTime);
                     nodeRect.setData('key', node.key);
     
-                    nodes.push(nodeRect);
+                    this.nodes.push(nodeRect);
                 },
                 loop: false, 
                 callbackScope: this 
             });
         });
 
-        return nodes;
+        return this.nodes;
     }
 
     xPositionToKey(keyName) {

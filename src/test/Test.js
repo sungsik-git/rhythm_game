@@ -1,12 +1,23 @@
 import Phaser from "phaser";
+import Sample from "../asset/music/that’s_not_how_this-works.mp3"
 
 export default class Test extends Phaser.Scene{
     constructor(){
         super('test');
         this.isPause = false;
+        this.bgm = null;
+    }
+
+    preload(){
+        this.load.audio('sample', Sample);
     }
 
     create(){
+        this.bgm = this.sound.add('sample', { loop : false });
+        this.bgm.play()
+        
+        
+
         this.star = this.add.text(this.game.config.width/2, 100, "*", '0xffffff');
 
         this.PuaseButton = this.add.text(600, 100, "PAUSE", '0xffffff').setInteractive();

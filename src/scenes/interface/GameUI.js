@@ -46,6 +46,8 @@ export default class GameUI {
             this.coordinate.height.judgementLine,
             this.coordinate.color.judgementLine
         ).setOrigin(0);
+
+
     }
     
     loadTest(){
