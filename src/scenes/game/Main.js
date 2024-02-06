@@ -22,6 +22,11 @@ import shortSample from '../../asset/music/short_sample.mp3';
 //노트 파일 추가
 import game1_node from '../../asset/textNode/SampleNode1.txt';
 import game2_node from '../../asset/textNode/SampleNode2.txt';
+import game3_node from '../../asset/textNode/SampleNode3.txt';
+import game4_node from '../../asset/textNode/SampleNode4.txt';
+import game5_node from '../../asset/textNode/SampleNode5.txt';
+import game6_node from '../../asset/textNode/SampleNode6.txt';
+import game7_node from '../../asset/textNode/SampleNode7.txt';
 
 import Music from "../music_info/Music";
 
@@ -35,11 +40,11 @@ export default class Main extends Phaser.Scene {
       //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
       new Music('Attention', 'Charlie Puth', 'game2_thumbnail', shortSample, game1_node),
       new Music('Dangerously', 'Charlie Puth', 'game3_thumbnail', game3_music, game2_node),
-      new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game1_node),
-      new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game1_node),
-      new Music('Thats hilarious', 'Charlie Puth', 'game6_thumbnail', game6_music, game1_node),
-      new Music('See you again', 'Charlie Puth', 'game7_thumbnail', game7_music, game1_node),
-      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game1_node),
+      new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game3_node),
+      new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game4_node),
+      new Music('Thats hilarious', 'Charlie Puth', 'game6_thumbnail', game6_music, game5_node),
+      new Music('See you again', 'Charlie Puth', 'game7_thumbnail', game7_music, game6_node),
+      new Music('Game1', 'Artist1', 'game1_thumbnail', game1_music, game7_node),
     ];
   }
 

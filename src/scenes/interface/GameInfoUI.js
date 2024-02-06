@@ -1,23 +1,43 @@
-import Phaser from "phaser";
+import Coordinate from "../theme/Coordinate";
 
-export default class GameInfoUI extends Phaser.Scene {
-    constructor(){
-        super('gameInfoUI')
+export default class GameInfoUI {
+    
+    coordinate = new Coordinate()
+
+    constructor(scene, musicInfo){
+        this.scene = scene;
+        this.musicInfo = musicInfo;
     }
 
-    init(data){
-        this.musicInfo = data.musicInfo;
-    };
+    loadGameInfoBar(){
+        const gameInfoBar = this.scene.add.rectangle(
+            0,
+            this.coordinate.yPosit.height - 80,
+            this.coordinate.xPosit.width,
+            80,
+            0x8c8c8c
+        ).setOrigin(0);
 
-    preload(){
-
+        return gameInfoBar;
     }
 
-    create(){
-        
-    }
+    loadGameInfo(){
+        const musicTitle = this.scene.add.text(
+            this.coordinate.xPosit.width - 200,
+            700,
+            this.musicInfo.title,
+            {fill: '0x000000'}
+        ).setOrigin(0);
+        musicTitle.setFontSize(24).setAlign('center');
 
-    update(){
+        const musicArtist = this.scene.add.text(
+            this.coordinate.xPosit.width - 200,
+            740,
+            this.musicInfo.artist,
+            {fill: '0x000000'}
+        ).setOrigin(0);
+        musicArtist.setAlign('center');
 
+        return [musicTitle, musicArtist];
     }
 }

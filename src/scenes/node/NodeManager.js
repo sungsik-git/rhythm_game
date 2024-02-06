@@ -14,7 +14,6 @@ export default class NodeManager {
     }
 
     makeClassFromText(){
-        console.log(this.nodeFile)
         let lines = this.nodeFile.split('\n');
         lines.forEach(line => {
             const [startTime, key, pressTime] = line.replace(/[{}]/g, '').split(',').map(item => item.trim());

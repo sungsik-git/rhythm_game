@@ -5,6 +5,7 @@ import KeyboardEvent from "../input/KeyboardEvent";
 import HomeButton from "../component/HomeButton";
 import RestartButton from "../component/RestartButton";
 import PauseButton from "../component/PauseButton";
+import GameInfoUI from "../interface/GameInfoUI";
 
 export default class Game extends Phaser.Scene {
     init(data) {
@@ -120,15 +121,11 @@ export default class Game extends Phaser.Scene {
             this.coordinate.color.judgementLine
         ).setOrigin(0);
 
-        this.gameInfoBar = this.add.rectangle(
-            0,
-            this.game.config.height - 100,
-            this.game.config.width,
-            100,
-            0x8c8c8c
-        ).setOrigin(0);
+        // Load game info
+        const gameInfoUI = new GameInfoUI(this, this.musicInfo);
+        gameInfoUI.loadGameInfoBar();
+        gameInfoUI.loadGameInfo();
 
-        
 
         // show judgement text
         this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#000000' }).setOrigin(0.5);
