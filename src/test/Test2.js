@@ -42,6 +42,7 @@ export default class Test2 extends Phaser.Scene{
         this.scoreObject.setText(this.score);
         this.comboObject.setText(this.combo);
         this.judgementTextObject.setText(this.judgementText);
+        console.log("test")
     }
     
 }
