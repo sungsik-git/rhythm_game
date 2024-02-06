@@ -6,7 +6,9 @@ import HomeButton from "../component/HomeButton";
 import RestartButton from "../component/RestartButton";
 import PauseButton from "../component/PauseButton";
 import GameInfoUI from "../interface/GameInfoUI";
-import routeOfKey from "../interface/RouteOfKey";
+import RouteOfKey from "../interface/RouteOfKey";
+
+import BlueFlare from "../../asset/img/blueFlare.jpeg";
 
 export default class Game extends Phaser.Scene {
     init(data) {
@@ -41,6 +43,9 @@ export default class Game extends Phaser.Scene {
     
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
+
+        // Load the Flare img
+        // this.load.image('blueFlare', BlueFlare);
     }
 
     create() {
@@ -82,10 +87,12 @@ export default class Game extends Phaser.Scene {
         this.keyboardEvent.loadGameKey();
     
         // make to nodeRoute 
-        this.routeOfKeyD = new routeOfKey(this, this.coordinate.xPosit.keyD).createRoute();
-        this.routeOfKeyF = new routeOfKey(this, this.coordinate.xPosit.keyF).createRoute();
-        this.routeOfKeyJ = new routeOfKey(this, this.coordinate.xPosit.keyJ).createRoute();
-        this.routeOfKeyK = new routeOfKey(this, this.coordinate.xPosit.keyK).createRoute();
+        ['D', 'F', 'J', 'K'].forEach(key => {
+            const route = new RouteOfKey(this, 'key' + key);
+            this['routeOfKey' + key] = route.createRoute();
+            route.createKeyInfo();
+        });
+        
 
         // make judgement line
         this.judgementLine = this.add.rectangle(

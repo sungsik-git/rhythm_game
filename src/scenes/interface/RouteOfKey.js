@@ -1,19 +1,31 @@
-export default class routeOfKey{
-    constructor(scene, xPos, yPos){
+export default class RouteOfKey{
+    constructor(scene, key){
         this.scene = scene;
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.key = key;
+
+        this.xPosition = this.scene.coordinate.xPosit[this.key];
     }
 
-    createRoute(){
-        this.route = this.scene.add.rectangle(
-            this.xPos,
+    createRoute() {
+        
+        const route = this.scene.add.rectangle(
+            this.xPosition,
             this.scene.coordinate.yPosit.nodeRouteOrigin,
             this.scene.coordinate.width.node,
             this.scene.coordinate.height.nodeRoute,
             this.scene.coordinate.color.nodeRoute
         ).setOrigin(0);
 
-        return this.route;
+        return route;
+    }
+
+
+    createKeyInfo(){
+        this.scene.add.text(
+            this.xPosition + 55,
+            630,
+            this.key.substring(3),
+            { fill: '0x000000'}
+        )
     }
 }
