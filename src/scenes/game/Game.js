@@ -73,6 +73,7 @@ export default class Game extends Phaser.Scene {
             this.pauseTime = this.bgm.seek;
             this.pauseButton.setVisible(false);
             this.playButton.setVisible(true);
+            this.isPause = true;
         });
 
         this.playButton = this.add.text( this.game.config.width - 180,50,'Play','0xffffff')
@@ -84,6 +85,7 @@ export default class Game extends Phaser.Scene {
             this.pauseTime = this.bgm.seek;
             this.playButton.setVisible(false);
             this.pauseButton.setVisible(true);
+            this.isPause = false;
         });
         
         // Load to button
@@ -143,7 +145,7 @@ export default class Game extends Phaser.Scene {
         //drop the nodes
 
         if(!this.isPause){
-            this.nodeSlider();
+            this.nodeManager.nodeSlider();
         
             this.updateJudgementText();
             this.updateCombo();
@@ -161,19 +163,6 @@ export default class Game extends Phaser.Scene {
 
     updateScore(){
         this.scoreObject.setText(this.score);
-    }
-
-    nodeSlider() {
-        this.nodes.forEach(node => {
-            if (node.y < 650) {
-                node.y += this.speed;
-            }
-
-            if (node.y === 650){
-                this.keyboardEvent.missJudgement();
-                this.nodeManager.removeNode(node);
-            }
-        });
     }
 
     resetGameState() {

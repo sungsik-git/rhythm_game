@@ -51,6 +51,19 @@ export default class NodeManager {
         return this.nodes;
     }
 
+    nodeSlider() {
+        this.scene.nodes.forEach(node => {
+            if (node.y < 650) {
+                node.y += this.scene.speed;
+            }
+
+            if (node.y === 650){
+                this.scene.keyboardEvent.missJudgement();
+                this.removeNode(node);
+            }
+        });
+    }
+
     xPositionToKey(keyName) {
         
         switch (keyName) {
