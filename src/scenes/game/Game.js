@@ -19,6 +19,8 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
         this.speed = 5;
+        this.nodeDelay = 500;
+
         this.nodesClass = [];
         this.nodes = [];
         this.yOfJudgementLine = 600;
@@ -59,29 +61,37 @@ export default class Game extends Phaser.Scene {
         this.nodesClass = this.nodeManager.makeClassFromText();
         this.nodes = this.nodeManager.makeRectFromClass(this.nodesClass);
 
-        // Play the background music (BGM)
         this.bgm = this.sound.add('bgm', { loop: false });
-        if(!this.isPause){
-            this.bgm.play();
-        }else{
-            this.bgm.pause();
-        }
+        this.bgm.play();
+        this.pauseTime = 0;
 
+        this.pauseButton = this.add.text( this.game.config.width - 180,50,'Pause','0xffffff')
+        .setInteractive();
+
+        this.pauseButton.on('pointerdown', () => {
+            this.bgm.pause();
+            this.pauseTime = this.bgm.seek;
+            this.pauseButton.setVisible(false);
+            this.playButton.setVisible(true);
+        });
+
+        this.playButton = this.add.text( this.game.config.width - 180,50,'Play','0xffffff')
+        .setInteractive()
+        .setVisible(false);
+
+        this.playButton.on('pointerdown', () => {
+            this.bgm.play({ seek: this.pauseTime });
+            this.pauseTime = this.bgm.seek;
+            this.playButton.setVisible(false);
+            this.pauseButton.setVisible(true);
+        });
+        
         // Load to button
         this.homeButton = new HomeButton(this, this.bgm, this.score);
         this.homeButton.loadHomeButton();
         this.restartButton = new RestartButton(this, this.bgm, this.nodes);
         this.restartButton.loadRestartButton();
        
-        this.pauseButton = this.add.text( this.game.config.width - 180,50,'Pause','0xffffff')
-        .setInteractive();
-
-        this.pauseButton.on('pointerdown', () => {
-            if(this.isPause) this.isPause = false;
-            else this.isPause = true;
-        });
-
-
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
         this.keyboardEvent.loadGameKey();

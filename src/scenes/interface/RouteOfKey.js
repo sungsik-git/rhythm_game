@@ -23,7 +23,7 @@ export default class RouteOfKey{
     createKeyInfo(){
         this.scene.add.text(
             this.xPosition + 55,
-            630,
+            640,
             this.key.substring(3),
             { fill: '0x000000'}
         )

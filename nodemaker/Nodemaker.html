@@ -111,7 +111,7 @@
     function updateTimer(){
         onlyMilli++;
 
-        milliseconds++;
+        milliseconds += 6;
         if(milliseconds === 1000){
             milliseconds = 0;
             seconds++;
@@ -168,18 +168,5 @@
             textOfNodes.value += `{${keyInfo[event.key].startTime}, ${event.key}, ${keyInfo[event.key].pressedTime}}\n`;
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </html>

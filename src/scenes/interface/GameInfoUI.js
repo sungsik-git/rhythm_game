@@ -23,7 +23,7 @@ export default class GameInfoUI {
 
     loadGameInfo(){
         const musicTitle = this.scene.add.text(
-            this.coordinate.xPosit.width - 200,
+            300,
             700,
             this.musicInfo.title,
             {fill: '0x000000'}
@@ -31,7 +31,7 @@ export default class GameInfoUI {
         musicTitle.setFontSize(24).setAlign('center');
 
         const musicArtist = this.scene.add.text(
-            this.coordinate.xPosit.width - 200,
+            300,
             740,
             this.musicInfo.artist,
             {fill: '0x000000'}
