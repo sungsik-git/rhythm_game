@@ -12,8 +12,8 @@ import RestartButton from './scenes/component/RestartButton';
 import Result from './scenes/game/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './scenes/input/KeyboardEvent';
-import Test from './test/Test';
-import Test2 from './test/Test2';
+import DialogScene from './test/DialogScene';
+import MainScene from './test/MainScene';
 
 
 function App() {
@@ -29,13 +29,13 @@ function App() {
       scene: [ 
         //Page
         // Loading, 
-        Main, Game, Result, 
+        // Main, Game, Result, 
         //Interface
         // GameUI, GameInfoUI,
         //Component
         // HomeButton, PauseButton, SoundBar, RestartButton, KeyboardEvent
-        // Test, 
-        // Test2
+        MainScene,
+        DialogScene,
 
       ],
       plugins: {
