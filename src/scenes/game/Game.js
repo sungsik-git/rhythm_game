@@ -60,7 +60,7 @@ export default class Game extends Phaser.Scene {
         }
         this.nodeManager = new NodeManager(this, this.nodeFile, this.isPause);
         this.nodesClass = this.nodeManager.makeClassFromText();
-        this.nodes = this.nodeManager.makeRectFromClass(this.nodesClass);
+        this.nodes = this.nodeManager.makeRectFromClass();
 
         this.bgm = this.sound.add('bgm', { loop: false });
         this.bgm.play();

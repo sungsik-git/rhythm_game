@@ -30,26 +30,30 @@ export default class NodeManager {
             this.scene.time.addEvent({
                 delay: node.startTime, 
                 callback: () => {
-                    var nodeRect = this.scene.add.rectangle(
-                        this.xPositionToKey(node.key),
-                        this.coordinate.yPosit.nodeRouteOrigin,
-                        this.coordinate.width.node,
-                        this.coordinate.height.node + (node.pressTime/1000 * 40),
-                        0x00ffaa
-                    )
-                    nodeRect.setOrigin(0);
-                    nodeRect.setData('startTime', node.startTime);
-                    nodeRect.setData('key', node.key);
+                    if (!this.isPause) {
+                        var nodeRect = this.scene.add.rectangle(
+                            this.xPositionToKey(node.key),
+                            this.coordinate.yPosit.nodeRouteOrigin,
+                            this.coordinate.width.node,
+                            this.coordinate.height.node + (node.pressTime/1000 * 40),
+                            0x00ffaa
+                        );
+                        nodeRect.setOrigin(0);
+                        nodeRect.setData('startTime', node.startTime);
+                        nodeRect.setData('key', node.key);
     
-                    this.nodes.push(nodeRect);
+                        this.nodes.push(nodeRect);
+                    }
                 },
                 loop: false, 
                 callbackScope: this 
             });
         });
-    
+        
         return this.nodes;
     }
+    
+    
 
     nodeSlider() {
         this.scene.nodes.forEach(node => {
