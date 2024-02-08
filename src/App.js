@@ -34,7 +34,8 @@ function App() {
         // GameUI, GameInfoUI,
         //Component
         // HomeButton, PauseButton, SoundBar, RestartButton, KeyboardEvent
-        // Test, Test2
+        // Test, 
+        // Test2
 
       ],
       plugins: {

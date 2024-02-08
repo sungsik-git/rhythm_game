@@ -97,5 +97,13 @@ export default class NodeManager {
         }
         node = null;
     }
+
+    updateIsPauseTrue(){
+        this.isPause = true;
+    }
+
+    updateIsPauseFalse(){
+        this.isPause = false;
+    }
 }
 

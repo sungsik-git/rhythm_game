@@ -38,6 +38,7 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
+        // Game Score, Combo, Judgement Reset
         this.resetGameState();
         
         // Load the background music (BGM)
@@ -74,6 +75,7 @@ export default class Game extends Phaser.Scene {
             this.pauseButton.setVisible(false);
             this.playButton.setVisible(true);
             this.isPause = true;
+            this.nodeManager.updateIsPauseTrue();
         });
 
         this.playButton = this.add.text( this.game.config.width - 180,50,'Play','0xffffff')
@@ -86,6 +88,7 @@ export default class Game extends Phaser.Scene {
             this.playButton.setVisible(false);
             this.pauseButton.setVisible(true);
             this.isPause = false;
+            this.nodeManager.updateIsPauseFalse();
         });
         
         // Load to button
@@ -171,7 +174,6 @@ export default class Game extends Phaser.Scene {
         this.judgementText = null;
         this.nodesClass = null;
         this.nodes = null;
-        
-
+        this.isPause = false;   
     }
 }
