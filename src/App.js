@@ -29,13 +29,13 @@ function App() {
       scene: [ 
         //Page
         // Loading, 
-        // Main, Game, Result, 
+        Main, Game, Result, 
         //Interface
         // GameUI, GameInfoUI,
         //Component
         // HomeButton, PauseButton, SoundBar, RestartButton, KeyboardEvent
-        MainScene,
-        DialogScene,
+        // MainScene,
+        // DialogScene,
 
       ],
       plugins: {
