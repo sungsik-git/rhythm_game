@@ -38,7 +38,7 @@ export default class Main extends Phaser.Scene {
 
     this.musics = [
       //Music('title', 'artist', 'thumbnailPath', 'musicPath', 'nodeFilePath')
-      new Music('Attention', 'Charlie Puth', 'game2_thumbnail', shortSample, game1_node),
+      new Music('Attention', 'Charlie Puth', 'game2_thumbnail', game2_music, game1_node),
       new Music('Dangerously', 'Charlie Puth', 'game3_thumbnail', game3_music, game2_node),
       new Music('Loser', 'Charlie Puth', 'game4_thumbnail', game4_music, game3_node),
       new Music('That’s not how this', 'Charlie Puth', 'game5_thumbnail', game5_music, game4_node),

@@ -14,6 +14,7 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './scenes/input/KeyboardEvent';
 import DialogScene from './test/DialogScene';
 import MainScene from './test/MainScene';
+import Test from './test/Test';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
       },
       scene: [ 
         //Page
-        // Loading, 
+        Loading, 
         Main, Game, Result, 
         //Interface
         // GameUI, GameInfoUI,
@@ -36,6 +37,7 @@ function App() {
         // HomeButton, PauseButton, SoundBar, RestartButton, KeyboardEvent
         // MainScene,
         // DialogScene,
+        // Test
 
       ],
       plugins: {

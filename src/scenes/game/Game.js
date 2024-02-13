@@ -146,7 +146,6 @@ export default class Game extends Phaser.Scene {
 
     update() {
         //drop the nodes
-
         if(!this.isPause){
             this.nodeManager.nodeSlider();
         
