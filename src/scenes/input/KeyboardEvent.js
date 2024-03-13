@@ -85,11 +85,11 @@ export default class KeyboardEvent{
             this.addScore(200)
             this.addCombo()
         } else if (distance <= 20) {
-            this.changeJudgementText("greate")
+            this.changeJudgementText("Great")
             this.addScore(150)
             this.addCombo()
         } else if (distance <= 30) {
-            this.changeJudgementText("good")
+            this.changeJudgementText("Good")
             this.addScore(100)
             this.addCombo()
         } else if (distance <= 40) {
