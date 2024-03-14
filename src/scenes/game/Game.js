@@ -72,10 +72,11 @@ export default class Game extends Phaser.Scene {
         this.pauseButton.on('pointerdown', () => {
             this.bgm.pause();
             this.pauseTime = this.bgm.seek;
-            this.pauseButton.setVisible(false);
-            this.playButton.setVisible(true);
+            // this.pauseButton.setVisible(false);
+            // this.playButton.setVisible(true);
             this.isPause = true;
             this.nodeManager.updateIsPauseTrue();
+            this.scene.launch('PauseModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
         });
 
         this.playButton = this.add.text( this.game.config.width - 180,50,'Play','0xffffff')

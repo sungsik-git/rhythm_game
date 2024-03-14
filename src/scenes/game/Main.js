@@ -124,7 +124,7 @@ export default class Main extends Phaser.Scene {
     this.currentMusicTitle = this.add.text(
       this.game.config.width / 2,
       this.game.config.height * 4 / 5,
-      this.musics[this.currentIndex].title,
+      this.musics[this.currentIndex].title + " - " + this.musics[this.currentIndex].artist,
       {
           fill: '#7751e0',
           backgroundColor: '#e7e4f0',
@@ -149,7 +149,7 @@ export default class Main extends Phaser.Scene {
         this.scaleImage(target);
 
         // 텍스트 값 변경
-        this.currentMusicTitle.setText(this.musics[this.currentIndex].title);
+        this.currentMusicTitle.setText(this.musics[this.currentIndex].title + " - " + this.musics[this.currentIndex].artist);
         const textWidth = this.currentMusicTitle.getBounds().width;
         this.currentMusicTitle.setX(this.game.config.width / 2 - textWidth / 2);
       },
