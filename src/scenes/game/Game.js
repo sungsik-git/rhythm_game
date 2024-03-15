@@ -72,29 +72,27 @@ export default class Game extends Phaser.Scene {
         this.pauseButton.on('pointerdown', () => {
             this.bgm.pause();
             this.pauseTime = this.bgm.seek;
-            // this.pauseButton.setVisible(false);
-            // this.playButton.setVisible(true);
             this.isPause = true;
             this.nodeManager.updateIsPauseTrue();
             this.scene.launch('PauseModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
         });
 
-        this.playButton = this.add.text( this.game.config.width - 180,50,'Play','0xffffff')
-        .setInteractive()
-        .setVisible(false);
-
-        this.playButton.on('pointerdown', () => {
-            this.bgm.play({ seek: this.pauseTime });
-            this.pauseTime = this.bgm.seek;
-            this.playButton.setVisible(false);
-            this.pauseButton.setVisible(true);
-            this.isPause = false;
-            this.nodeManager.updateIsPauseFalse();
-        });
         
         // Load to button
-        this.homeButton = new HomeButton(this, this.bgm, this.score);
-        this.homeButton.loadHomeButton();
+
+        this.HomeButton = this.add.text(this.game.config.width - 100,50,'Home!!',{ fill: '#ffffff' }).setInteractive()
+
+        this.HomeButton.on('pointerdown', () => {
+            this.bgm.pause();
+            this.pauseTime = this.bgm.seek;
+            this.isPause = true;
+            this.nodeManager.updateIsPauseTrue();
+            this.scene.launch('HomeModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
+        })
+
+
+        // this.homeButton = new HomeButton(this, this.bgm, this.score);
+        // this.homeButton.loadHomeButton();
         this.restartButton = new RestartButton(this, this.bgm, this.nodes);
         this.restartButton.loadRestartButton();
        

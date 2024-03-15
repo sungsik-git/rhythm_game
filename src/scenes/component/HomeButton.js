@@ -22,6 +22,8 @@ export default class HomeButton {
                     if (this.scene.cache && this.scene.cache.audio) {
                         this.scene.cache.audio.remove('bgm');
                     }
+
+                    this.scene.launch('HomeModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
                 }
 
                 this.scene.scene.start('main');

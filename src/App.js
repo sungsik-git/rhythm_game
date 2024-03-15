@@ -13,6 +13,8 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './scenes/input/KeyboardEvent';
 import Test from './test/Test';
 import PauseModal from './scenes/component/PauseModal';
+import HomeModal from './scenes/component/HomeModal';
+import RestartModal from './scenes/component/RestartModal';
 
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
         //Interface
         GameUI, GameInfoUI,
         //Component
-        HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal,
+        HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal, HomeModal, RestartModal,
 
 
         //Test

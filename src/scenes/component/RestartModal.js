@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class PauseModal extends Phaser.Scene{
+export default class RestartModal extends Phaser.Scene{
     init(data){
         this.scene = data.scene;
         this.bgm = data.bgm
@@ -9,14 +9,14 @@ export default class PauseModal extends Phaser.Scene{
     }
 
     constructor(){
-        super('PauseModal');
+        super('RestartModal');
     }
 
     create(){
         this.add.rectangle(400, 300, 400, 200, 0x666666);
 
         // 텍스트 추가
-        this.add.text(400, 250, "일시정지 \n\n 게임을 이어서 하시겠습니까?", { fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
+        this.add.text(400, 250, "게임을 재시작하시겠습니까?", { fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
 
         // 닫기 버튼
         const closeButton = this.add.text(400, 350, '닫기', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5).setInteractive();
