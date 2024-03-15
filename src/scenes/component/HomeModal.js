@@ -21,8 +21,6 @@ export default class HomeModal extends Phaser.Scene{
         const closeButton = this.add.text(400, 350, '닫기', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5).setInteractive();
 
         closeButton.on('pointerdown', () => {            
-            this.scene.resume('game')
-
             const gameScene = this.scene.get('game');
             gameScene.isPause= false;
             gameScene.nodeManager.updateIsPauseFalse();

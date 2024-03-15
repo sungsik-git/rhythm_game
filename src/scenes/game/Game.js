@@ -100,22 +100,22 @@ export default class Game extends Phaser.Scene {
             this.scene.launch('RestartModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager});
         })
        
-    // Menu Button
-    this.buttonsVisible = false; 
+        // Menu Button
+        this.buttonsVisible = false; 
 
-    this.pauseButton.setVisible(this.buttonsVisible);
-    this.homeButton.setVisible(this.buttonsVisible);
-    this.restartButton.setVisible(this.buttonsVisible);
+        this.pauseButton.setVisible(this.buttonsVisible);
+        this.homeButton.setVisible(this.buttonsVisible);
+        this.restartButton.setVisible(this.buttonsVisible);
 
-    this.menuButton = this.add.text(this.game.config.width - 100, 50, 'menu!', { fill: '#ffffff' }).setInteractive();
-    this.menuButton.on('pointerdown', () => {
-    this.buttonsVisible = !this.buttonsVisible;
-    
-    this.pauseButton.setVisible(this.buttonsVisible);
-    this.homeButton.setVisible(this.buttonsVisible);
-    this.restartButton.setVisible(this.buttonsVisible);
-});
-
+        this.menuButton = this.add.text(this.game.config.width - 100, 50, 'menu!', { fill: '#ffffff' }).setInteractive();
+        this.menuButton.on('pointerdown', () => {
+            this.buttonsVisible = !this.buttonsVisible;
+            
+            this.pauseButton.setVisible(this.buttonsVisible);
+            this.homeButton.setVisible(this.buttonsVisible);
+            this.restartButton.setVisible(this.buttonsVisible);
+        });
+            
 
 
         // load to keyboard event
@@ -156,11 +156,15 @@ export default class Game extends Phaser.Scene {
             this.time.addEvent({
                 delay: 3000,
                 callback: () => {
+                    this.scene.stop();
                     this.scene.start('result', { score: this.score, musicInfo: this.musicInfo, combo: this.combo, judgementText: this.judgementText });
                 },
                 callbackScope: this
             });
         });
+
+        this.game.events.on('blur', this.onBlur, this);
+        this.game.events.on('focus', this.onFocus, this);
 
 
     }
@@ -175,6 +179,12 @@ export default class Game extends Phaser.Scene {
             this.updateScore();
         }   
     }
+
+    shutdown() {
+        this.game.events.off('blur', this.onBlur, this);
+        this.game.events.off('focus', this.onFocus, this);
+    }
+    
 
     updateJudgementText(){
         this.judgementTextObject.setText(this.judgementText);
@@ -195,5 +205,22 @@ export default class Game extends Phaser.Scene {
         this.nodesClass = null;
         this.nodes = null;
         this.isPause = false;   
+    }
+
+    onBlur(){
+        window.onblur = () => {
+            this.pauseTime = this.bgm.seek;
+            this.scene.launch('FocusoutModal')
+            this.scene.pause();
+            this.bgm.pause()
+        }
+    }
+
+    onFocus(){
+        window.onfocus = () => {
+            this.scene.stop('FocusoutModal');
+            this.bgm.play({ seek: this.pauseTime });
+            this.scene.resume();
+        }
     }
 }

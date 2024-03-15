@@ -15,6 +15,7 @@ import Test from './test/Test';
 import PauseModal from './scenes/component/PauseModal';
 import HomeModal from './scenes/component/HomeModal';
 import RestartModal from './scenes/component/RestartModal';
+import FocusoutModal from './scenes/component/FocusoutModal';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         //Interface
         GameUI, GameInfoUI,
         //Component
-        HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal, HomeModal, RestartModal,
+        HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal, HomeModal, RestartModal, FocusoutModal,
 
 
         //Test
