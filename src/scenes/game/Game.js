@@ -80,21 +80,28 @@ export default class Game extends Phaser.Scene {
         
         // Load to button
 
-        this.HomeButton = this.add.text(this.game.config.width - 100,50,'Home!!',{ fill: '#ffffff' }).setInteractive()
+        this.homeButton = this.add.text(this.game.config.width - 100,50,'Home!!',{ fill: '#ffffff' }).setInteractive()
 
-        this.HomeButton.on('pointerdown', () => {
+        this.homeButton.on('pointerdown', () => {
             this.bgm.pause();
             this.pauseTime = this.bgm.seek;
             this.isPause = true;
             this.nodeManager.updateIsPauseTrue();
-            this.scene.launch('HomeModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
+            this.scene.launch('HomeModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager});
         })
 
+        this.restartButton = this.add.text(this.game.config.width - 300,
+            50,
+            'Restart!!',
+            { fill: '#ffffff' }).setInteractive()
 
-        // this.homeButton = new HomeButton(this, this.bgm, this.score);
-        // this.homeButton.loadHomeButton();
-        this.restartButton = new RestartButton(this, this.bgm, this.nodes);
-        this.restartButton.loadRestartButton();
+        this.restartButton.on('pointerdown', () => {
+            this.bgm.pause();
+            this.pauseTime = this.bgm.seek;
+            this.isPause = true;
+            this.nodeManager.updateIsPauseTrue();
+            this.scene.launch('RestartModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager});
+        })
        
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);

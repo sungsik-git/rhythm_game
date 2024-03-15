@@ -5,7 +5,6 @@ export default class RestartModal extends Phaser.Scene{
         this.scene = data.scene;
         this.bgm = data.bgm
         this.nodeManager = data.nodeManager;
-        this.pauseTime = data.pauseTime;
     }
 
     constructor(){
@@ -22,14 +21,24 @@ export default class RestartModal extends Phaser.Scene{
         const closeButton = this.add.text(400, 350, '닫기', { fontSize: '20px', fill: '#fff' }).setOrigin(0.5).setInteractive();
 
         closeButton.on('pointerdown', () => {
-            this.bgm.play({ seek: this.pauseTime });
             const gameScene = this.scene.get('game');
 
             gameScene.isPause= false;
             gameScene.nodeManager.updateIsPauseFalse();
 
-            this.scene.stop('PauseModal');
-            this.scene.resume('game')
+            this.scene.stop('RestartModal');
+            // this.scene.resume('game')
+
+
+            this.bgm.stop();
+                this.bgm.destroy();
+
+                if (this.scene.cache && this.scene.cache.audio) {
+                    this.scene.cache.audio.remove('bgm');
+                }
+
+                this.nodeManager.clearNodes();
+                this.scene.restart();
         });
     }
 }

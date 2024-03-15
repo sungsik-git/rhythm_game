@@ -5,7 +5,6 @@ export default class HomeModal extends Phaser.Scene{
         this.scene = data.scene;
         this.bgm = data.bgm
         this.nodeManager = data.nodeManager;
-        this.pauseTime = data.pauseTime;
     }
 
     constructor(){
