@@ -23,12 +23,11 @@ export default class Result extends Phaser.Scene{
         this.bgm = this.sound.add('resultBGM', {loop: true});
         this.bgm.play();
 
+        this.add.text(500, 100, "COMPLETE", {fill : '#fff', fontSize : '50px'})
+        this.title = this.add.text(450, 300, this.musicInfo.title, {fill: '#fff', fontSize : '40px'});
+        this.artist = this.add.text(450, 400, this.musicInfo.artist, {fill: '#fff', fontSize : '32px'});
 
-        this.scoreObject = this.add.text(100,100,this.score,{fill:'#ffffff'});
-        this.comboObject = this.add.text(100,200,this.combo, '0xffffff');
-        this.judgementTextObject = this.add.text(100,300,this.judgementText, '0xffffff');
-
-        this.title = this.add.text(500, 600, this.musicInfo.title, {fill: '#fff'})
+        this.scoreObject = this.add.text(450,450,"Score!! : " + this.score,{fill:'#ffffff', fontSize : '32px'});
 
         // Load to button
         this.homeButton = this.add.text(this.game.config.width - 200,50,'Home!!',{ fill: '#ffffff' }).setInteractive();
@@ -70,13 +69,6 @@ export default class Result extends Phaser.Scene{
     }
 
     update(){
-        this.scoreObject.setText(this.score);
-        this.comboObject.setText(this.combo);
-        this.judgementTextObject.setText(this.judgementText);
-    }
 
-    resetGameState(){
-        
     }
-
 }

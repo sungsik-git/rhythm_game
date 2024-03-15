@@ -97,7 +97,7 @@ export default class Game extends Phaser.Scene {
             this.pauseTime = this.bgm.seek;
             this.isPause = true;
             this.nodeManager.updateIsPauseTrue();
-            this.scene.launch('RestartModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager});
+            this.scene.launch('RestartModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek});
         })
        
         // Menu Button
