@@ -23,17 +23,17 @@ export default class HomeModal extends Phaser.Scene{
         closeButton.on('pointerdown', () => {            
             this.scene.resume('game')
 
+            const gameScene = this.scene.get('game');
+            gameScene.isPause= false;
+            gameScene.nodeManager.updateIsPauseFalse();
             if(this.bgm){
                 this.bgm.stop();
                 this.bgm.destroy();
 
-                if (this.scene.cache && this.scene.cache.audio) {
-                    this.scene.cache.audio.remove('bgm');
+                if (gameScene.cache && gameScene.cache.audio) {
+                    gameScene.cache.audio.remove('bgm');
                 }
             }
-            const gameScene = this.scene.get('game');
-            gameScene.isPause= false;
-            gameScene.nodeManager.updateIsPauseFalse();
             this.scene.stop('HomeModal');
             this.scene.start('main');
         });

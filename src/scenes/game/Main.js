@@ -100,12 +100,18 @@ export default class Main extends Phaser.Scene {
       this.currentIndex = (this.currentIndex + 1) % this.musics.length;
       this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width / 2);
       this.slideBackground(currentBackground, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width);
+      if(playButton.setVisible(true)){
+        playButton.setVisible(false)
+      };
     }
 
     const prevThumbnail = () => {
       this.currentIndex = (this.currentIndex - 1 + this.musics.length) % this.musics.length;
       this.slideThumbnail(currentThumbnail, this.musics[this.currentIndex].thumbnailPath, this.game.config.width / 2);
       this.slideBackground(currentBackground, this.musics[this.currentIndex].thumbnailPath, -this.game.config.width);
+      if(playButton.setVisible(true)){
+        playButton.setVisible(false)
+      };
     }; 
 
     // thumbnail click시 해당되는 곡의 플레이 화면으로 이동
@@ -113,12 +119,19 @@ export default class Main extends Phaser.Scene {
       this.loadScene(this.currentIndex);
     }
 
-    
 
     // button event 설정
     nextButton.on('pointerdown', nextThumbnail);
     prevButton.on('pointerdown', prevThumbnail);
-    currentThumbnail.setInteractive().on('pointerdown', onThumbnailClick);
+    currentThumbnail.setInteractive().on('pointerdown', () =>{
+      playButton.setVisible(true)
+    });
+
+    //Play Button
+    const playButton = this.add.text(500,700,"Let's play!", {fill:'#fff', fontSize:'28px'})
+    .setVisible(false)
+
+    playButton.setInteractive().on('pointerdown', onThumbnailClick);
 
     // 출력되는 음악의 제목을 출력
     this.currentMusicTitle = this.add.text(
