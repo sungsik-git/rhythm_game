@@ -11,8 +11,8 @@ import RestartButton from './scenes/component/RestartButton';
 import Result from './scenes/game/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './scenes/input/KeyboardEvent';
-import Test from './test/Test';
 import PauseModal from './scenes/component/PauseModal';
+import Test from './scenes/test/Test';
 import HomeModal from './scenes/component/HomeModal';
 import RestartModal from './scenes/component/RestartModal';
 import FocusoutModal from './scenes/component/FocusoutModal';
@@ -30,7 +30,7 @@ function App() {
       },
       scene: [ 
         //Page
-        Loading, 
+        // Loading, 
         Main, Game, Result, 
         //Interface
         GameUI, GameInfoUI,

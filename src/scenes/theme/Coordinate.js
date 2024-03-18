@@ -11,6 +11,10 @@ export default class Coordinate {
             keyJ: 250,
             keyK: 375,
 
+            centerRouteKeyD: 60,
+            centerRouteKeyF: 185, 
+            centerRouteKeyJ: 310,
+            centerRouteKeyK: 435,
         };
 
         this.yPosit = {

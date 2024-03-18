@@ -7,8 +7,8 @@ import RestartButton from "../component/RestartButton";
 import PauseButton from "../component/PauseButton";
 import GameInfoUI from "../interface/GameInfoUI";
 import RouteOfKey from "../interface/RouteOfKey";
+import effect from "../../asset/img/effect.png";
 
-import BlueFlare from "../../asset/img/blueFlare.jpeg";
 
 export default class Game extends Phaser.Scene {
     init(data) {
@@ -35,6 +35,7 @@ export default class Game extends Phaser.Scene {
         this.coordinate = new Coordinate();        
 
         this.isPause = false;
+        this.isGameStarted = false;
     }
 
     preload() {
@@ -47,11 +48,18 @@ export default class Game extends Phaser.Scene {
         // Load the node file
         this.load.text('nodeFile', this.musicInfo.nodeFilePath);
 
-        // Load the Flare img
-        // this.load.image('blueFlare', BlueFlare);
+        // Load the effec img
+        this.load.image('effect', effect)
     }
 
     create() {
+        // Countdown
+        this.countdownText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, '3', {
+            fontSize: '64px',
+            fill: '#FFFFFF'
+        }).setOrigin(0.5, 0.5);
+        this.startCountdown(3);
+
         // Load the nodes
         let nodeFileKey = 'nodeFile';
         if (this.cache.text.has(nodeFileKey)) {
@@ -61,9 +69,7 @@ export default class Game extends Phaser.Scene {
         this.nodeManager = new NodeManager(this, this.nodeFile, this.isPause);
         this.nodesClass = this.nodeManager.makeClassFromText();
         this.nodes = this.nodeManager.makeRectFromClass();
-
         this.bgm = this.sound.add('bgm', { loop: false });
-        this.bgm.play();
         this.pauseTime = 0;
 
         this.pauseButton = this.add.text( this.game.config.width - 280,50,'Pause','0xffffff')
@@ -171,7 +177,7 @@ export default class Game extends Phaser.Scene {
 
     update() {
         //drop the nodes
-        if(!this.isPause){
+        if(!this.isPause && this.isGameStarted){
             this.nodeManager.nodeSlider();
         
             this.updateJudgementText();
@@ -223,4 +229,29 @@ export default class Game extends Phaser.Scene {
             this.scene.resume();
         }
     }
-}
+
+    startCountdown(seconds) {
+        let counter = seconds;
+
+        // 타이머 이벤트 생성
+        const timerEvent = this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                counter--;
+                this.countdownText.setText(counter.toString());
+                if (counter === 0) {
+                    timerEvent.remove(); 
+                    this.startGame();
+                    this.countdownText.setVisible(false)
+                }
+            },
+            callbackScope: this,
+            loop: true // 반복 설정
+        });
+    }
+
+    startGame(){
+        this.bgm.play();
+        this.isGameStarted = true;
+    }
+} 

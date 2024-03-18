@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import Coordinate from "../theme/Coordinate";
 import NodeManager from "../node/NodeManager";
 
+import effect from "../../asset/img/effect.png";
+
 export default class KeyboardEvent{
 
     coordinate = new Coordinate();
@@ -40,7 +42,7 @@ export default class KeyboardEvent{
     
         if (judgmentNodes.length > 0) { 
             judgmentNodes.forEach(node => {
-                this.judgeNode(node);
+                this.judgeNode(node, key);
             });
             this.nodeManager.removeNode(judgmentNodes);
         }
@@ -78,8 +80,9 @@ export default class KeyboardEvent{
             route.setFillStyle(this.coordinate.color.nodeRoute); 
         }
     }
-    judgeNode(node) {
+    judgeNode(node, key) {
         const distance = Math.abs(this.coordinate.yPosit.judgementLine - node.y);
+        this.showEffect(key);
         if (distance <= 10) {
             this.changeJudgementText("Perfect")
             this.addScore(200)
@@ -122,5 +125,27 @@ export default class KeyboardEvent{
 
     resetCombo(){
         this.scene.combo = 0;
+    }
+
+    showEffect(key) {
+        const upperKey = key.toUpperCase();
+        const effect = this.scene.add.image(this.coordinate.xPosit[`centerRouteKey${upperKey}`], this.coordinate.yPosit.judgementLine, 'effect')
+            .setAlpha(1)
+            .setDisplaySize(this.coordinate.width.node,this.coordinate.height.node);
+        effect.setVisible(true);
+        this.animationEffect(effect);
+    }
+    
+
+    animationEffect(effect){
+        this.scene.tweens.add({
+            targets: effect,
+            alpha: 0,
+            duration: 300,
+            ease: 'Linear',
+            onComplete: () => {
+                effect.setVisible(false);
+            }
+        });
     }
 }
