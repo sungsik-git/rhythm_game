@@ -2,8 +2,6 @@ import Phaser from "phaser";
 import Coordinate from "../theme/Coordinate";
 import NodeManager from "../node/NodeManager";
 
-import effect from "../../asset/img/effect.png";
-
 export default class KeyboardEvent{
 
     coordinate = new Coordinate();
@@ -116,6 +114,9 @@ export default class KeyboardEvent{
     }
 
     addScore(score){
+        if(this.scene.isFever){
+            this.scene.score += score * 5;
+        }
         this.scene.score += score;
     }
 

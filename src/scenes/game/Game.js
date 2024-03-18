@@ -36,6 +36,7 @@ export default class Game extends Phaser.Scene {
 
         this.isPause = false;
         this.isGameStarted = false;
+        this.isFever = false;
     }
 
     preload() {
@@ -152,11 +153,17 @@ export default class Game extends Phaser.Scene {
 
 
         // show judgement text
-        this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#000000' }).setOrigin(0.5);
-        this.comboObject = this.add.text(100, 200, this.combo, {fill: '#000000'}).setOrigin(0.5);
+        this.judgementTextObject = this.add.text(100,100,this.judgementText,{ fill: '#000000' })
+            .setOrigin(0.5);
+        this.comboObject = this.add.text(100, 200, this.combo, {fill: '#000000'})
+            .setOrigin(0.5);
         this.scoreObject = this.add.text(100, 730, this.score, {fill: '#000000'})
-        .setOrigin(0.5)
-        .setFontSize(40);
+            .setOrigin(0.5)
+            .setFontSize(40);
+        this.feverObject = this.add.text(100, 300, "FEVER!", {fill: '#FF7F50'})
+            .setOrigin(0.5)
+            .setFontSize(30)
+            .setVisible(false);
 
         this.bgm.on('complete', () => {
             this.time.addEvent({
@@ -183,6 +190,7 @@ export default class Game extends Phaser.Scene {
             this.updateJudgementText();
             this.updateCombo();
             this.updateScore();
+            this.setFever();
         }   
     }
 
@@ -198,6 +206,12 @@ export default class Game extends Phaser.Scene {
 
     updateCombo(){
         this.comboObject.setText(this.combo);
+        
+        if(this.combo > 4){
+            this.isFever = true;
+        }else{
+            this.isFever = false;
+        }
     }
 
     updateScore(){
@@ -253,5 +267,13 @@ export default class Game extends Phaser.Scene {
     startGame(){
         this.bgm.play();
         this.isGameStarted = true;
+    }
+
+    setFever(){
+        if(this.isFever){
+            this.feverObject.setVisible(true);
+        }else{
+            this.feverObject.setVisible(false);
+        }
     }
 } 
