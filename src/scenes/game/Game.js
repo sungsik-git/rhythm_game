@@ -207,7 +207,7 @@ export default class Game extends Phaser.Scene {
     updateCombo(){
         this.comboObject.setText(this.combo);
         
-        if(this.combo > 4){
+        if(this.combo > 10){
             this.isFever = true;
         }else{
             this.isFever = false;

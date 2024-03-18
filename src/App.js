@@ -30,7 +30,7 @@ function App() {
       },
       scene: [ 
         //Page
-        // Loading, 
+        Loading, 
         Main, Game, Result, 
         //Interface
         GameUI, GameInfoUI,
