@@ -20,9 +20,13 @@ import FocusoutModal from './scenes/component/FocusoutModal';
 
 function App() {
   useEffect(() => {
+    const gameWidth = isMobile() ? window.innerWidth: 1200;
+    const gameheight = isMobile() ? window.innerHeight: 1080;
+
     const config = {
       type: Phaser.AUTO,
-      width:1200,
+      width: gameWidth,
+      height:gameheight,
       // width: 1920,
       physics: {
         default: 'arcade',
@@ -67,8 +71,13 @@ function App() {
       game.destroy(true);
     };
   }, []);
- 
-  return <div />;
+  
+  return <div style={{ width: '100%', height: '100%' }} id="game-container" />;
+}
+
+
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 export default App;
