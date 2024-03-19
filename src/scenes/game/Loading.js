@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import bg from "../../asset/img/loadingBackground2.jpg";
 import Coordinate from "../theme/Coordinate";
-import ValidateDevice from "../theme/ValideteDevice";
+import VaildateDevice from "./ValidateDevice";
 
 export default class Loading extends Phaser.Scene {
   constructor() {
@@ -11,23 +11,12 @@ export default class Loading extends Phaser.Scene {
   preload() {
     //background
     this.load.image('bg',bg);
-
-    // this.validate = new ValidateDevice(this);
-    // this.validate.vaildateDevice();
   }
 
   create() {
-    /* check divece */
-    let device = this.sys.game.device;
-
-    if(device.os.desktop){
-      console.log("desktop");
-    }else{
-      console.log("not desktop");
-    }
-
-
-    const coordinate = new Coordinate()
+    const validate = new VaildateDevice(this);
+    validate.vaildateDevice();
+    const coordinate = new Coordinate();
 
     const bgImg = this.add.image(0, 0, 'bg').setOrigin(0);
     bgImg.displayWidth = coordinate.xPosit.width;

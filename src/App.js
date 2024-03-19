@@ -20,8 +20,8 @@ import FocusoutModal from './scenes/component/FocusoutModal';
 
 function App() {
   useEffect(() => {
-    const gameWidth = isMobile() ? window.innerWidth: 1200;
-    const gameheight = isMobile() ? window.innerHeight: 1080;
+    const gameWidth = isMobile() ? window.innerWidth : 1200;
+    const gameheight = isMobile() ? window.innerHeight : 1080;
 
     const config = {
       type: Phaser.AUTO,
@@ -72,7 +72,7 @@ function App() {
     };
   }, []);
   
-  return <div style={{ width: '100%', height: '100%' }} id="game-container" />;
+  return <div style={{ width: '100%', height: '60%' }} id="game-container" />;
 }
 
 
