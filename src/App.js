@@ -26,7 +26,7 @@ function App() {
     const config = {
       type: Phaser.AUTO,
       width: gameWidth,
-      height:gameheight,
+      // height:gameheight,
       // width: 1920,
       physics: {
         default: 'arcade',
