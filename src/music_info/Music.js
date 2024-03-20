@@ -1,4 +1,4 @@
-class Music {
+export default class Music {
     static id = 0;
 
     constructor(title, artist, thumbnailPath, musicPath, nodeFilePath){
@@ -10,5 +10,3 @@ class Music {
         this.nodeFilePath = nodeFilePath;
     }
 }
-
-export default Music;

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import bg from "../../asset/img/loadingBackground2.jpg";
+import bg from "../asset/img/loadingBackground2.jpg";
 import Coordinate from "../theme/Coordinate";
 import VaildateDevice from "../theme/ValidateDevice";
 

@@ -7,7 +7,7 @@ import RestartButton from "../component/RestartButton";
 import PauseButton from "../component/PauseButton";
 import GameInfoUI from "../interface/GameInfoUI";
 import RouteOfKey from "../interface/RouteOfKey";
-import effect from "../../asset/img/effect.png";
+import effect from "../asset/img/effect.png";
 import VaildateDevice from "../theme/ValidateDevice";
 import MobileTouchEvent from "../input/MobileTouchEvent";
 

@@ -1,32 +1,32 @@
 import Phaser from "phaser";
 
 //썸네일 이미지 추가
-import game1_thumbnail from "../../asset/img/game1_thumbnail.jpg";
-import game2_thumbnail from "../../asset/img/game2_thumbnail.jpeg";
-import game3_thumbnail from "../../asset/img/game3_thumbnail.jpeg";
-import game4_thumbnail from "../../asset/img/game4_thumbnail.jpeg";
-import game5_thumbnail from "../../asset/img/game5_thumbnail.png";
-import game6_thumbnail from "../../asset/img/game6_thumbnail.jpeg";
-import game7_thumbnail from "../../asset/img/game7_thumbnail.jpeg";
+import game1_thumbnail from "../asset/img/game1_thumbnail.jpg";
+import game2_thumbnail from "../asset/img/game2_thumbnail.jpeg";
+import game3_thumbnail from "../asset/img/game3_thumbnail.jpeg";
+import game4_thumbnail from "../asset/img/game4_thumbnail.jpeg";
+import game5_thumbnail from "../asset/img/game5_thumbnail.png";
+import game6_thumbnail from "../asset/img/game6_thumbnail.jpeg";
+import game7_thumbnail from "../asset/img/game7_thumbnail.jpeg";
 
 //음악 파일 추가
-import game1_music from '../../asset/music/Dome_before30mins_231206.wav';
-import game2_music from '../../asset/music/attention.mp3';
-import game3_music from '../../asset/music/dangerously.mp3';
-import game4_music from '../../asset/music/loser.mp3';
-import game5_music from '../../asset/music/that’s_not_how_this-works.mp3';
-import game6_music from '../../asset/music/thats_hilarious.mp3';
-import game7_music from '../../asset/music/see_you_again.mp3';
-import shortSample from '../../asset/music/short_sample.mp3';
+import game1_music from '../asset/music/Dome_before30mins_231206.wav';
+import game2_music from '../asset/music/attention.mp3';
+import game3_music from '../asset/music/dangerously.mp3';
+import game4_music from '../asset/music/loser.mp3';
+import game5_music from '../asset/music/that’s_not_how_this-works.mp3';
+import game6_music from '../asset/music/thats_hilarious.mp3';
+import game7_music from '../asset/music/see_you_again.mp3';
+import shortSample from '../asset/music/short_sample.mp3';
 
 //노트 파일 추가
-import game1_node from '../../asset/textNode/SampleNode1.txt';
-import game2_node from '../../asset/textNode/SampleNode2.txt';
-import game3_node from '../../asset/textNode/SampleNode3.txt';
-import game4_node from '../../asset/textNode/SampleNode4.txt';
-import game5_node from '../../asset/textNode/SampleNode5.txt';
-import game6_node from '../../asset/textNode/SampleNode6.txt';
-import game7_node from '../../asset/textNode/SampleNode7.txt';
+import game1_node from '../asset/textNode/SampleNode1.txt';
+import game2_node from '../asset/textNode/SampleNode2.txt';
+import game3_node from '../asset/textNode/SampleNode3.txt';
+import game4_node from '../asset/textNode/SampleNode4.txt';
+import game5_node from '../asset/textNode/SampleNode5.txt';
+import game6_node from '../asset/textNode/SampleNode6.txt';
+import game7_node from '../asset/textNode/SampleNode7.txt';
 
 import Music from "../music_info/Music";
 

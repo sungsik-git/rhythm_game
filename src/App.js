@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import Phaser from 'phaser';
-import Loading from './scenes/game/Loading';
-import Game from './scenes/game/Game';
-import HomeButton from './scenes/component/HomeButton';
-import GameUI from './scenes/interface/GameUI';
-import GameInfoUI from './scenes/interface/GameInfoUI';
-import PauseButton from './scenes/component/PauseButton';
-import Main from './scenes/game/Main';
-import RestartButton from './scenes/component/RestartButton';
-import Result from './scenes/game/Result';
+import Loading from './scenes/Loading'
+import Game from './scenes/Game';
+import HomeButton from './component/HomeButton';
+import GameUI from './interface/GameUI';
+import GameInfoUI from './interface/GameInfoUI';
+import PauseButton from './component/PauseButton';
+import Main from './scenes/Main';
+import RestartButton from './component/RestartButton';
+import Result from './scenes/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import KeyboardEvent from './scenes/input/KeyboardEvent';
-import PauseModal from './scenes/component/PauseModal';
-import Test from './scenes/test/Test';
-import HomeModal from './scenes/component/HomeModal';
-import RestartModal from './scenes/component/RestartModal';
-import FocusoutModal from './scenes/component/FocusoutModal';
+import KeyboardEvent from './input/KeyboardEvent';
+import PauseModal from './component/PauseModal';
+import Test from './test/Test';
+import HomeModal from './component/HomeModal';
+import RestartModal from './component/RestartModal';
+import FocusoutModal from './component/FocusoutModal';
 
 
 function App() {
