@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import bg from "../../asset/img/loadingBackground2.jpg";
 import Coordinate from "../theme/Coordinate";
-import VaildateDevice from "./ValidateDevice";
+import VaildateDevice from "../theme/ValideteDevice";
 
 export default class Loading extends Phaser.Scene {
   constructor() {

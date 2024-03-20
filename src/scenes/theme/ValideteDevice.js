@@ -1,12 +1,13 @@
-// export default class ValidateDevice extneds{
-    
-//     vaildateDevice(scene) {
-//         let device = scene.sys.game.device;
+export default class VaildateDevice{
+    constructor(scene){
+        this.scene = scene;
+    }
 
-//         if(device.os.desktop){
-//             console.log("desktop");
-//         }else {
-//             console.log("not desktop")
-//         }
-//     }
-// }
+    vaildateDevice(){
+        let device = this.scene.sys.game.device;
+
+        if(device.os.desktop){
+            console.log('desktop')
+        }
+    }
+}
