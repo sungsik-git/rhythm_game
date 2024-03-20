@@ -3,11 +3,14 @@ export default class VaildateDevice{
         this.scene = scene;
     }
 
-    vaildateDevice(){
+    isDevice(){
         let device = this.scene.sys.game.device;
+        var isMobile = false;
 
-        if(device.os.desktop){
-            console.log('desktop')
+        if(!device.os.desktop){
+            isMobile = true;
         }
+
+        return isMobile;
     }
 }

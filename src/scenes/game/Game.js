@@ -8,6 +8,8 @@ import PauseButton from "../component/PauseButton";
 import GameInfoUI from "../interface/GameInfoUI";
 import RouteOfKey from "../interface/RouteOfKey";
 import effect from "../../asset/img/effect.png";
+import VaildateDevice from "../theme/ValidateDevice";
+import MobileTouchEvent from "../input/MobileTouchEvent";
 
 
 export default class Game extends Phaser.Scene {
@@ -123,11 +125,18 @@ export default class Game extends Phaser.Scene {
             this.restartButton.setVisible(this.buttonsVisible);
         });
             
-
+        this.isMobile = false;
 
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
         this.keyboardEvent.loadGameKey();
+
+        const validateDevice = new VaildateDevice(this);
+        this.isMobile = validateDevice.isDevice()
+        if(this.isMobile){
+            const touchEvents = new MobileTouchEvent(this);
+            touchEvents.loadTouchScreen();
+        }
     
         // make to nodeRoute 
         ['D', 'F', 'J', 'K'].forEach(key => {

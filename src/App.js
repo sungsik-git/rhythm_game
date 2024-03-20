@@ -32,8 +32,11 @@ function App() {
         default: 'arcade',
         debug: true
       },
+      input:{
+        activePointers: 10,
+      },
       scene: [ 
-        //Page
+        // Page
         Loading, 
         Main, Game, Result, 
         //Interface
@@ -42,8 +45,8 @@ function App() {
         HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal, HomeModal, RestartModal, FocusoutModal,
 
 
-        //Test
-        // Test, PauseModal
+        // // Test
+        // Test,
       ],
       plugins: {
         scene: [

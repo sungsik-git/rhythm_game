@@ -149,4 +149,8 @@ export default class KeyboardEvent{
             }
         });
     }
+
+    testInput(){
+        this.scene.add.text(500, 500, "TEST", {fill : '#fff'})
+    }
 }

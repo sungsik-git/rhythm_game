@@ -1,48 +1,60 @@
 import Phaser from "phaser"
+import VaildateDevice from "../theme/ValidateDevice";
+import KeyboardEvent from "../input/KeyboardEvent";
 
-import effect from "../../asset/img/effect.png";
-import Coordinate from "../theme/Coordinate";
 
 export default class Test extends Phaser.Scene{
     constructor(){
         super('test');
-
-        this.coordinate = new Coordinate();
     }
 
     preload(){
-        this.load.image('effect', effect)
-
-
     }
 
     create(){
-        this.effect = this.add.image(200,100,'effect')
-            .setDisplaySize(this.coordinate.width.node, this.coordinate.height.node);
-        
-        this.effect.setVisible(false)
-        
 
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyD.on('down', () => {
-            this.effect.setVisible(true)
-            this.effect.alpha = 1;
-            
-            this.tweens.add({
-                targets: this.effect,
-                alpha: 0, // 투명도를 0으로 변경
-                duration: 1000, // 1000밀리초(1초) 동안 진행
-                ease: 'Linear', // 변화율(easing)은 일정하게
-                onComplete: () => {
-                    // 트윈이 완료되면 이미지를 완전히 숨김
-                    this.effect.setVisible(false);
-                }
-            });
-        });
+        var isMobile = false;
+
+        let vaildate = new VaildateDevice(this);
+        isMobile = vaildate.isDevice();
+
+        console.log(isMobile);
+
+        var setText = isMobile ? "Mobile" : "Desktop";
+
+        this.add.text(100, 100, setText, {fill : '#fff'})     
         
+        this.input.on('pointerdown', function(pointer){
+            let width = this.game.config.width;
+            let height = this.game.config.height;
+
+            let x = pointer.x;
+            let y = pointer.y;
+
+            if (y > height * 2 / 3) { // 화면 하단을 터치했을 경우에만 반응
+                if (x < width / 4) {
+                    // 첫 번째 영역 (D 키에 해당)
+                    this.pressKey('D');
+                } else if (x < width / 2) {
+                    // 두 번째 영역 (F 키에 해당)
+                    this.pressKey('F');
+                } else if (x < width * 3 / 4) {
+                    // 세 번째 영역 (J 키에 해당)
+                    this.pressKey('J');
+                } else {
+                    // 네 번째 영역 (K 키에 해당)
+                    this.pressKey('K');
+                }
+            }
+        }, this);
     }
 
     update(){
         
     }
+
+    pressKey(key){
+       this.add.text(500, 100, key, {fill : '#fff'}) 
+    }
+
 }

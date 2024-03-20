@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import bg from "../../asset/img/loadingBackground2.jpg";
 import Coordinate from "../theme/Coordinate";
-import VaildateDevice from "../theme/ValideteDevice";
+import VaildateDevice from "../theme/ValidateDevice";
 
 export default class Loading extends Phaser.Scene {
   constructor() {
@@ -14,14 +14,20 @@ export default class Loading extends Phaser.Scene {
   }
 
   create() {
-    const validate = new VaildateDevice(this);
-    validate.vaildateDevice();
+
+    this.isMoblie = false;
+    const isMoblieDevice = new VaildateDevice(this);
+    this.isMoblie = isMoblieDevice.isDevice();
+    console.log(this.isMoblie)
+
+    const fontSize = this.isMobile? '1px' : '50px'
     const coordinate = new Coordinate();
 
     const bgImg = this.add.image(0, 0, 'bg').setOrigin(0);
     bgImg.displayWidth = coordinate.xPosit.width;
     bgImg.displayHeight = coordinate.yPosit.height;
 
+    
     //Start Button
     this.clickToStart = this.add.text(
       coordinate.xPosit.center,
@@ -29,7 +35,7 @@ export default class Loading extends Phaser.Scene {
       'Click to Start'
     )
     .setFill("#fff")
-    .setFontSize(50)
+    .setFontSize(fontSize)
     .setOrigin(0.5)
     .setDepth(999)
     .setAlign('center')
