@@ -11,11 +11,11 @@ import RestartButton from './component/RestartButton';
 import Result from './scenes/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './input/KeyboardEvent';
-import PauseModal from './component/PauseModal';
+import PauseModal from './modal/PauseModal';
 import Test from './test/Test';
-import HomeModal from './component/HomeModal';
-import RestartModal from './component/RestartModal';
-import FocusoutModal from './component/FocusoutModal';
+import HomeModal from './modal/HomeModal';
+import RestartModal from './modal/RestartModal';
+import FocusoutModal from './modal/FocusoutModal';
 
 
 function App() {
@@ -55,7 +55,6 @@ function App() {
             plugin: RexUIPlugin,
             mapping: 'rexUI'
           }
-          // Add other plugins as needed
         ]
       },
       scale: {

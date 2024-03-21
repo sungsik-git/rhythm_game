@@ -260,6 +260,7 @@ export default class Game extends Phaser.Scene {
         const timerEvent = this.time.addEvent({
             delay: 1000,
             callback: () => {
+                this.isGameStarted = false;
                 counter--;
                 this.countdownText.setText(counter.toString());
                 if (counter === 0) {

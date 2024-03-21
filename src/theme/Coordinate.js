@@ -29,12 +29,14 @@ export default class Coordinate {
         this.width = {
             node: 120,
             judgementLine: 495,
+            modal: 700,
         }
 
         this.height = {
             node: 40,
             nodeRoute: 700,
             judgementLine: 4,
+            modal: 300,
         }
 
         this.color = {
@@ -42,7 +44,7 @@ export default class Coordinate {
             pressednodeRoute: 0x00CCFF,
             node: 0x00ffaa,
             judgementLine: 0xFF0066,
-            
+            modal: 0xFFFFCC,
         }
     }
 }
