@@ -9,7 +9,7 @@ export default class ModalUI{
         this.notice = notice;
         this.closeButton = closeButton;
         this.functionButton = functionButton;
-        
+        this.modalScene = this.scene.scene.scene;   
     }
 
     makeModal(){
@@ -33,8 +33,8 @@ export default class ModalUI{
 
     }
 
-    makeCloseButton(pauseTime){
-        if(this.closeButton){
+    makeCloseButton(pauseTime) {
+        if (this.closeButton) {
             const closeButton = this.scene.add.text(
                 this.coordinate.xPosit.center + 100,
                 this.coordinate.yPosit.center + 100,
@@ -43,19 +43,19 @@ export default class ModalUI{
             )
             .setOrigin(0.5)
             .setInteractive();
-
+    
             closeButton.on('pointerdown', () => {
                 this.scene.bgm.play({ seek: pauseTime });
-                const gameScene = this.scene.scene.get('game');
-    
-                gameScene.isPause= false;
+                const gameScene = this.modalScene.get('game');
+                gameScene.isPause = false;
                 gameScene.nodeManager.updateIsPauseFalse();
-    
-                this.scene.scene.stop(this.scene);
-                this.scene.scene.resume('game')
+        
+                this.modalScene.stop(this.scene); 
+                this.modalScene.resume('game'); 
             });
         }
     }
+    
 
     makeFunctionButton(){
         if(this.functionButton){
@@ -70,10 +70,10 @@ export default class ModalUI{
         }
     }
 
-    loadBackFunction(){
+    setupBackButton(){
         const backButton = this.makeFunctionButton()
         backButton.on('pointerdown', () => {            
-            const gameScene = this.scene.scene.get('game');
+            const gameScene = this.modalScene.get('game');
             gameScene.isPause= false;
             gameScene.nodeManager.updateIsPauseFalse();
             if(this.scene.bgm){
@@ -84,12 +84,29 @@ export default class ModalUI{
                     gameScene.cache.audio.remove('bgm');
                 }
             }
-            this.scene.scene.stop('HomeModal');
-            this.scene.scene.start('main');
+            this.modalScene.stop('HomeModal');
+            this.modalScene.start('main');
         });
     }
     
-    loadRestartFunction(){
-        
+    setupRestartButton(){
+        const restartButton = this.makeFunctionButton();
+        restartButton.on('pointerdown', () => {
+            const gameScene = this.modalScene.get('game');
+            gameScene.isPause= false;
+            gameScene.nodeManager.updateIsPauseFalse();
+
+            
+            this.scene.bgm.stop();
+            this.scene.bgm.destroy();
+            
+            if (gameScene.cache && gameScene.cache.audio) {
+                gameScene.cache.audio.remove('bgm');
+            }
+            
+            gameScene.nodeManager.clearNodes();
+            this.modalScene.stop('RestartModal');
+            this.modalScene.restart();
+        });
     }
 }

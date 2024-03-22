@@ -10,6 +10,7 @@ import RouteOfKey from "../interface/RouteOfKey";
 import effect from "../asset/img/effect.png";
 import VaildateDevice from "../theme/ValidateDevice";
 import MobileTouchEvent from "../input/MobileTouchEvent";
+import ModalManager from "../modal/ModalManager";
 
 
 export default class Game extends Phaser.Scene {
@@ -39,6 +40,7 @@ export default class Game extends Phaser.Scene {
         this.isPause = false;
         this.isGameStarted = false;
         this.isFever = false;
+        this.onModal = false;
     }
 
     preload() {
@@ -74,64 +76,17 @@ export default class Game extends Phaser.Scene {
         this.nodes = this.nodeManager.makeRectFromClass();
         this.bgm = this.sound.add('bgm', { loop: false });
         this.pauseTime = 0;
-
-        this.pauseButton = this.add.text( this.game.config.width - 280,50,'Pause','0xffffff')
-        .setInteractive();
-
-        this.pauseButton.on('pointerdown', () => {
-            this.bgm.pause();
-            this.pauseTime = this.bgm.seek;
-            this.isPause = true;
-            this.nodeManager.updateIsPauseTrue();
-            this.scene.launch('PauseModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek });
-        });
-
-        
-        // Load to button
-
-        this.homeButton = this.add.text(this.game.config.width - 200,50,'Home!!',{ fill: '#ffffff' }).setInteractive()
-
-        this.homeButton.on('pointerdown', () => {
-            this.bgm.pause();
-            this.pauseTime = this.bgm.seek;
-            this.isPause = true;
-            this.nodeManager.updateIsPauseTrue();
-            this.scene.launch('HomeModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager});
-        })
-
-        this.restartButton = this.add.text(this.game.config.width - 400,50,'Restart!!',{ fill: '#ffffff' }).setInteractive()
-
-        this.restartButton.on('pointerdown', () => {
-            this.bgm.pause();
-            this.pauseTime = this.bgm.seek;
-            this.isPause = true;
-            this.nodeManager.updateIsPauseTrue();
-            this.scene.launch('RestartModal', {scene : this.scene, bgm : this.bgm, nodeManager : this.nodeManager, pauseTime : this.bgm.seek});
-        })
        
         // Menu Button
-        this.buttonsVisible = false; 
-
-        this.pauseButton.setVisible(this.buttonsVisible);
-        this.homeButton.setVisible(this.buttonsVisible);
-        this.restartButton.setVisible(this.buttonsVisible);
-
-        this.menuButton = this.add.text(this.game.config.width - 100, 50, 'menu!', { fill: '#ffffff' }).setInteractive();
-        this.menuButton.on('pointerdown', () => {
-            this.buttonsVisible = !this.buttonsVisible;
-            
-            this.pauseButton.setVisible(this.buttonsVisible);
-            this.homeButton.setVisible(this.buttonsVisible);
-            this.restartButton.setVisible(this.buttonsVisible);
-        });
-            
-        this.isMobile = false;
+        let modalManager = new ModalManager(this);
+        modalManager.initialize(this.bgm, this.nodeManager);
 
         // load to keyboard event
         this.keyboardEvent = new KeyboardEvent(this);
         this.keyboardEvent.loadGameKey();
-
+        
         const validateDevice = new VaildateDevice(this);
+        this.isMobile = false;
         this.isMobile = validateDevice.isDevice()
         if(this.isMobile){
             const touchEvents = new MobileTouchEvent(this);
@@ -185,8 +140,10 @@ export default class Game extends Phaser.Scene {
             });
         });
 
-        this.game.events.on('blur', this.onBlur, this);
-        this.game.events.on('focus', this.onFocus, this);
+        if(!this.onModal){
+            this.game.events.on('blur', this.onBlur, this);
+            this.game.events.on('focus', this.onFocus, this);
+        }
 
 
     }

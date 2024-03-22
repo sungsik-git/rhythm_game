@@ -23,16 +23,6 @@ export default class PauseModal extends Phaser.Scene{
         modalUI.makeModal();
 
         /* Make close button and apply function */
-        const closeButton = modalUI.makeCloseButton();
-        closeButton.on('pointerdown', () => {
-            this.bgm.play({ seek: this.pauseTime });
-            const gameScene = this.scene.get('game');
-
-            gameScene.isPause= false;
-            gameScene.nodeManager.updateIsPauseFalse();
-
-            this.scene.stop('PauseModal');
-            this.scene.resume('game')
-        });
+        const closeButton = modalUI.makeCloseButton(this.pauseTime);
     }
 }

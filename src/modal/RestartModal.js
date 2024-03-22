@@ -25,27 +25,6 @@ export default class RestartModal extends Phaser.Scene{
 
         /* Make close button and apply function */
         const closeButton = modalUI.makeCloseButton(this.pauseTime);
-
-        const restartButton = modalUI.makeFunctionButton();
-        restartButton.on('pointerdown', () => {
-            const gameScene = this.scene.get('game');
-
-            gameScene.isPause= false;
-            gameScene.nodeManager.updateIsPauseFalse();
-
-            this.scene.stop('RestartModal');
-
-            this.bgm.stop();
-                this.bgm.destroy();
-                
-                if (this.scene.cache && this.scene.cache.audio) {
-                    this.scene.cache.audio.remove('bgm');
-                }
-                
-                this.nodeManager.clearNodes();
-                this.scene.restart();
-        });
-
-        
+        const restartButton = modalUI.setupRestartButton();        
     }
 }
