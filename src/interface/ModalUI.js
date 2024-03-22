@@ -48,6 +48,7 @@ export default class ModalUI{
                 this.scene.bgm.play({ seek: pauseTime });
                 const gameScene = this.modalScene.get('game');
                 gameScene.isPause = false;
+                gameScene.onModal = false;
                 gameScene.nodeManager.updateIsPauseFalse();
         
                 this.modalScene.stop(this.scene); 

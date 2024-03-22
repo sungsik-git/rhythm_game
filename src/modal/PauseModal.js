@@ -23,6 +23,6 @@ export default class PauseModal extends Phaser.Scene{
         modalUI.makeModal();
 
         /* Make close button and apply function */
-        const closeButton = modalUI.makeCloseButton(this.pauseTime);
+        modalUI.makeCloseButton(this.pauseTime);
     }
 }

@@ -24,7 +24,7 @@ export default class RestartModal extends Phaser.Scene{
         modalUI.makeModal();
 
         /* Make close button and apply function */
-        const closeButton = modalUI.makeCloseButton(this.pauseTime);
-        const restartButton = modalUI.setupRestartButton();        
+        modalUI.makeCloseButton(this.pauseTime);
+        modalUI.setupRestartButton();        
     }
 }

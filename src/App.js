@@ -2,12 +2,9 @@ import React, { useEffect } from 'react';
 import Phaser from 'phaser';
 import Loading from './scenes/Loading'
 import Game from './scenes/Game';
-import HomeButton from './component/HomeButton';
 import GameUI from './interface/GameUI';
 import GameInfoUI from './interface/GameInfoUI';
-import PauseButton from './component/PauseButton';
 import Main from './scenes/Main';
-import RestartButton from './component/RestartButton';
 import Result from './scenes/Result';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import KeyboardEvent from './input/KeyboardEvent';
@@ -42,7 +39,7 @@ function App() {
         //Interface
         GameUI, GameInfoUI,
         //Component
-        HomeButton, PauseButton, RestartButton, KeyboardEvent, PauseModal, HomeModal, RestartModal, FocusoutModal,
+        KeyboardEvent, PauseModal, HomeModal, RestartModal, FocusoutModal,
 
 
         // // Test

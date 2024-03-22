@@ -2,9 +2,6 @@ import Phaser from "phaser";
 import NodeManager from "../node/NodeManager";
 import Coordinate from "../theme/Coordinate";
 import KeyboardEvent from "../input/KeyboardEvent";
-import HomeButton from "../component/HomeButton";
-import RestartButton from "../component/RestartButton";
-import PauseButton from "../component/PauseButton";
 import GameInfoUI from "../interface/GameInfoUI";
 import RouteOfKey from "../interface/RouteOfKey";
 import effect from "../asset/img/effect.png";
@@ -77,7 +74,7 @@ export default class Game extends Phaser.Scene {
         this.bgm = this.sound.add('bgm', { loop: false });
         this.pauseTime = 0;
        
-        // Menu Button
+        // Load mene button and modal popup function
         let modalManager = new ModalManager(this);
         modalManager.initialize(this.bgm, this.nodeManager);
 
@@ -140,10 +137,8 @@ export default class Game extends Phaser.Scene {
             });
         });
 
-        if(!this.onModal){
-            this.game.events.on('blur', this.onBlur, this);
-            this.game.events.on('focus', this.onFocus, this);
-        }
+        this.game.events.on('blur', this.onBlur, this);
+        this.game.events.on('focus', this.onFocus, this);
 
 
     }
@@ -195,18 +190,22 @@ export default class Game extends Phaser.Scene {
 
     onBlur(){
         window.onblur = () => {
-            this.pauseTime = this.bgm.seek;
-            this.scene.launch('FocusoutModal')
-            this.scene.pause();
-            this.bgm.pause()
+            if (!this.onModal) {
+                this.pauseTime = this.bgm.seek;
+                this.scene.launch('FocusoutModal', { scene: this, bgm: this.bgm, nodeManager: this.nodeManager, pauseTime: this.bgm.seek});
+                this.scene.pause();
+                this.bgm.pause();
+            }
         }
     }
 
     onFocus(){
         window.onfocus = () => {
+            if (!this.onModal) {
             this.scene.stop('FocusoutModal');
             this.bgm.play({ seek: this.pauseTime });
             this.scene.resume();
+            }
         }
     }
 
@@ -242,5 +241,13 @@ export default class Game extends Phaser.Scene {
         }else{
             this.feverObject.setVisible(false);
         }
+    }
+
+    setOnModalTrue(){
+        this.onModal = true;
+    }
+
+    setOnModalFalse(){
+        this.onModal = false;
     }
 } 

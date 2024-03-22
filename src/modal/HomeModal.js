@@ -24,8 +24,7 @@ export default class HomeModal extends Phaser.Scene{
         modalUI.makeModal();
 
         // /* Make close button and apply function */
-        const closeButton = modalUI.makeCloseButton(this.pauseTime);
-        const backButton = modalUI.setupBackButton();
-        // console.log("TEST")
+        modalUI.makeCloseButton(this.pauseTime);
+        modalUI.setupBackButton();
     }
 }

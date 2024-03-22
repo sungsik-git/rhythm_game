@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import HomeButton from "../component/HomeButton";
 import ResultBGM from "../asset/music/result.mp3";
 
 export default class Result extends Phaser.Scene{
